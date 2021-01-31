@@ -4,52 +4,23 @@
   
     
     <entry>
-      <title>TEST2</title>
-      <link href="2021/02/01/test2/"/>
-      <url>2021/02/01/test2/</url>
+      <title>协会博客操作方法</title>
+      <link href="2021/01/30/li_one/"/>
+      <url>2021/01/30/li_one/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1 id="协会博客操作方法"><a href="#协会博客操作方法" class="headerlink" title="协会博客操作方法"></a>协会博客操作方法</h1><p>kkp</p>]]></content>
       
       
       <categories>
           
-          <category> CTF </category>
+          <category> Tutorials </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> WriteUps </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>TEST</title>
-      <link href="2021/01/30/test/"/>
-      <url>2021/01/30/test/</url>
-      
-        <content type="html"><![CDATA[<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>kkp</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> CTF </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> CTF </tag>
-            
-            <tag> WriteUps </tag>
+            <tag> Tutorials </tag>
             
         </tags>
       
