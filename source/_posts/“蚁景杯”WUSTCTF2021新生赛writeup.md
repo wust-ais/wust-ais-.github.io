@@ -1,5 +1,5 @@
 ---
-title: WUST-CTF 2020 官方 Writeup
+title: WUST-CTF 2021 官方 Writeup
 date: 2021-02-02 17:00:00
 tags: 
 - CTF 
@@ -7,7 +7,11 @@ tags:
 categories: 
 - CTF
 ---
-#  “蚁景杯”WUSTCTF2021新生赛writeup
+## “蚁景杯”WUSTCTF2021新生赛writeup
+
+
+
+<!--more-->
 
 ## Crypto
 

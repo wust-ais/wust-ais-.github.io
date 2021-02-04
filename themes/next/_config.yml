@@ -200,6 +200,7 @@ social_icons:
   icons_only: false
   transition: false
 
+
 # Blog rolls
 links_settings:
   icon: link
